@@ -10,7 +10,7 @@ MLX_LIB = ./libraries/minilibx-linux/libmlx.a
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 MLX_FLAGS = -lmlx -lXext -lX11
 RM = rm -f
 
