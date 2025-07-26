@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/24 09:48:46 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:39:03 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 # define MAP_NUM_COLS 8
 # define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
 # define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
+# define FOV 60 * (PI / 180)
+# define WALL_STRIP_WIDTH 1
+# define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include <string.h>
 # include <X11/keysym.h>
 # include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/libft/libft.h"
@@ -35,7 +39,7 @@ typedef struct s_player {
 	float	dir_y;
 	int		turn_dir;
 	int		walk_dir;
-	int		rotation_Angle;
+	double		rotation_Angle;
 	int		move_speed;
 	int		rotation_speed;
 }	t_player;
@@ -45,8 +49,11 @@ typedef struct  s_mlx_data
 {
 	void	*mlx_ptr;
 	void	*mlx_window;
-	void	*wall;
-	void	*black;
+	void	*img;
+	char	*img_pixels;
+	int		bpp;
+	int		size_line;
+	int		endian;
 	t_player	player;
 }	t_mlx_data;
 
