@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/25 16:39:03 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:58:18 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 # define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
 # define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
 # define FOV 60 * (PI / 180)
-# define WALL_STRIP_WIDTH 1
-# define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
+# define NUM_RAYS WINDOW_WIDTH
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/26 09:44:24 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:56:57 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,12 +206,25 @@ void	render(t_mlx_data *mlx)
 	draw_facing_line(mlx, 16, 0xff0000);
 }
 
+void	cast_rays(t_mlx_data *mlx)
+{
+	int	i = 0;
+
+	float ray_angle = mlx->player.rotation_Angle - (FOV / 2);
+	while (i < NUM_RAYS)
+	{
+		draw_line(mlx, mlx->player.player_x, mlx->player.player_y, mlx->player.player_x + cos(ray_angle) * 32, mlx->player.player_y + sin(ray_angle) * 32, 0x00ff00);
+		i++;
+		ray_angle += FOV / (NUM_RAYS);
+	}
+}
 
 int update(t_mlx_data *mlx)
 {
     mlx->img = mlx_new_image(mlx->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
     mlx->img_pixels = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
 	render(mlx);
+	cast_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img);
     return (0);
