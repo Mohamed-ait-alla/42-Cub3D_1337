@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/27 10:08:46 by mait-all         ###   ########.fr       */
+/*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
+/*   Updated: 2025/07/27 10:03:27 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/cub3d.h"
 
-void	cast_rays(t_mlx_data *mlx)
+void	init_player(t_mlx_data *mlx)
 {
-	int	i = 0;
-
-	float ray_angle = mlx->player.rotation_Angle - (FOV / 2);
-	while (i < NUM_RAYS)
-	{
-		draw_line(mlx, mlx->player.player_x, mlx->player.player_y, mlx->player.player_x + cos(ray_angle) * 32, mlx->player.player_y + sin(ray_angle) * 32, 0x00ff00);
-		i++;
-		ray_angle += FOV / NUM_RAYS;
-	}
+	mlx->player.player_x = WINDOW_WIDTH / 2;  // col 4
+	mlx->player.player_y = WINDOW_HEIGHT / 2; // row 3
+	mlx->player.turn_dir = 0;
+	mlx->player.walk_dir = 0;
+	mlx->player.rotation_Angle = PI / 2;
+	mlx->player.rotation_speed = 2 * (PI / 180);
+	mlx->player.move_speed = 2;
 }
