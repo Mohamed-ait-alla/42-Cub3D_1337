@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/27 10:15:27 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:24:16 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct  s_mlx_data
 
 // #-------------- raycasting prototypes --------------#
 void	init_player(t_mlx_data *mlx);
+int		ft_destroy_window(t_mlx_data *mlx);
 int		key_Pressed(int keycode, t_mlx_data *mlx);
 int		is_wall(float x, float y);
 void	put_pixel(t_mlx_data *mlx, int x, int y, int color);

@@ -1,6 +1,10 @@
 NAME = cub3d
 
-SRCS = srcs/main.c
+SRCS = srcs/main.c \
+		srcs/raycasting/init.c \
+		srcs/raycasting/rendering.c \
+		srcs/raycasting/hooks_utils.c \
+		srcs/raycasting/raycasting.c
 
 LIBFT_DIR = ./libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a
