@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/27 10:24:16 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:13:02 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ typedef struct s_player {
 	int		rotation_speed;
 }	t_player;
 
+typedef	struct s_ray
+{
+	double	ray_distance;
+}	t_ray;
+
 
 typedef struct  s_mlx_data
 {
@@ -54,6 +59,7 @@ typedef struct  s_mlx_data
 	int		size_line;
 	int		endian;
 	t_player	player;
+	t_ray		rays[NUM_RAYS];
 }	t_mlx_data;
 
 

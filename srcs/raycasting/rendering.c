@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/27 10:08:24 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:36:19 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,19 @@ void draw_facing_line(t_mlx_data *mlx, double length, double color)
     draw_line(mlx, x0, y0, x1, y1, color); // red line
 }
 
+void draw_vertical_line(t_mlx_data *mlx, int x, int wall_top, int wall_bottom, int color)
+{
+    for (int y = 0; y < WINDOW_HEIGHT; y++) {
+        if (y < wall_top)
+            put_pixel(mlx, x, y, 0x000000);
+        else if (y >= wall_top && y <= wall_bottom)
+            put_pixel(mlx, x, y, color); // Wall slice
+        else
+            put_pixel(mlx, x, y, 0xffffff);
+    }
+}
+
+
 void	render(t_mlx_data *mlx)
 {
 	char	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
@@ -104,11 +117,28 @@ void	render(t_mlx_data *mlx)
 	draw_facing_line(mlx, 16, 0xff0000);
 }
 
+void	render_projected_walls(t_mlx_data *mlx)
+{
+	int		i;
+	double	wall_strip_height;
+	double	projection_plane_distance;
+
+	i = 0;
+	while (i < NUM_RAYS)
+	{
+		projection_plane_distance = (WINDOW_WIDTH / 2) / tan(FOV / 2);
+		wall_strip_height = (TILE_SIZE / mlx->rays[i].ray_distance) * projection_plane_distance;
+		draw_vertical_line(mlx, i, (WINDOW_HEIGHT / 2) - (wall_strip_height / 2), (WINDOW_HEIGHT / 2) + (wall_strip_height / 2), 0xa000ff);
+		i++;
+	}
+}
+
 int update(t_mlx_data *mlx)
 {
     mlx->img = mlx_new_image(mlx->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
     mlx->img_pixels = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
-	render(mlx);
+	// render(mlx);
+	render_projected_walls(mlx);
 	cast_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img);

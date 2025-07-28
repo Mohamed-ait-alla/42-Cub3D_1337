@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/27 18:58:07 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:24:50 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double get_distance_between_points(double x0, double y0, double x1, double y1)
 	return (sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)));
 }
 
-void	cast(t_mlx_data *mlx, double ray_angle)
+void	cast(t_mlx_data *mlx, double ray_angle, int i)
 {
 	double	wall_hit_x;
 	double	wall_hit_y;
@@ -154,11 +154,10 @@ void	cast(t_mlx_data *mlx, double ray_angle)
 	else
 		wall_hit_y = vert_wall_hit_y;
 	if (horz_hit_distance < vert_hit_distance)
-		distance = horz_hit_distance;
+		mlx->rays[i].ray_distance = horz_hit_distance;
 	else
-		distance = vert_hit_distance;
-	draw_line(mlx, mlx->player.player_x, mlx->player.player_y, wall_hit_x, wall_hit_y, 0xfff000);
-		
+		mlx->rays[i].ray_distance = vert_hit_distance;
+	// draw_line(mlx, mlx->player.player_x, mlx->player.player_y, wall_hit_x, wall_hit_y, 0xfff000);
 }
 
 void	cast_rays(t_mlx_data *mlx)
@@ -168,7 +167,7 @@ void	cast_rays(t_mlx_data *mlx)
 	double ray_angle = mlx->player.rotation_Angle - (FOV / 2);
 	while (i < NUM_RAYS)
 	{
-		cast(mlx, ray_angle);
+		cast(mlx, ray_angle, i);
 		// draw_line(mlx, mlx->player.player_x, mlx->player.player_y, mlx->player.player_x + cos(ray_angle) * 32, mlx->player.player_y + sin(ray_angle) * 32, 0x00ff00);
 		i++;
 		ray_angle += FOV / (NUM_RAYS);
