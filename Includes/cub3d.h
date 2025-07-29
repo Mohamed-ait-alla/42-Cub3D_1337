@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/29 09:48:11 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/29 10:50:38 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_player {
 
 typedef	struct s_ray
 {
+	double	ray_angle;
 	double	ray_distored_distance;
 	double	ray_correct_distance;
 	
