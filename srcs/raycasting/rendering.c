@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/28 20:36:19 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/29 09:52:02 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ void	render_projected_walls(t_mlx_data *mlx)
 	while (i < NUM_RAYS)
 	{
 		projection_plane_distance = (WINDOW_WIDTH / 2) / tan(FOV / 2);
-		wall_strip_height = (TILE_SIZE / mlx->rays[i].ray_distance) * projection_plane_distance;
-		draw_vertical_line(mlx, i, (WINDOW_HEIGHT / 2) - (wall_strip_height / 2), (WINDOW_HEIGHT / 2) + (wall_strip_height / 2), 0xa000ff);
+		wall_strip_height = (TILE_SIZE / mlx->rays[i].ray_correct_distance) * projection_plane_distance;
+		draw_vertical_line(mlx, i, (WINDOW_HEIGHT / 2) - (wall_strip_height / 2), (WINDOW_HEIGHT / 2) + (wall_strip_height / 2), 0x0000ff);
 		i++;
 	}
 }
@@ -138,8 +138,8 @@ int update(t_mlx_data *mlx)
     mlx->img = mlx_new_image(mlx->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
     mlx->img_pixels = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
 	// render(mlx);
-	render_projected_walls(mlx);
 	cast_rays(mlx);
+	render_projected_walls(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img);
     return (0);

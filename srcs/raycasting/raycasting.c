@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/28 20:24:50 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/07/29 09:52:17 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,10 @@ void	cast(t_mlx_data *mlx, double ray_angle, int i)
 	else
 		wall_hit_y = vert_wall_hit_y;
 	if (horz_hit_distance < vert_hit_distance)
-		mlx->rays[i].ray_distance = horz_hit_distance;
+		mlx->rays[i].ray_distored_distance = horz_hit_distance;
 	else
-		mlx->rays[i].ray_distance = vert_hit_distance;
+		mlx->rays[i].ray_distored_distance = vert_hit_distance;
+	mlx->rays[i].ray_correct_distance = mlx->rays[i].ray_distored_distance * cos(ray_angle - mlx->player.rotation_Angle);
 	// draw_line(mlx, mlx->player.player_x, mlx->player.player_y, wall_hit_x, wall_hit_y, 0xfff000);
 }
 
