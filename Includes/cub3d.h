@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/29 10:50:38 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/04 15:47:45 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 #  define PI 3.141592653589793238462
 # endif
 # define TILE_SIZE 32
-# define MAP_NUM_ROWS 6
-# define MAP_NUM_COLS 8
+# define MAP_NUM_ROWS 16
+# define MAP_NUM_COLS 20
 # define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
 # define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
 # define FOV 60 * (PI / 180)
 # define NUM_RAYS WINDOW_WIDTH
+# define TEXTURE_WIDTH 32
+# define TEXTURE_HIEGHT 32
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
@@ -48,8 +50,22 @@ typedef	struct s_ray
 	double	ray_angle;
 	double	ray_distored_distance;
 	double	ray_correct_distance;
-	
+	int		was_hit_horz;
+	int		was_hit_vert;
+	double	wall_hit_x;
+	double	wall_hit_y;
 }	t_ray;
+
+typedef struct s_texture 
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}	t_texture;
 
 
 typedef struct  s_mlx_data
@@ -61,6 +77,7 @@ typedef struct  s_mlx_data
 	int		bpp;
 	int		size_line;
 	int		endian;
+	t_texture	wall_texture;
 	t_player	player;
 	t_ray		rays[NUM_RAYS];
 }	t_mlx_data;
@@ -79,5 +96,7 @@ void	draw_facing_line(t_mlx_data *mlx, double length, double color);
 void	render(t_mlx_data *mlx);
 int		update(t_mlx_data *mlx);
 void	cast_rays(t_mlx_data *mlx);
+
+int	load_wall_texture(t_mlx_data *mlx, char *path);
 
 #endif

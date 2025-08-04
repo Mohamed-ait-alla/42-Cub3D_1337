@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/29 18:38:49 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/03 13:13:55 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	get_smallest_distance(t_mlx_data *mlx, int i,
 	double	horz_hit_distance;
 	double	vert_hit_distance;
 
+	mlx->rays[i].was_hit_horz = 0;
+	mlx->rays[i].was_hit_vert = 0;
 	if (found_horz_wall_hit)
 		horz_hit_distance = get_distance_between_points(mlx->player.player_x, mlx->player.player_y, horz_wall_hit_x, horz_wall_hit_y);
 	else
@@ -48,13 +50,19 @@ void	get_smallest_distance(t_mlx_data *mlx, int i,
 	{
 		wall_hit_x = horz_wall_hit_x;
 		wall_hit_y = horz_wall_hit_y;
+		mlx->rays[i].wall_hit_x = wall_hit_x;
+		mlx->rays[i].wall_hit_y = wall_hit_y;
 		mlx->rays[i].ray_distored_distance = horz_hit_distance;
+		mlx->rays[i].was_hit_horz = 1;
 	}
 	else
 	{
 		wall_hit_x = vert_wall_hit_x;
 		wall_hit_y = vert_wall_hit_y;
+		mlx->rays[i].wall_hit_x = wall_hit_x;
+		mlx->rays[i].wall_hit_y = wall_hit_y;
 		mlx->rays[i].ray_distored_distance = vert_hit_distance;
+		mlx->rays[i].was_hit_vert = 1;
 	}
 	mlx->rays[i].ray_correct_distance = mlx->rays[i].ray_distored_distance * cos(mlx->rays[i].ray_angle - mlx->player.rotation_Angle);
 }
@@ -194,7 +202,6 @@ void	cast_rays(t_mlx_data *mlx)
 	while (i < NUM_RAYS)
 	{
 		cast(mlx, i);
-		// draw_line(mlx, mlx->player.player_x, mlx->player.player_y, mlx->player.player_x + cos(ray_angle) * 32, mlx->player.player_y + sin(ray_angle) * 32, 0x00ff00);
 		i++;
 		mlx->rays[i].ray_angle = mlx->rays[i - 1].ray_angle + FOV / (NUM_RAYS);
 	}
