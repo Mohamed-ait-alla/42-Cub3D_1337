@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/04 15:47:37 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:18:21 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,6 @@ void draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1, int color)
     }
 }
 
-int	load_wall_texture(t_mlx_data *mlx, char *path)
-{
-	mlx->wall_texture.img = mlx_xpm_file_to_image (mlx->mlx_ptr, path, &mlx->wall_texture.width, &mlx->wall_texture.height);
-	if (!mlx->wall_texture.img)
-		printf("failed to load the wall texture\n");
-	mlx->wall_texture.addr = mlx_get_data_addr(mlx->wall_texture.img, &mlx->wall_texture.bpp, &mlx->wall_texture.line_length, &mlx->wall_texture.endian);
-	if (!mlx->wall_texture.addr)
-		printf("failed to get the addr of the texture\n");
-	printf("texture loaded successfully\n");
-	return (1);
-}
-
 int get_texture_pixel(t_mlx_data *mlx, int x, int y)
 {
 	char *dst;
@@ -87,10 +75,11 @@ int get_texture_pixel(t_mlx_data *mlx, int x, int y)
 
 int calculate_texture_x(t_mlx_data *mlx, int ray_index)
 {
-    t_ray *ray = &mlx->rays[ray_index];
-    double wall_x;
-    int texture_x;
+    t_ray	*ray;
+    double	wall_x;
+    int		texture_x;
     
+	ray = &mlx->rays[ray_index];
     // Use the fractional part of the wall hit position
     wall_x = ray->wall_hit_x - floor(ray->wall_hit_x);
     if (wall_x < 0) wall_x += 1.0;
@@ -109,7 +98,7 @@ int calculate_texture_x(t_mlx_data *mlx, int ray_index)
     
     return (texture_x);
 }
-
+// used just to add some dark colors to the walls
 int apply_distance_shading(int color, double distance)
 {
     double max_distance = 500.0;
@@ -129,19 +118,21 @@ int apply_distance_shading(int color, double distance)
 void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top, 
                                 int wall_bottom, int x)
 {
-    int texture_x = calculate_texture_x(mlx, x);
-    int wall_height = wall_bottom - wall_top;
-    
-    for (int y = 0; y < WINDOW_HEIGHT; y++) 
+    int texture_x;
+    int wall_height;
+	int	y;
+
+	texture_x = calculate_texture_x(mlx, x);
+	wall_height = wall_bottom - wall_top;
+	y = 0;
+	while (y < WINDOW_HEIGHT)
     {
+		// Ceiling
         if (y < wall_top)
-        {
-            // Ceiling
-            put_pixel(mlx, x, y, 0x87CEEB); // Sky blue ceiling
-        }
+			put_pixel(mlx, x, y, 0x87CEEB);
+		// Wall rendering
         else if (y >= wall_top && y <= wall_bottom)
         {
-			// Wall rendering
 			
             // Calculate which pixel of the texture to use
             double texture_y_exact = (double)(y - wall_top) / wall_height * mlx->wall_texture.height;
@@ -161,15 +152,13 @@ void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top,
             
             put_pixel(mlx, x, y, color);
         }
+		// Floor
         else
-        {
-            // Floor
-            put_pixel(mlx, x, y, 0x8B4513); // Brown floor
-        }
+            put_pixel(mlx, x, y, 0x8B4513);
+
+		y++;
     }
 }
-
-
 
 void render_textured_walls(t_mlx_data *mlx)
 {
@@ -266,11 +255,11 @@ void render_textured_walls(t_mlx_data *mlx)
 
 int update(t_mlx_data *mlx)
 {
+	update_player_position(mlx);
     mlx->img = mlx_new_image(mlx->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
     mlx->img_pixels = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
 	// render(mlx);
 	cast_rays(mlx);
-	// render_projected_walls(mlx);
 	render_textured_walls(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img);

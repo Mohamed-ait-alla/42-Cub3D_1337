@@ -29,6 +29,9 @@ $(LIBFT):
 
 all: $(NAME)
 
+run: all
+	./cub3d
+
 clean:
 	$(RM) $(OBJS)
 	make -C $(LIBFT_DIR) clean

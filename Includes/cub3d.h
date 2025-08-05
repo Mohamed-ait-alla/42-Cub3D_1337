@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/04 15:47:45 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:18:53 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,17 @@ typedef struct s_texture
 }	t_texture;
 
 
+typedef struct s_keys
+{
+	int	key_w;
+	int	key_s;
+	int	key_d;
+	int	key_a;
+	int	key_left;
+	int	key_right;
+	int	key_escape;
+}	t_keys;
+
 typedef struct  s_mlx_data
 {
 	void	*mlx_ptr;
@@ -77,6 +88,7 @@ typedef struct  s_mlx_data
 	int		bpp;
 	int		size_line;
 	int		endian;
+	t_keys		keys;
 	t_texture	wall_texture;
 	t_player	player;
 	t_ray		rays[NUM_RAYS];
@@ -86,7 +98,9 @@ typedef struct  s_mlx_data
 // #-------------- raycasting prototypes --------------#
 void	init_player(t_mlx_data *mlx);
 int		ft_destroy_window(t_mlx_data *mlx);
-int		key_Pressed(int keycode, t_mlx_data *mlx);
+int		key_pressed(int keycode, t_mlx_data *mlx);
+int		key_released(int keycode, t_mlx_data *mlx);
+void	update_player_position(t_mlx_data *mlx);
 int		is_wall(float x, float y);
 void	put_pixel(t_mlx_data *mlx, int x, int y, int color);
 void	draw_circle(t_mlx_data *mlx, int cx, int cy, int radius, int color);
@@ -96,7 +110,6 @@ void	draw_facing_line(t_mlx_data *mlx, double length, double color);
 void	render(t_mlx_data *mlx);
 int		update(t_mlx_data *mlx);
 void	cast_rays(t_mlx_data *mlx);
-
-int	load_wall_texture(t_mlx_data *mlx, char *path);
+int		load_wall_texture(t_mlx_data *mlx, char *path);
 
 #endif

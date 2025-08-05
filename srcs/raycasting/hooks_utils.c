@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/31 10:03:08 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:07:48 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,55 +38,88 @@ int is_wall(float x, float y) {
     return map[grid_y][grid_x] == '1';
 }
 
-int	key_Pressed(int keycode, t_mlx_data *mlx)
+int	key_pressed(int keycode, t_mlx_data *mlx)
 {
 	if (keycode == XK_Escape)
-		ft_destroy_window(mlx);
-	else if (keycode == XK_Left)
-		mlx->player.rotation_Angle -= 0.1;
-	else if (keycode == XK_Right)
-		mlx->player.rotation_Angle += 0.1;
-    else {
-        float next_x = mlx->player.player_x;
-        float next_y = mlx->player.player_y;
-
-        if (keycode == XK_w) {
-            next_x += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
-            next_y += sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
-			if (!is_wall(next_x, next_y))
-			{
-				mlx->player.player_x = next_x;
-				mlx->player.player_y = next_y;
-			}
-        } else if (keycode == XK_s) {
-            next_x -= cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
-            next_y -= sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
-			if (!is_wall(next_x, next_y))
-			{
-				mlx->player.player_x = next_x;
-				mlx->player.player_y = next_y;
-			}
-        }
-		else if (keycode == XK_a)
-		{
-            next_x -= sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
-            next_y += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
-			if (!is_wall(next_x, next_y))
-			{
-				mlx->player.player_x = next_x;
-				mlx->player.player_y = next_y;
-			}			
-		}
-		else if (keycode == XK_d)
-		{
-            next_x += sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
-            next_y -= cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
-			if (!is_wall(next_x, next_y))
-			{
-				mlx->player.player_x = next_x;
-				mlx->player.player_y = next_y;
-			}			
-		}
-    }
+		mlx->keys.key_escape = 1;
+	if (keycode == XK_Left)
+		mlx->keys.key_left = 1;
+	if (keycode == XK_Right)
+		mlx->keys.key_right = 1;
+	if (keycode == XK_a)
+		mlx->keys.key_a = 1;
+	if (keycode == XK_d)
+		mlx->keys.key_d = 1;
+	if (keycode == XK_w)
+		mlx->keys.key_w = 1;
+	if (keycode == XK_s)
+		mlx->keys.key_s = 1;
 	return (0);
+}
+
+int	key_released(int keycode, t_mlx_data *mlx)
+{
+	if (keycode == XK_Escape)
+		mlx->keys.key_escape = 0;
+	if (keycode == XK_Left)
+		mlx->keys.key_left = 0;
+	if (keycode == XK_Right)
+		mlx->keys.key_right = 0;
+	if (keycode == XK_a)
+		mlx->keys.key_a = 0;
+	if (keycode == XK_d)
+		mlx->keys.key_d = 0;
+	if (keycode == XK_w)
+		mlx->keys.key_w = 0;
+	if (keycode == XK_s)
+		mlx->keys.key_s = 0;
+	return (0);
+}
+
+void	update_player_position(t_mlx_data *mlx)
+{
+	float	next_x;
+	float	next_y;
+
+	next_x = mlx->player.player_x;
+	next_y = mlx->player.player_y;
+
+	// handle escape: close the game
+	if (mlx->keys.key_escape)
+		ft_destroy_window(mlx);
+	// for moving the feild-of-view angle
+	if (mlx->keys.key_right)
+		mlx->player.rotation_Angle += 0.01;
+	if (mlx->keys.key_left)
+		mlx->player.rotation_Angle -= 0.01;
+		
+	// for moving the player: right, left, forward, backward
+	if (mlx->keys.key_w)
+	{
+		next_x += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_y += sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
+	}
+	if (mlx->keys.key_s)
+	{
+		next_x -= cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_y -= sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
+	}
+	if (mlx->keys.key_a)
+	{
+		next_x -= sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_y += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
+	}
+	if (mlx->keys.key_d)
+	{
+		next_x += sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_y -= cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
+	}
+
+	// check for wall collision
+	if (!is_wall(next_x, next_y))
+	{
+		mlx->player.player_x = next_x;
+		mlx->player.player_y = next_y;
+	}
+	
 }
