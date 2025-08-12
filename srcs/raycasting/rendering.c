@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/05 13:18:21 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/12 18:57:41 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,19 @@ int apply_distance_shading(int color, double distance)
 }
 
 void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top, 
-                                int wall_bottom, int x)
+                                int wall_bottom, int x, double wall_strip_height)
 {
-    int texture_x;
-    int wall_height;
+	int color;
+	int texture_offset_x;
+	int texture_offset_y;
 	int	y;
 
-	texture_x = calculate_texture_x(mlx, x);
-	wall_height = wall_bottom - wall_top;
 	y = 0;
+	// get the x offset
+	if (mlx->rays[x].was_hit_vert)
+		texture_offset_x = (int)mlx->rays[x].wall_hit_y % TILE_SIZE;
+	else
+		texture_offset_x = (int)mlx->rays[x].wall_hit_x % TILE_SIZE;
 	while (y < WINDOW_HEIGHT)
     {
 		// Ceiling
@@ -133,24 +137,22 @@ void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top,
 		// Wall rendering
         else if (y >= wall_top && y <= wall_bottom)
         {
-			
-            // Calculate which pixel of the texture to use
-            double texture_y_exact = (double)(y - wall_top) / wall_height * mlx->wall_texture.height;
-            int texture_y = (int)texture_y_exact;
-            
+			// get the y offset
+			texture_offset_y = (y -  wall_top) * ((float)mlx->wall_texture.height / wall_strip_height);
             // Bounds checking
-            if (texture_y >= mlx->wall_texture.height)
-                texture_y = mlx->wall_texture.height - 1;
-            if (texture_y < 0)
-                texture_y = 0;
+            if (texture_offset_y >= mlx->wall_texture.height)
+                texture_offset_y = mlx->wall_texture.height - 1;
+            if (texture_offset_y < 0)
+                texture_offset_y = 0;
             
-            // Get the color from texture
-            int color = get_texture_pixel(mlx, texture_x, texture_y);
+            // // Get the color from texture
+            color = get_texture_pixel(mlx, texture_offset_x, texture_offset_y);
             
-            // Apply distance-based shading
+            // // Apply distance-based shading
             color = apply_distance_shading(color, mlx->rays[x].ray_correct_distance);
+			put_pixel(mlx, x, y, color);	
             
-            put_pixel(mlx, x, y, color);
+
         }
 		// Floor
         else
@@ -176,7 +178,7 @@ void render_textured_walls(t_mlx_data *mlx)
         draw_textured_vertical_line(mlx,
                                    (WINDOW_HEIGHT / 2) - (wall_strip_height / 2), 
                                    (WINDOW_HEIGHT / 2) + (wall_strip_height / 2), 
-                                   i);
+                                   i, wall_strip_height);
         i++;
     }
 }

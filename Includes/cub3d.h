@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/05 13:18:53 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/12 19:01:21 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
 # define FOV 60 * (PI / 180)
 # define NUM_RAYS WINDOW_WIDTH
-# define TEXTURE_WIDTH 32
-# define TEXTURE_HIEGHT 32
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
