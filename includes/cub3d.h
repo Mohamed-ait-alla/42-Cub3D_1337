@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/12 19:01:21 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/18 10:35:27 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <string.h>
+# include <stdbool.h>
 # include <X11/keysym.h>
 # include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/libft/libft.h"
@@ -109,5 +110,11 @@ void	render(t_mlx_data *mlx);
 int		update(t_mlx_data *mlx);
 void	cast_rays(t_mlx_data *mlx);
 int		load_wall_texture(t_mlx_data *mlx, char *path);
+
+
+
+// #--------------- Parsing map ----------------#
+bool	check_file_name(char *file_name);
+void	custom_error(char *msg);
 
 #endif

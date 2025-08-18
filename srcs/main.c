@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/12 18:59:28 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/18 10:36:36 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 int	ft_destroy_window(t_mlx_data *mlx)
 {
@@ -20,10 +20,14 @@ int	ft_destroy_window(t_mlx_data *mlx)
 	exit (0);
 }
 
-int main()
+int main(int ac, char **av)
 {
 	t_mlx_data	mlx;
 
+	// check file name
+	if (ac != 2 || !check_file_name(av[1]))
+		return (custom_error("Error:\nNo such file or directory !\n"), 1);
+	
 	// render_wall_texture(&mlx);
 	ft_bzero(&mlx, sizeof(t_mlx_data));
 	init_player(&mlx);

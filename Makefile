@@ -4,7 +4,12 @@ SRCS = srcs/main.c \
 		srcs/raycasting/init.c \
 		srcs/raycasting/rendering.c \
 		srcs/raycasting/hooks_utils.c \
-		srcs/raycasting/raycasting.c
+		srcs/raycasting/raycasting.c \
+		\
+		\
+		\
+		srcs/parsing/check_file_name.c \
+		srcs/parsing/helper-functions/custom_error.c \
 
 LIBFT_DIR = ./libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a
