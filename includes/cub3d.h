@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 11:12:05 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/18 15:51:22 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,28 @@ int		load_wall_texture(t_mlx_data *mlx, char *path);
 
 
 // #--------------- Parsing map ----------------#
-bool	check_file_name(char *file_name);
-void	custom_error(char *msg);
-
 typedef struct s_map
 {
-	
+	int		_0;
+	int		_1;
+	int		_N;
+	int		_S;
+	int		_E;
+	int		_W;
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	char	*f_color;
+	char	*c_color;
 }		t_map;
+
+
+bool	check_file_name(char *file_name);
+void	custom_error(char *msg);
+bool 	check_map(char *file, t_map *map);
+char	*get_next_line(int fd);
+
 
 
 #endif
