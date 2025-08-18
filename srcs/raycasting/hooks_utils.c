@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/05 13:07:48 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/18 10:12:12 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int is_wall(float x, float y) {
 	char	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {

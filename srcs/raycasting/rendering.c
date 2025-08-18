@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/12 18:57:41 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/18 10:12:34 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void put_pixel(t_mlx_data *mlx, int x, int y, int color)
 {
