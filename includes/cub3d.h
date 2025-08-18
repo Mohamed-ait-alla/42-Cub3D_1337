@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 10:35:27 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/18 11:12:05 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <math.h>
 # include <string.h>
 # include <stdbool.h>
+# include <fcntl.h>
 # include <X11/keysym.h>
 # include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/libft/libft.h"
@@ -116,5 +117,11 @@ int		load_wall_texture(t_mlx_data *mlx, char *path);
 // #--------------- Parsing map ----------------#
 bool	check_file_name(char *file_name);
 void	custom_error(char *msg);
+
+typedef struct s_map
+{
+	
+}		t_map;
+
 
 #endif
