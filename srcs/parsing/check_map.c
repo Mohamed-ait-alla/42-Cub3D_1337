@@ -6,119 +6,86 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/18 16:56:07 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/19 11:24:53 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static bool get_path_directions(int fd, t_map *map)
+static void parse_line(char *line, t_map *map)
 {
-    char	*line;
-    int		i;
+	int i = 0;
 
-    while (1)
-    {
-        line = get_next_line(fd);
-		if (!line)
-			break ;
-		i = 0;
-        while (line[i])
-        {
-			if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] <= 32)
-			{
-				i+= 2;
-				while (line[i] <= 32 && line[i])
-					i++;
-				map->NO = ft_substr(line, i, ft_strlen(line) - i);
-			}
-			else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] <= 32)
-			{
-				i+= 2;
-				while (line[i] <= 32 && line[i])
-					i++;
-				map->SO = ft_substr(line, i, ft_strlen(line) - i);
-			}
-			else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] <= 32)
-			{
-				i+= 2;
-				while (line[i] <= 32 && line[i])
-					i++;
-				map->WE = ft_substr(line, i, ft_strlen(line) - i);
-			}
-			else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] <= 32)
-			{
-				i+= 2;
-				while (line[i] <= 32 && line[i])
-					i++;
-				map->EA = ft_substr(line, i, ft_strlen(line) - i);
-			}
-            i++;
-        }
-    }
+	while (line[i] && line[i] <= 32)
+		i++;
+
+	if (ft_strncmp(&line[i], "NO", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
+	{
+		printf("dkhal\n");
+		i += 2;
+		while (line[i] && line[i] <= 32)
+			i++;
+		map->NO = ft_substr(line, i, ft_strlen(line) - i);
+	}
+	else if (ft_strncmp(&line[i], "SO", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
+	{
+		i += 2;
+		while (line[i] && line[i] <= 32)
+			i++;
+		map->SO = ft_substr(line, i, ft_strlen(line) - i);
+	}
+	else if (ft_strncmp(&line[i], "WE", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
+	{
+		i += 2;
+		while (line[i] && line[i] <= 32)
+			i++;
+		map->WE = ft_substr(line, i, ft_strlen(line) - i);
+	}
+	else if (ft_strncmp(&line[i], "EA", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
+	{
+		i += 2;
+		while (line[i] && line[i] <= 32)
+			i++;
+		map->EA = ft_substr(line, i, ft_strlen(line) - i);
+	}
+	else if (ft_strncmp(&line[i], "F", 1) == 0 && line[i + 1] <= 32 && line[i + 1] && line[i + 1] != '\n')
+	{
+		i += 1;
+		while (line[i] && line[i] <= 32)
+			i++;
+		map->f_color = ft_substr(line, i, ft_strlen(line) - i);
+	}
+	else if (ft_strncmp(&line[i], "C", 1) == 0 && line[i + 1] <= 32 && line[i + 1] && line[i + 1] != '\n')
+	{
+		i += 1;
+		while (line[i] && line[i] <= 32)
+			i++;
+		map->c_color = ft_substr(line, i, ft_strlen(line) - i);
+	}
+}
+
+bool check_map(char *file, t_map *map)
+{
+	int fd;
+	char *line;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return false;
+
+	while ((line = get_next_line(fd)))
+	{
+		parse_line(line, map);
+	}
+	close(fd);
+
 	printf("NO: %s\n", map->NO);
 	printf("SO: %s\n", map->SO);
 	printf("WE: %s\n", map->WE);
 	printf("EA: %s\n", map->EA);
-	return (map->NO && map->SO && map->WE && map->EA);
-}
-
-static bool get_F_C(int fd, t_map *map)
-{
-	char	*line;
-	int		i;
-
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		i = 0;
-		while (line[i])
-		{
-			if (line[i] == 'F' && line[i + 1] <= 32)
-			{
-				printf("dkhal\n");
-				i++;
-				while (line[i] <= 32 && line[i])
-					i++;
-				map->f_color = ft_substr(line, i, ft_strlen(line) - i);			
-			}
-			else if (line[i] == 'C' && line[i + 1] <= 32)
-			{
-				i++;
-				while (line[i] <= 32 && line[i])
-					i++;
-				map->c_color = ft_substr(line, i, ft_strlen(line) - i);			
-			}
-			i++;
-		}
-	}
 	printf("F: %s\n", map->f_color);
 	printf("C: %s\n", map->c_color);
-	return (map->f_color && map->c_color);
-}
-// static bool check_valid_character(int fd, t_map *map)
-// {
-    
-// }
 
-
-bool check_map(char *file, t_map *map)
-{
-    int fd;
-
-    fd = open(file, O_RDONLY);
-    if (!get_path_directions(fd, map))
-	{
-		close(fd);
-		return (false);
-	}
-	fd = open(file, O_RDONLY);
-    if (!get_F_C(fd, map))
-	{
-		close(fd);
-		return (false);
-	}
-	return(true);
+	return (map->NO && map->SO && map->WE && map->EA &&
+			map->f_color && map->c_color);
 }
