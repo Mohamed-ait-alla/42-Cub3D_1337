@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 10:12:12 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:25:10 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,13 @@ void	update_player_position(t_mlx_data *mlx)
 	}
 	if (mlx->keys.key_a)
 	{
-		next_x -= sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
-		next_y += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_x += sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_y -= cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
 	}
 	if (mlx->keys.key_d)
 	{
-		next_x += sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
-		next_y -= cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_x -= sin(mlx->player.rotation_Angle) * mlx->player.move_speed;
+		next_y += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
 	}
 
 	// check for wall collision

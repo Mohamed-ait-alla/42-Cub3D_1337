@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/20 13:17:01 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:11:39 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,18 @@ typedef struct s_map
 	int		_S;
 	int		_E;
 	int		_W;
+	int		num_NO;
+	int		num_SO;
+	int		num_WE;
+	int		num_EA;
 	char	*NO;
 	char	*SO;
 	char	*WE;
 	char	*EA;
 	char	*f_color;
 	char	*c_color;
+	int		num_f_color;
+	int		num_c_color;
 	char	**copy_map;
 	int		rows;
 }		t_map;
