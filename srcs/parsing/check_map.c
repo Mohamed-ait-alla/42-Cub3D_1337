@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/19 15:43:38 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/20 14:40:23 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,42 +24,42 @@ static void parse_line(char *line, t_map *map)
 		i += 2;
 		while (line[i] && line[i] <= 32)
 			i++;
-		map->NO = ft_substr(line, i, ft_strlen(line) - i);
+		map->NO = ft_substr(line, i, (ft_strlen(line) - i) - 1);
 	}
 	else if (ft_strncmp(&line[i], "SO", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
 	{
 		i += 2;
 		while (line[i] && line[i] <= 32)
 			i++;
-		map->SO = ft_substr(line, i, ft_strlen(line) - i);
+		map->SO = ft_substr(line, i, (ft_strlen(line) - i) - 1);
 	}
 	else if (ft_strncmp(&line[i], "WE", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
 	{
 		i += 2;
 		while (line[i] && line[i] <= 32)
 			i++;
-		map->WE = ft_substr(line, i, ft_strlen(line) - i);
+		map->WE = ft_substr(line, i, (ft_strlen(line) - i) - 1);
 	}
 	else if (ft_strncmp(&line[i], "EA", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
 	{
 		i += 2;
 		while (line[i] && line[i] <= 32)
 			i++;
-		map->EA = ft_substr(line, i, ft_strlen(line) - i);
+		map->EA = ft_substr(line, i, (ft_strlen(line) - i) - 1);
 	}
 	else if (ft_strncmp(&line[i], "F", 1) == 0 && line[i + 1] <= 32 && line[i + 1] && line[i + 1] != '\n')
 	{
 		i += 1;
 		while (line[i] && line[i] <= 32)
 			i++;
-		map->f_color = ft_substr(line, i, ft_strlen(line) - i);
+		map->f_color = ft_substr(line, i, (ft_strlen(line) - i) - 1);
 	}
 	else if (ft_strncmp(&line[i], "C", 1) == 0 && line[i + 1] <= 32 && line[i + 1] && line[i + 1] != '\n')
 	{
 		i += 1;
 		while (line[i] && line[i] <= 32)
 			i++;
-		map->c_color = ft_substr(line, i, ft_strlen(line) - i);
+		map->c_color = ft_substr(line, i, (ft_strlen(line) - i) - 1);
 	}
 }
 static bool is_map(char *line)
@@ -121,5 +121,5 @@ bool check_map(char *file, t_map *map)
 		printf("%s\n", map->copy_map[i]);
 	}
 	return (map->NO && map->SO && map->WE && map->EA &&
-			map->f_color && map->c_color && map->rows);
+			map->f_color && map->c_color && map->rows && check_color(map));
 }

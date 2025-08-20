@@ -12,6 +12,7 @@ SRCS = srcs/main.c \
 		srcs/parsing/helper-functions/custom_error.c \
 		srcs/parsing/check_map.c \
 		libraries/get_next_line/get_next_line.c \
+		srcs/parsing/check_color.c \
 
 LIBFT_DIR = ./libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a

@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/19 13:20:14 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/20 13:17:01 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ bool	check_file_name(char *file_name);
 void	custom_error(char *msg);
 bool 	check_map(char *file, t_map *map);
 char	*get_next_line(int fd);
+bool 	check_color(t_map *map);
 
 
 
