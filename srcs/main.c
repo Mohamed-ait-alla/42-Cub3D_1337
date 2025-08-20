@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 10:36:36 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/18 16:05:13 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ int	ft_destroy_window(t_mlx_data *mlx)
 int main(int ac, char **av)
 {
 	t_mlx_data	mlx;
+	t_map		map;
 
 	// check file name
 	if (ac != 2 || !check_file_name(av[1]))
-		return (custom_error("Error:\nNo such file or directory !\n"), 1);
+		return (custom_error("Error:\nNo such file or directory!\n"), 1);
+
+	// check the map
+	ft_bzero(&map, sizeof(t_map));
+	if (!check_map(av[1], &map))
+		return (custom_error("Error:\nInvalid map!\n"), 1);
 	
 	// render_wall_texture(&mlx);
 	ft_bzero(&mlx, sizeof(t_mlx_data));

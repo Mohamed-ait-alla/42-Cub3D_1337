@@ -1,10 +1,16 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO textures/north.xpm
+EA textures/east.xpm
+SO textures/south.xpm
+WE textures/west.xpm
 
-F 1,4,5
-C 2,4,0
+DOOR_CLOSED textures/bonus/door_closed.xpm
+ANIM_3  textures/bonus/anim_3.xpm
+ANIM_2          textures/bonus/anim_2.xpm
+ANIM_0      textures/bonus/anim_0.xpm
+ANIM_1      textures/bonus/anim_1.xpm
+
+C 35,19,73
+F 15,6,40
 
         1111111111111111111111111
         1000000000110000000000001
