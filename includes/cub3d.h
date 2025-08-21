@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/21 15:45:54 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/21 17:17:14 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,135 +18,131 @@
 # define TILE_SIZE 32
 # define MAP_NUM_ROWS 16
 # define MAP_NUM_COLS 20
-# define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
-# define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
+# define WINDOW_WIDTH MAP_NUM_COLS *TILE_SIZE
+# define WINDOW_HEIGHT MAP_NUM_ROWS *TILE_SIZE
 # define FOV 60 * (PI / 180)
 # define NUM_RAYS WINDOW_WIDTH
-# include <stdlib.h>
-# include <stdio.h>
-# include <math.h>
-# include <string.h>
-# include <stdbool.h>
-# include <fcntl.h>
-# include <X11/keysym.h>
-# include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/libft/libft.h"
+# include "../libraries/minilibx-linux/mlx.h"
+# include <X11/keysym.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
 
-
-typedef struct s_player {
-	float	player_x;
-	float	player_y;
-	float	dir_x;
-	float	dir_y;
-	int		turn_dir;
-	int		walk_dir;
+typedef struct s_player
+{
+	float		player_x;
+	float		player_y;
+	float		dir_x;
+	float		dir_y;
+	int			turn_dir;
+	int			walk_dir;
 	double		rotation_Angle;
-	int		move_speed;
-	int		rotation_speed;
-}	t_player;
+	int			move_speed;
+	int			rotation_speed;
+}				t_player;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
-	double	ray_angle;
-	double	ray_distored_distance;
-	double	ray_correct_distance;
-	int		was_hit_horz;
-	int		was_hit_vert;
-	double	wall_hit_x;
-	double	wall_hit_y;
-}	t_ray;
+	double		ray_angle;
+	double		ray_distored_distance;
+	double		ray_correct_distance;
+	int			was_hit_horz;
+	int			was_hit_vert;
+	double		wall_hit_x;
+	double		wall_hit_y;
+}				t_ray;
 
-typedef struct s_texture 
+typedef struct s_texture
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}	t_texture;
-
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+}				t_texture;
 
 typedef struct s_keys
 {
-	int	key_w;
-	int	key_s;
-	int	key_d;
-	int	key_a;
-	int	key_left;
-	int	key_right;
-	int	key_escape;
-}	t_keys;
+	int			key_w;
+	int			key_s;
+	int			key_d;
+	int			key_a;
+	int			key_left;
+	int			key_right;
+	int			key_escape;
+}				t_keys;
 
-typedef struct  s_mlx_data
+typedef struct s_mlx_data
 {
-	void	*mlx_ptr;
-	void	*mlx_window;
-	void	*img;
-	char	*img_pixels;
-	int		bpp;
-	int		size_line;
-	int		endian;
+	void		*mlx_ptr;
+	void		*mlx_window;
+	void		*img;
+	char		*img_pixels;
+	int			bpp;
+	int			size_line;
+	int			endian;
 	t_keys		keys;
 	t_texture	wall_texture;
 	t_player	player;
 	t_ray		rays[NUM_RAYS];
-}	t_mlx_data;
-
+}				t_mlx_data;
 
 // #-------------- raycasting prototypes --------------#
-void	init_player(t_mlx_data *mlx);
-int		ft_destroy_window(t_mlx_data *mlx);
-int		key_pressed(int keycode, t_mlx_data *mlx);
-int		key_released(int keycode, t_mlx_data *mlx);
-void	update_player_position(t_mlx_data *mlx);
-int		is_wall(float x, float y);
-void	put_pixel(t_mlx_data *mlx, int x, int y, int color);
-void	draw_circle(t_mlx_data *mlx, int cx, int cy, int radius, int color);
-void	draw_square(t_mlx_data *mlx, int x, int y, int color);
-void	draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1, int color);
-void	draw_facing_line(t_mlx_data *mlx, double length, double color);
-void	render(t_mlx_data *mlx);
-int		update(t_mlx_data *mlx);
-void	cast_rays(t_mlx_data *mlx);
-int		load_wall_texture(t_mlx_data *mlx, char *path);
-
-
+void			init_player(t_mlx_data *mlx);
+int				ft_destroy_window(t_mlx_data *mlx);
+int				key_pressed(int keycode, t_mlx_data *mlx);
+int				key_released(int keycode, t_mlx_data *mlx);
+void			update_player_position(t_mlx_data *mlx);
+int				is_wall(float x, float y);
+void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
+void			draw_circle(t_mlx_data *mlx, int cx, int cy, int radius,
+					int color);
+void			draw_square(t_mlx_data *mlx, int x, int y, int color);
+void			draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1,
+					int color);
+void			draw_facing_line(t_mlx_data *mlx, double length, double color);
+void			render(t_mlx_data *mlx);
+int				update(t_mlx_data *mlx);
+void			cast_rays(t_mlx_data *mlx);
+int				load_wall_texture(t_mlx_data *mlx, char *path);
 
 // #--------------- Parsing map ----------------#
 typedef struct s_map
 {
-	int		_0;
-	int		_1;
-	int		_N;
-	int		_S;
-	int		_E;
-	int		_W;
-	int		num_NO;
-	int		num_SO;
-	int		num_WE;
-	int		num_EA;
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	char	*f_color;
-	char	*c_color;
-	int		num_f_color;
-	int		num_c_color;
-	char	**copy_map;
-	int		rows;
-}		t_map;
+	int			_0;
+	int			_1;
+	int			_N;
+	int			_S;
+	int			_E;
+	int			_W;
+	int			num_NO;
+	int			num_SO;
+	int			num_WE;
+	int			num_EA;
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+	char		*f_color;
+	char		*c_color;
+	int			num_f_color;
+	int			num_c_color;
+	char		**map;
+	char		**copy_map;
+	int			rows;
+}				t_map;
 
-
-bool	check_file_name(char *file_name);
-void	custom_error(char *msg);
-bool 	check_map(char *file, t_map *map);
-char	*get_next_line(int fd);
-bool 	check_color(t_map *map);
-bool 	check_num_of_players(t_map *map);
-
-
+bool			check_file_name(char *file_name);
+void			custom_error(char *msg);
+bool			check_map(char *file, t_map *map);
+char			*get_next_line(int fd);
+bool			check_color(t_map *map);
+bool			check_num_of_players(t_map *map);
 
 #endif

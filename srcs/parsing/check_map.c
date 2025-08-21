@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/21 15:46:20 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/21 18:27:37 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,12 @@ static bool check_chars_of_map(char *line, t_map *map)
 	return (true);
 }
 
+// static bool is_empty_line_in_map(char *line, char *prev_line)
+// {
+// 	if (this_line_is_map(line) && this_line_is_map(prev_line) && prev_line[0] == '\n' && prev_line[1] == '\0')
+// 		return (false);
+// 	return (false);
+// }
 
 bool check_map(char *file, t_map *map)
 {
@@ -168,23 +174,37 @@ bool check_map(char *file, t_map *map)
 
 	// copy the map
 	map->copy_map = malloc(sizeof(char *) * (map->rows + 1));
-	if (!map->copy_map)
+	map->map = malloc(sizeof(char *) * (map->rows + 1));
+	if (!map->copy_map || !map->map)
 		return (false);
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return false;
+		return (false);
+	// char *prev_line;
 	while ((line = get_next_line(fd)))
 	{
+		// if (is_empty_line_in_map(line, prev_line))
+		// {
+		// 	printf("line: %s\n", line);
+		// 	printf("prev_line: %s\n", prev_line);
+		// 	return (false);
+		// }
 		if (is_map(line))
-			map->copy_map[i++] = ft_strdup(line);
+		{
+			map->copy_map[i] = ft_strdup(line);
+			map->map[i] = ft_strdup(line);
+			i++;
+		}
+		// prev_line = ft_strdup(line);
 	}
 	map->copy_map[i] = NULL;
+	map->map[i] = NULL;
 
 	// check order of mape
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return false;
+		return (false);
 	line_before_map = 0;
 	while ((line = get_next_line(fd)))
 	{
@@ -207,8 +227,9 @@ bool check_map(char *file, t_map *map)
 	printf("copy map:\n");
 	for (int i = 0; map->copy_map[i]; i++)
 	{
-		printf("%s\n", map->copy_map[i]);
+		printf("%s", map->copy_map[i]);
 	}
+	printf("\n");
 	printf("line_before_map: %d\n", line_before_map);
 	printf("N_N: %d\n", map->_N);
 	printf("N_S: %d\n", map->_S);
@@ -220,5 +241,5 @@ bool check_map(char *file, t_map *map)
 			map->num_WE == 1 && map->num_EA == 1 &&
 			map->num_f_color == 1 && map->num_c_color == 1 &&
 			line_before_map == 6 && check_num_of_players(map) &&
-			check_color(map));
+			check_color(map) && map_is_valid(map));
 }
