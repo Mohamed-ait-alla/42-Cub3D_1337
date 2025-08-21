@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/20 17:59:58 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/21 10:45:28 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static bool is_map(char *line)
 		ft_strncmp(&line[i], "C", 1) == 0)
 		return false;
 	if (!line[i])
-		return false;
-	return true;
+		return (false);
+	return (true);
 }
 
 static bool this_line_is_map(char *line)
@@ -96,9 +96,39 @@ static bool this_line_is_map(char *line)
 		ft_strncmp(&line[i], "EA", 2) == 0 ||
 		ft_strncmp(&line[i], "F", 1) == 0 ||
 		ft_strncmp(&line[i], "C", 1) == 0)
-		return false;
-	return true;
+		return (false);
+	return (true);
 }
+
+
+static bool check_chars_of_map(char *line)
+{
+	int i = 0;
+	while (line[i] && line[i] <= 32)
+		i++;
+	if (!line[i])
+		return (true);
+	else if (!is_map(line))
+		return (true);
+	else if (line[i] == '1' || line[i] == '0' || line[i] == 'N' ||
+    		line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+	{
+		int j = 0;
+		while (line[j])
+		{
+			if (line[j] == '1' || line[j] == '0' || line[j] == 'N' ||
+    		line[j] == 'S' || line[j] == 'E' || line[j] == 'W' ||
+    		line[j] <= 32)
+				j++;
+			else
+				return (false);
+		}
+	}
+	else
+		return (false);
+	return (true);
+}
+
 
 bool check_map(char *file, t_map *map)
 {
@@ -115,6 +145,17 @@ bool check_map(char *file, t_map *map)
 		if (is_map(line))
 			map->rows++;
 	}
+
+	// check chars of map
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return false;
+	while ((line = get_next_line(fd)))
+	{
+		if (!check_chars_of_map(line))
+			return (false);
+	}
+	
 		
 	// copy the map
 	map->copy_map = malloc(sizeof(char *) * (map->rows + 1));
@@ -122,17 +163,19 @@ bool check_map(char *file, t_map *map)
 		return (false);
 	i = 0;
 	fd = open(file, O_RDONLY);
-	line_before_map = 0;
+	if (fd < 0)
+		return false;
 	while ((line = get_next_line(fd)))
 	{
 		if (is_map(line))
 			map->copy_map[i++] = ft_strdup(line);
-		line_before_map++;
 	}
 	map->copy_map[i] = NULL;
 
 	// check order of mape
 	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return false;
 	line_before_map = 0;
 	while ((line = get_next_line(fd)))
 	{
