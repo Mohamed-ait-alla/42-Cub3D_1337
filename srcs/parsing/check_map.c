@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/21 10:45:28 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/21 15:46:20 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static bool this_line_is_map(char *line)
 }
 
 
-static bool check_chars_of_map(char *line)
+static bool check_chars_of_map(char *line, t_map *map)
 {
 	int i = 0;
 	while (line[i] && line[i] <= 32)
@@ -119,7 +119,17 @@ static bool check_chars_of_map(char *line)
 			if (line[j] == '1' || line[j] == '0' || line[j] == 'N' ||
     		line[j] == 'S' || line[j] == 'E' || line[j] == 'W' ||
     		line[j] <= 32)
+			{
+				if (line[j] == 'N')
+					map->_N++;
+				else if (line[j] == 'S')
+					map->_S++;
+				else if (line[j] == 'E')
+					map->_E++;
+				else if (line[j] == 'W')
+					map->_W++;
 				j++;
+			}
 			else
 				return (false);
 		}
@@ -152,11 +162,10 @@ bool check_map(char *file, t_map *map)
 		return false;
 	while ((line = get_next_line(fd)))
 	{
-		if (!check_chars_of_map(line))
+		if (!check_chars_of_map(line, map))
 			return (false);
 	}
-	
-		
+
 	// copy the map
 	map->copy_map = malloc(sizeof(char *) * (map->rows + 1));
 	if (!map->copy_map)
@@ -201,11 +210,15 @@ bool check_map(char *file, t_map *map)
 		printf("%s\n", map->copy_map[i]);
 	}
 	printf("line_before_map: %d\n", line_before_map);
+	printf("N_N: %d\n", map->_N);
+	printf("N_S: %d\n", map->_S);
+	printf("N_E: %d\n", map->_E);
+	printf("N_W: %d\n", map->_W);
 	return (map->NO && map->SO && map->WE && map->EA &&
 			map->f_color && map->c_color && map->rows &&
 			map->num_NO == 1 && map->num_SO == 1 &&
 			map->num_WE == 1 && map->num_EA == 1 &&
 			map->num_f_color == 1 && map->num_c_color == 1 &&
-			line_before_map == 6 &&
+			line_before_map == 6 && check_num_of_players(map) &&
 			check_color(map));
 }

@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/20 16:11:39 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/21 15:45:54 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	custom_error(char *msg);
 bool 	check_map(char *file, t_map *map);
 char	*get_next_line(int fd);
 bool 	check_color(t_map *map);
+bool 	check_num_of_players(t_map *map);
 
 
 
