@@ -6,30 +6,77 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/22 09:58:59 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/22 17:52:59 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-bool flood_fill(t_map *map, int x, int y, int len_of_line, char player)
+void normalize_the_map(t_map *map)
 {
-    if (x < 0 || x >= map->rows || y < 0 || y >= len_of_line)
+    int x, y, big_line;
+    
+    // get the big line
+    x = 0;
+    big_line = 0;
+    while (map->copy_map[x])
+    {
+        if (big_line < (int) ft_strlen(map->copy_map[x]))
+            big_line = ft_strlen(map->copy_map[x]);
+        x++;
+    }
+    // fill the white spaces on O
+    x = 0;
+    while (map->copy_map[x])
+    {
+        y = 0;
+        while (map->copy_map[x][y])
+        {
+            if (map->copy_map[x][y] <= 32)
+                map->copy_map[x][y] = 'O';
+            y++;
+        }
+       if ((int) ft_strlen(map->copy_map[x]) < big_line)
+        {
+            int count_chars = big_line - (int) ft_strlen(map->copy_map[x]);
+            while (count_chars > 0)
+            {
+                map->copy_map[x] = ft_strjoin(map->copy_map[x], "O");
+                count_chars--;
+            }
+        }
+        x++;
+    }
+}
+
+
+bool flood_fill(t_map *map, int x, int y, char player)
+{
+    if (x < 0 || x >= map->rows || y < 0 || y >= (int)ft_strlen(map->copy_map[x]))
         return (false);
-    if (map->copy_map[x][y] != '0' && map->copy_map[x][y] != player)
-		return (true);
+    char c = map->copy_map[x][y];
+    if (c == 'O')
+        return (false);
+    if (c != '0' && c != player)
+        return (true);
     map->copy_map[x][y] = 'V';
-    flood_fill(map, x + 1, y, len_of_line, player);
-    flood_fill(map, x - 1, y, len_of_line, player);
-    flood_fill(map, x, y + 1, len_of_line, player);
-    flood_fill(map, x, y - 1, len_of_line, player);
+    if (!flood_fill(map, x + 1, y, player)) 
+        return (false);
+    if (!flood_fill(map, x - 1, y, player))
+        return (false);
+    if (!flood_fill(map, x, y + 1, player))
+        return (false);
+    if (!flood_fill(map, x, y - 1, player))
+        return (false);
     return (true);
 }
 
 bool map_is_valid(t_map *map)
 {
     int x, y;
-    
+
+    // normalize the map
+    normalize_the_map(map);
     x = 0;
     while (map->copy_map[x])
     {
@@ -38,8 +85,9 @@ bool map_is_valid(t_map *map)
         {
             if (map->copy_map[x][y] == 'N' || map->copy_map[x][y] == 'S' || map->copy_map[x][y] == 'E' || map->copy_map[x][y] == 'W')
             {
-                if (!flood_fill(map, x, y, ft_strlen(map->copy_map[x]), map->copy_map[x][y]))
-                    return (false);
+                
+                if (!flood_fill(map, x, y, map->copy_map[x][y]))
+                    return (false);                
             }
             y++;
         }
@@ -49,7 +97,7 @@ bool map_is_valid(t_map *map)
     printf("map after flood fill\n");
     for (int i = 0; map->copy_map[i]; i++)
     {
-        printf("%s", map->copy_map[i]);
+        printf("%s\n", map->copy_map[i]);
     }
     printf("\n");    
     return (true);
