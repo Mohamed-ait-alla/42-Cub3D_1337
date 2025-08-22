@@ -6,23 +6,24 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/21 19:00:13 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/22 09:58:59 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void flood_fill(t_map *map, int x, int y, int len_of_line, char player)
+bool flood_fill(t_map *map, int x, int y, int len_of_line, char player)
 {
     if (x < 0 || x >= map->rows || y < 0 || y >= len_of_line)
-        return;
+        return (false);
     if (map->copy_map[x][y] != '0' && map->copy_map[x][y] != player)
-		return ;
+		return (true);
     map->copy_map[x][y] = 'V';
     flood_fill(map, x + 1, y, len_of_line, player);
     flood_fill(map, x - 1, y, len_of_line, player);
     flood_fill(map, x, y + 1, len_of_line, player);
     flood_fill(map, x, y - 1, len_of_line, player);
+    return (true);
 }
 
 bool map_is_valid(t_map *map)
@@ -44,5 +45,12 @@ bool map_is_valid(t_map *map)
         }
         x++;
     }
+
+    printf("map after flood fill\n");
+    for (int i = 0; map->copy_map[i]; i++)
+    {
+        printf("%s", map->copy_map[i]);
+    }
+    printf("\n");    
     return (true);
 }

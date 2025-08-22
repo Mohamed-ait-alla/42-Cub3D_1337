@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/21 18:27:37 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/22 10:44:19 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,17 @@ static bool check_chars_of_map(char *line, t_map *map)
 	return (true);
 }
 
-// static bool is_empty_line_in_map(char *line, char *prev_line)
-// {
-// 	if (this_line_is_map(line) && this_line_is_map(prev_line) && prev_line[0] == '\n' && prev_line[1] == '\0')
-// 		return (false);
-// 	return (false);
-// }
+static bool is_empty_line(char *line)
+{
+    int i = 0;
+	while (line[i] && line[i] <= 32)
+		i++;
+	if (line[i])
+		return (false);
+    return (true);
+}
+
+
 
 bool check_map(char *file, t_map *map)
 {
@@ -181,25 +186,28 @@ bool check_map(char *file, t_map *map)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (false);
-	// char *prev_line;
+	bool map_started = false;
+	bool map_ended = false;
 	while ((line = get_next_line(fd)))
 	{
-		// if (is_empty_line_in_map(line, prev_line))
-		// {
-		// 	printf("line: %s\n", line);
-		// 	printf("prev_line: %s\n", prev_line);
-		// 	return (false);
-		// }
-		if (is_map(line))
+    	if (is_map(line))
 		{
+			if (map_ended)
+				return (false);
+			map_started = true;
 			map->copy_map[i] = ft_strdup(line);
 			map->map[i] = ft_strdup(line);
 			i++;
 		}
-		// prev_line = ft_strdup(line);
+		else if (is_empty_line(line))
+		{
+			if (map_started)
+				map_ended = true;
+		}
 	}
 	map->copy_map[i] = NULL;
 	map->map[i] = NULL;
+
 
 	// check order of mape
 	fd = open(file, O_RDONLY);
