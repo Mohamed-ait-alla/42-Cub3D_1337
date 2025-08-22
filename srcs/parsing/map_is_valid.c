@@ -6,13 +6,13 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/22 17:52:59 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/22 18:01:32 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void normalize_the_map(t_map *map)
+static void normalize_the_map(t_map *map)
 {
     int x, y, big_line;
     
@@ -50,7 +50,7 @@ void normalize_the_map(t_map *map)
 }
 
 
-bool flood_fill(t_map *map, int x, int y, char player)
+static bool flood_fill(t_map *map, int x, int y, char player)
 {
     if (x < 0 || x >= map->rows || y < 0 || y >= (int)ft_strlen(map->copy_map[x]))
         return (false);
