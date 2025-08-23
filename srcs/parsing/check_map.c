@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/22 10:44:19 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/23 09:50:17 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,9 @@ bool check_map(char *file, t_map *map)
 	line_before_map = 0;
 	while ((line = get_next_line(fd)))
 	{
-		if (!ft_strcmp(line, map->copy_map[0]))
+		if (!map->copy_map[0] || !ft_strcmp(line, map->copy_map[0]))
 			break ;
+		
 		if (!this_line_is_map(line))
 			line_before_map++;
 	}
