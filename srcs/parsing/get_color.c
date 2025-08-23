@@ -6,13 +6,13 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 10:29:40 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/23 10:46:00 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/23 11:39:16 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	convert_rgb_to_int(int r, int g, int b)
+static int	convert_rgb_to_int(int r, int g, int b)
 {
     return (r << 16 | g << 8 | b);
 }
