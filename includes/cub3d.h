@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/22 10:33:57 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/23 10:38:42 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ typedef struct s_map
 	char		**map;
 	char		**copy_map;
 	int			rows;
+	int			floor_color;
+	int			ceiling_color;
 }				t_map;
 
 bool			check_file_name(char *file_name);
@@ -145,5 +147,6 @@ char			*get_next_line(int fd);
 bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);
 bool 			map_is_valid(t_map *map);
+void			get_color(t_map *map);
 
 #endif

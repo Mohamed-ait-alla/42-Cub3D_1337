@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:08:59 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/20 14:43:07 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/23 10:52:12 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ bool check_color(t_map *map)
     }
     if (f_count != 3 || c_count != 3)
         return (false);
+    get_color(map);
     return (true);
 }
