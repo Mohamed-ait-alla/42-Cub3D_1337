@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   check_num_of_players.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 10:42:30 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/22 18:20:34 by mdahani          ###   ########.fr       */
+/*   Created: 2025/08/21 15:43:13 by mdahani           #+#    #+#             */
+/*   Updated: 2025/08/21 15:45:29 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/cub3d.h"
 
-int	ft_strcmp(char *s1, char *s2)
+bool check_num_of_players(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+    if ((map->_N + map->_S +map->_E + map->_W) != 1)
+        return (false);
+    return (true);
 }
