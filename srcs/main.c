@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 16:05:13 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/23 10:53:14 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int main(int ac, char **av)
 	init_player(&mlx);
 	mlx.mlx_ptr = mlx_init();
 	mlx.mlx_window = mlx_new_window(mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "mlx window");
+
 	if (!load_wall_texture(&mlx, "./textures/tile39.xpm"))
 	{
 		printf("Error: failed to load textures\n");
