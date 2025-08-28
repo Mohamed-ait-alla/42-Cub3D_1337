@@ -6,15 +6,21 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/26 19:25:17 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:14:51 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int is_wall(t_mlx_data *mlx, float x, float y) {
+int is_wall(t_mlx_data *mlx, double x, double y) {
     if (x < 0 || y < 0 || x >= mlx->map.cols * TILE_SIZE || y >= mlx->map.rows * TILE_SIZE)
-        return 1;
+	{
+        return 1;	
+	}
+	if (!is_ray_facing_down(mlx->ray_angle)) // if ray is facing up get the y inside the cell.
+		y--;		
+	if (!is_ray_facing_right(mlx->ray_angle)) // if ray is facing left get the x inside the cell.
+		x--;	
     int grid_x = x / TILE_SIZE;
     int grid_y = y / TILE_SIZE;
 	
@@ -64,8 +70,8 @@ void	update_player_position(t_mlx_data *mlx)
 	float	next_x;
 	float	next_y;
 
-	next_x = mlx->player.player_x;
-	next_y = mlx->player.player_y;
+	next_x = mlx->player.px;
+	next_y = mlx->player.py;
 
 	// handle escape: close the game
 	if (mlx->keys.key_escape)
@@ -101,8 +107,8 @@ void	update_player_position(t_mlx_data *mlx)
 	// check for wall collision
 	if (!is_wall(mlx, next_x, next_y))
 	{
-		mlx->player.player_x = next_x;
-		mlx->player.player_y = next_y;
+		mlx->player.px = next_x;
+		mlx->player.py = next_y;
 	}
 	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 10:12:34 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:58:46 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,8 +235,8 @@ void render_textured_walls(t_mlx_data *mlx)
 // 		}
 // 		i++;
 // 	}
-// 	draw_circle(mlx, mlx->player.player_x, mlx->player.player_y, 3, 0xff0000);
-// 	draw_facing_line(mlx, 16, 0xff0000);
+// 	draw_circle(mlx, mlx->player.px, mlx->player.py, 3, 0xff0000);
+//  draw_facing_line(mlx, 16, 0xff0000);
 // }
 
 // void	render_projected_walls(t_mlx_data *mlx)

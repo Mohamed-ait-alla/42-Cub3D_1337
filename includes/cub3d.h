@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/26 19:12:50 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:13:47 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@
 
 typedef struct s_player
 {
-	float		player_x;
-	float		player_y;
-	float		dir_x;
-	float		dir_y;
+	double		px;
+	double		py;
 	int			turn_dir;
 	int			walk_dir;
 	double		rotation_Angle;
@@ -116,6 +114,7 @@ typedef struct s_mlx_data
 	int			bpp;
 	int			size_line;
 	int			endian;
+	double		ray_angle;
 	t_keys		keys;
 	t_texture	wall_texture;
 	t_player	player;
@@ -129,7 +128,7 @@ int				ft_destroy_window(t_mlx_data *mlx);
 int				key_pressed(int keycode, t_mlx_data *mlx);
 int				key_released(int keycode, t_mlx_data *mlx);
 void			update_player_position(t_mlx_data *mlx);
-int				is_wall(t_mlx_data *mlx, float x, float y);
+int				is_wall(t_mlx_data *mlx, double x, double y);
 void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
 void			draw_circle(t_mlx_data *mlx, int cx, int cy, int radius,
 					int color);
@@ -141,6 +140,8 @@ void			render(t_mlx_data *mlx);
 int				update(t_mlx_data *mlx);
 void			cast_rays(t_mlx_data *mlx);
 int				load_wall_texture(t_mlx_data *mlx, char *path);
+int				is_ray_facing_down(double ray_angle);
+int 			is_ray_facing_right(double ray_angle);
 
 // #--------------- Parsing map ----------------#
 
