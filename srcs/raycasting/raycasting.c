@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 10:12:28 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/26 13:38:40 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	find_horizontal_intersection(t_mlx_data *mlx, double *horz_wall_hit_x, doubl
 		next_horz_touch_y --;
 	while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
 	{
-		if (is_wall(next_horz_touch_x, next_horz_touch_y))
+		if (is_wall(mlx, next_horz_touch_x, next_horz_touch_y))
 		{
 			// we hit the wall
 			// found_horz_wall_hit = 1;
@@ -157,7 +157,7 @@ int	find_vertical_intersections(t_mlx_data *mlx, double *vert_wall_hit_x, double
 		next_vert_touch_x --;
 	while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
 	{
-		if (is_wall(next_vert_touch_x, next_vert_touch_y))
+		if (is_wall(mlx, next_vert_touch_x, next_vert_touch_y))
 		{
 			// found_vert_wall_hit = 1;
 			*vert_wall_hit_x = next_vert_touch_x;
