@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 15:13:47 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:49:12 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ typedef struct s_map
 	int			cols;
 	int			floor_color;
 	int			ceiling_color;
-	int			px_player;
-	int			py_player;
+	double		px_player;
+	double		py_player;
 	char		player;
 }				t_map;
 

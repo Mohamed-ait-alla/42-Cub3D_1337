@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/22 18:01:32 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/28 18:10:18 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ bool map_is_valid(t_map *map)
         {
             if (map->copy_map[x][y] == 'N' || map->copy_map[x][y] == 'S' || map->copy_map[x][y] == 'E' || map->copy_map[x][y] == 'W')
             {
-                map->px_player = x;
-                map->py_player = y;
+                map->px_player = y;
+                map->py_player = x;
                 map->player = map->copy_map[x][y];
                 if (!flood_fill(map, x, y, map->copy_map[x][y]))
                     return (false);                
@@ -102,8 +102,8 @@ bool map_is_valid(t_map *map)
         printf("%s\n", map->copy_map[i]);
     }
     printf("\n");
-    printf("px_player: %d\n", map->px_player);
-    printf("py_player: %d\n", map->py_player);
+    printf("px_player: %f\n", map->px_player);
+    printf("py_player: %f\n", map->py_player);
     printf("char of player: %c\n", map->player);
     return (true);
 }
