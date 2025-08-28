@@ -16,6 +16,7 @@ SRCS = srcs/main.c \
 		srcs/parsing/check_num_of_players.c \
 		srcs/parsing/map_is_valid.c \
 		srcs/parsing/get_color.c \
+		srcs/parsing/check_order_textures.c \
 
 LIBFT_DIR = ./libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a
