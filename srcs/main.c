@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/23 10:53:14 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/26 19:01:13 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int main(int ac, char **av)
 	ft_bzero(&map, sizeof(t_map));
 	if (!check_map(av[1], &map))
 		return (custom_error("Error:\nInvalid map!\n"), 1);
-	
 	// render_wall_texture(&mlx);
 	ft_bzero(&mlx, sizeof(t_mlx_data));
 	init_player(&mlx);

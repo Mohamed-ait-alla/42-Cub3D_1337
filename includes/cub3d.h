@@ -138,6 +138,9 @@ typedef struct s_map
 	int			rows;
 	int			floor_color;
 	int			ceiling_color;
+	int			px_player;
+	int			py_player;
+	char		player;
 }				t_map;
 
 bool			check_file_name(char *file_name);
