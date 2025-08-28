@@ -3,21 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/18 10:12:22 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:14:00 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+static int	get_n_map_cols(char *row)
+{
+	int	count;
+	
+	if (!row)
+		return (0);
+	count = 0;
+	while (row[count])
+	{
+		count++;
+	}
+	return (count - 1);
+}
+
 void	init_player(t_mlx_data *mlx)
 {
-	mlx->player.player_x = WINDOW_WIDTH / 2;  // col 4
-	mlx->player.player_y = WINDOW_HEIGHT / 2; // row 3
-	mlx->player.turn_dir = 0;
-	mlx->player.walk_dir = 0;
+	mlx->player.px = WINDOW_WIDTH / 2;
+	mlx->player.py = WINDOW_HEIGHT / 2;
 	mlx->player.rotation_Angle = PI / 2;
 	mlx->player.rotation_speed = 2 * (PI / 180);
 	mlx->player.move_speed = 1;
@@ -28,6 +40,7 @@ void	init_player(t_mlx_data *mlx)
 	mlx->keys.key_left = 0;
 	mlx->keys.key_right = 0;
 	mlx->keys.key_escape = 0;
+	mlx->map.cols = get_n_map_cols(mlx->map.map[0]);
 }
 
 int	load_wall_texture(t_mlx_data *mlx, char *path)
