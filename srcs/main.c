@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 13:17:53 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:11:21 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main(int ac, char **av)
 	ft_bzero(&map, sizeof(t_map));
 	if (!check_map(av[1], &map))
 		return (custom_error("Error:\nInvalid map!\n"), 1);
-	
 	// render_wall_texture(&mlx);
 	ft_bzero(&mlx, sizeof(t_mlx_data));
 	mlx.map = map;

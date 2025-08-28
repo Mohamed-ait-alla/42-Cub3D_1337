@@ -102,6 +102,9 @@ typedef struct s_map
 	int			cols;
 	int			floor_color;
 	int			ceiling_color;
+	int			px_player;
+	int			py_player;
+	char		player;
 }				t_map;
 
 

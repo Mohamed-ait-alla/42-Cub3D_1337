@@ -85,7 +85,9 @@ bool map_is_valid(t_map *map)
         {
             if (map->copy_map[x][y] == 'N' || map->copy_map[x][y] == 'S' || map->copy_map[x][y] == 'E' || map->copy_map[x][y] == 'W')
             {
-                
+                map->px_player = x;
+                map->py_player = y;
+                map->player = map->copy_map[x][y];
                 if (!flood_fill(map, x, y, map->copy_map[x][y]))
                     return (false);                
             }
@@ -99,6 +101,9 @@ bool map_is_valid(t_map *map)
     {
         printf("%s\n", map->copy_map[i]);
     }
-    printf("\n");    
+    printf("\n");
+    printf("px_player: %d\n", map->px_player);
+    printf("py_player: %d\n", map->py_player);
+    printf("char of player: %c\n", map->player);
     return (true);
 }
