@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 18:15:39 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:04:30 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,26 @@ static int	get_n_map_cols(char *row)
 	return (count - 1);
 }
 
+static double get_rotation_agnle(char p_char)
+{
+	if (p_char == 'N')
+		return (3 * M_PI / 2);
+	else if (p_char == 'S')
+		return (M_PI / 2);
+	else if (p_char == 'E')
+		return (0);
+	else if (p_char == 'W')
+		return (M_PI);
+	return (0);
+}
+
 void	init_player(t_mlx_data *mlx)
 {
 	mlx->player.px = mlx->map.px_player * TILE_SIZE;
 	mlx->player.py = mlx->map.py_player * TILE_SIZE;
-	mlx->player.rotation_Angle = PI / 2;
-	mlx->player.rotation_speed = 2 * (PI / 180);
-	mlx->player.move_speed = 1;
+	mlx->player.rotation_Angle = get_rotation_agnle(mlx->map.player);
+	mlx->player.rotation_speed = 2 * (M_PI / 180);
+	mlx->player.move_speed = 0.8;
 	mlx->keys.key_a = 0;
 	mlx->keys.key_d = 0;
 	mlx->keys.key_w = 0;

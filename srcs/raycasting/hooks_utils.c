@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 15:14:51 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:03:05 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int is_wall(t_mlx_data *mlx, double x, double y) {
 	{
         return 1;	
 	}
-	if (!is_ray_facing_down(mlx->ray_angle)) // if ray is facing up get the y inside the cell.
-		y--;		
-	if (!is_ray_facing_right(mlx->ray_angle)) // if ray is facing left get the x inside the cell.
-		x--;	
+	// if (!is_ray_facing_down(mlx->ray_angle)) // if ray is facing up get the y inside the cell.
+	// 	y--;		
+	// if (!is_ray_facing_right(mlx->ray_angle)) // if ray is facing left get the x inside the cell.
+	// 	x--;	
     int grid_x = x / TILE_SIZE;
     int grid_y = y / TILE_SIZE;
-	
     return mlx->map.map[grid_y][grid_x] == '1';
 }
 
@@ -65,6 +64,18 @@ int	key_released(int keycode, t_mlx_data *mlx)
 	return (0);
 }
 
+int has_collision(t_mlx_data *mlx, float x, float y)
+{
+    float r = 0.5;
+
+    if (is_wall(mlx, x - r, y - r)) return 1;
+    if (is_wall(mlx, x + r, y - r)) return 1;
+    if (is_wall(mlx, x - r, y + r)) return 1;
+    if (is_wall(mlx, x + r, y + r)) return 1;
+    return 0;
+}
+
+
 void	update_player_position(t_mlx_data *mlx)
 {
 	float	next_x;
@@ -72,7 +83,7 @@ void	update_player_position(t_mlx_data *mlx)
 
 	next_x = mlx->player.px;
 	next_y = mlx->player.py;
-
+	
 	// handle escape: close the game
 	if (mlx->keys.key_escape)
 		ft_destroy_window(mlx);
@@ -105,7 +116,7 @@ void	update_player_position(t_mlx_data *mlx)
 	}
 
 	// check for wall collision
-	if (!is_wall(mlx, next_x, next_y))
+	if (!has_collision(mlx, next_x, next_y))
 	{
 		mlx->player.px = next_x;
 		mlx->player.py = next_y;

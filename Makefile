@@ -41,7 +41,8 @@ $(LIBFT):
 all: $(NAME)
 
 run: all
-	./cub3d
+	${RM} ${OBJS}
+	./cub3d	./maps/map_1.cub
 
 clean:
 	$(RM) $(OBJS)

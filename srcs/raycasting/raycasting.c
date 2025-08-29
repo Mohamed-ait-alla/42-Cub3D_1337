@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 15:24:21 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/29 10:56:47 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 double	normalize_angle(double angle)
 {
-	angle = fmod(angle, (2 * PI));
+	angle = fmod(angle, (2 * M_PI));
 	if (angle < 0)
-		angle += (2 * PI);
+		angle += (2 * M_PI);
 	return (angle);
 }
 
@@ -44,7 +44,7 @@ void	get_smallest_distance(t_mlx_data *mlx, int i,
 	else
 		vert_hit_distance = 2147483647;
 	// store values
-	if (horz_hit_distance < vert_hit_distance)
+	if (horz_hit_distance <= vert_hit_distance)
 	{
 		mlx->rays[i].wall_hit_x = horz_wall_hit_x;
 		mlx->rays[i].wall_hit_y = horz_wall_hit_y;
@@ -63,12 +63,12 @@ void	get_smallest_distance(t_mlx_data *mlx, int i,
 
 int	is_ray_facing_down(double ray_angle)
 {
-	return (ray_angle > 0 && ray_angle < PI);
+	return (ray_angle > 0 && ray_angle < M_PI);
 }
 
 int is_ray_facing_right(double ray_angle)
 {
-	return (ray_angle < 0.5 * PI || ray_angle > 1.5 * PI);
+	return (ray_angle < 0.5 * M_PI || ray_angle > 1.5 * M_PI);
 }
 
 int	find_horizontal_intersection(t_mlx_data *mlx, double *horz_wall_hit_x, double *horz_wall_hit_y, double ray_angle)
@@ -98,7 +98,7 @@ int	find_horizontal_intersection(t_mlx_data *mlx, double *horz_wall_hit_x, doubl
 
 	while (x_intercept >= 0 && x_intercept <= WINDOW_WIDTH && y_intercept >= 0 && y_intercept <= WINDOW_HEIGHT)
 	{
-		if (is_wall(mlx, x_intercept, y_intercept))
+		if (is_wall(mlx, x_intercept , y_intercept - (!is_ray_facing_down(ray_angle) ? 1 : 0)))
 		{
 			// we hit the wall
 			*horz_wall_hit_x = x_intercept;
@@ -136,7 +136,7 @@ int	find_vertical_intersections(t_mlx_data *mlx, double *vert_wall_hit_x, double
 	
 	while (x_intercept >= 0 && x_intercept <= WINDOW_WIDTH && y_intercept >= 0 && y_intercept <= WINDOW_HEIGHT)
 	{
-		if (is_wall(mlx, x_intercept, y_intercept))
+		if (is_wall(mlx, x_intercept - (!is_ray_facing_right(ray_angle) ? 1 : 0), y_intercept))
 		{
 			*vert_wall_hit_x = x_intercept;
 			*vert_wall_hit_y = y_intercept;
