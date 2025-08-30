@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/29 18:02:28 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:44:55 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int main(int ac, char **av)
 	init_player(&mlx);
 	mlx.mlx_ptr = mlx_init();
 	mlx.mlx_window = mlx_new_window(mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "mlx window");
-
-	if (!load_wall_texture(&mlx, "./textures/wall.xpm"))
+	if (!load_all_textures(&mlx))
 	{
 		printf("Error: failed to load textures\n");
 		exit (1);

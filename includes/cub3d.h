@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/29 10:59:46 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 12:12:14 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ typedef struct s_mlx_data
 	int			endian;
 	double		ray_angle;
 	t_keys		keys;
-	t_texture	wall_texture;
+	t_texture	textures[4];
+	t_texture	*wall_texture;
 	t_player	player;
 	t_ray		rays[NUM_RAYS];
 	t_map		map;
@@ -142,7 +143,7 @@ void			draw_facing_line(t_mlx_data *mlx, double length, double color);
 void			render(t_mlx_data *mlx);
 int				update(t_mlx_data *mlx);
 void			cast_rays(t_mlx_data *mlx);
-int				load_wall_texture(t_mlx_data *mlx, char *path);
+int				load_all_textures(t_mlx_data *mlx);
 int				is_ray_facing_down(double ray_angle);
 int 			is_ray_facing_right(double ray_angle);
 

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/29 11:04:30 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:08:08 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,33 @@ void	init_player(t_mlx_data *mlx)
 	mlx->map.cols = get_n_map_cols(mlx->map.map[0]);
 }
 
-int	load_wall_texture(t_mlx_data *mlx, char *path)
+int	load_texture(t_mlx_data *mlx, char *path, int i)
 {
-	mlx->wall_texture.img = mlx_xpm_file_to_image (mlx->mlx_ptr, path, &mlx->wall_texture.width, &mlx->wall_texture.height);
-	if (!mlx->wall_texture.img)
-		printf("failed to load the wall texture\n");
-	mlx->wall_texture.addr = mlx_get_data_addr(mlx->wall_texture.img, &mlx->wall_texture.bpp, &mlx->wall_texture.line_length, &mlx->wall_texture.endian);
-	if (!mlx->wall_texture.addr)
-		printf("failed to get the addr of the texture\n");
-	printf("texture loaded successfully\n");
+	mlx->textures[i].img = mlx_xpm_file_to_image (mlx->mlx_ptr, path, &mlx->textures[i].width, &mlx->textures[i].height);
+	if (!mlx->textures[i].img)
+	{
+		perror("failed to load a texture\n");
+		return (0);
+	}
+	mlx->textures[i].addr = mlx_get_data_addr(mlx->textures[i].img, &mlx->textures[i].bpp, &mlx->textures[i].line_length, &mlx->textures[i].endian);
+	if (!mlx->textures[i].addr)
+	{
+		perror("failed to get the addr of a texture\n");
+		return (0);
+	}
+	return (1);
+}
+
+int	load_all_textures(t_mlx_data *mlx)
+{
+	if (!load_texture(mlx, mlx->map.NO, 0))
+		return (0);
+	if (!load_texture(mlx, mlx->map.SO, 1))
+		return (0);
+	if (!load_texture(mlx, mlx->map.EA, 2))
+		return (0);
+	if (!load_texture(mlx, mlx->map.WE, 3))
+		return (0);
+	printf("textures loaded successfully!\n");
 	return (1);
 }

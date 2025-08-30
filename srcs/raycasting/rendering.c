@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 15:58:46 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 10:40:45 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,82 +22,57 @@ void put_pixel(t_mlx_data *mlx, int x, int y, int color)
 }
 
 
-void	draw_circle(t_mlx_data *mlx, int cx, int cy, int radius, int color)
-{
-	for (int y = -radius; y <= radius; y++)
-		for (int x = -radius; x <= radius; x++)
-			if (x * x + y * y <= radius * radius)
-				put_pixel(mlx, cx + x, cy + y, color);
-}
+// void	draw_circle(t_mlx_data *mlx, int cx, int cy, int radius, int color)
+// {
+// 	for (int y = -radius; y <= radius; y++)
+// 		for (int x = -radius; x <= radius; x++)
+// 			if (x * x + y * y <= radius * radius)
+// 				put_pixel(mlx, cx + x, cy + y, color);
+// }
 
-void draw_square(t_mlx_data *mlx, int x, int y, int color)
-{
-	for (int i = 0; i < 32; i++) // height
-	{
-		for (int j = 0; j < 32; j++) // width
-		{
-			put_pixel(mlx, x + j, y + i, color);
-		}
-	}
-}
+// void draw_square(t_mlx_data *mlx, int x, int y, int color)
+// {
+// 	for (int i = 0; i < 32; i++) // height
+// 	{
+// 		for (int j = 0; j < 32; j++) // width
+// 		{
+// 			put_pixel(mlx, x + j, y + i, color);
+// 		}
+// 	}
+// }
 
-void draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1, int color)
-{
-    int dx = x1 - x0;
-    int dy = y1 - y0;
+// void draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1, int color)
+// {
+//     int dx = x1 - x0;
+//     int dy = y1 - y0;
 
-    int steps = fmax(abs(dx), abs(dy));
+//     int steps = fmax(abs(dx), abs(dy));
 
-    double x_inc = dx / (double)steps;
-    double y_inc = dy / (double)steps;
+//     double x_inc = dx / (double)steps;
+//     double y_inc = dy / (double)steps;
 
-    double x = x0;
-    double y = y0;
+//     double x = x0;
+//     double y = y0;
 
-    for (int i = 0; i <= steps; i++)
-    {
-         put_pixel(mlx, round(x), round(y), color);
-        x += x_inc;
-        y += y_inc;
-    }
-}
+//     for (int i = 0; i <= steps; i++)
+//     {
+//          put_pixel(mlx, round(x), round(y), color);
+//         x += x_inc;
+//         y += y_inc;
+//     }
+// }
 
 int get_texture_pixel(t_mlx_data *mlx, int x, int y)
 {
 	char *dst;
 
-  if (x < 0 || x >= mlx->wall_texture.width || y < 0 || y >= mlx->wall_texture.height)
+  if (x < 0 || x >= mlx->wall_texture->width || y < 0 || y >= mlx->wall_texture->height)
         return (0x000000); // Return black for out-of-bounds
     
-    dst = mlx->wall_texture.addr + (y * mlx->wall_texture.line_length + x * (mlx->wall_texture.bpp / 8));
+    dst = mlx->wall_texture->addr + (y * mlx->wall_texture->line_length + x * (mlx->wall_texture->bpp / 8));
     return (*(unsigned int*)dst);
 }
 
-int calculate_texture_x(t_mlx_data *mlx, int ray_index)
-{
-    t_ray	*ray;
-    double	wall_x;
-    int		texture_x;
-    
-	ray = &mlx->rays[ray_index];
-    // Use the fractional part of the wall hit position
-    wall_x = ray->wall_hit_x - floor(ray->wall_hit_x);
-    if (wall_x < 0) wall_x += 1.0;
-    
-    // If hitting a vertical wall, use Y coordinate instead
-    if (fabs(ray->wall_hit_x - floor(ray->wall_hit_x + 0.5)) < 0.01)
-    {
-        wall_x = ray->wall_hit_y - floor(ray->wall_hit_y);
-        if (wall_x < 0) wall_x += 1.0;
-    }
-    
-    texture_x = (int)(wall_x * mlx->wall_texture.width);
-    
-    if (texture_x >= mlx->wall_texture.width)
-        texture_x = mlx->wall_texture.width - 1;
-    
-    return (texture_x);
-}
 // used just to add some dark colors to the walls
 int apply_distance_shading(int color, double distance)
 {
@@ -114,6 +89,24 @@ int apply_distance_shading(int color, double distance)
     b = (int)(b * shade_factor);
     return ((r << 16) | (g << 8) | b);
 }
+t_texture	*get_wall_texture(t_mlx_data *mlx, int x)
+{
+	if (mlx->rays[x].was_hit_vert)
+	{
+		if (is_ray_facing_right(mlx->rays[x].ray_angle))
+			return (&mlx->textures[3]);
+		else
+			return (&mlx->textures[2]);
+	}
+	if (mlx->rays[x].was_hit_horz)
+	{
+		if (is_ray_facing_down(mlx->rays[x].ray_angle))
+			return (&mlx->textures[1]);
+		else
+			return (&mlx->textures[0]);
+	}
+	return (NULL);
+}
 
 void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top, 
                                 int wall_bottom, int x, double wall_strip_height)
@@ -124,6 +117,12 @@ void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top,
 	int	y;
 
 	y = 0;
+	mlx->wall_texture = get_wall_texture(mlx, x);
+	if (!mlx->wall_texture)
+	{
+		perror("Error: Failed to get the wall_texture!\n");
+		return ;
+	}
 	// get the x offset
 	if (mlx->rays[x].was_hit_vert)
 		texture_offset_x = (int)mlx->rays[x].wall_hit_y % TILE_SIZE;
@@ -133,15 +132,15 @@ void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top,
     {
 		// Ceiling
         if (y < wall_top)
-			put_pixel(mlx, x, y, 0x87CEEB);
+			put_pixel(mlx, x, y, mlx->map.ceiling_color);
 		// Wall rendering
         else if (y >= wall_top && y <= wall_bottom)
         {
 			// get the y offset
-			texture_offset_y = (y -  wall_top) * ((float)mlx->wall_texture.height / wall_strip_height);
+			texture_offset_y = (y -  wall_top) * ((float)mlx->wall_texture->height / wall_strip_height);
             // Bounds checking
-            if (texture_offset_y >= mlx->wall_texture.height)
-                texture_offset_y = mlx->wall_texture.height - 1;
+            if (texture_offset_y >= mlx->wall_texture->height)
+                texture_offset_y = mlx->wall_texture->height - 1;
             if (texture_offset_y < 0)
                 texture_offset_y = 0;
             
@@ -151,12 +150,11 @@ void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top,
             // // Apply distance-based shading
             color = apply_distance_shading(color, mlx->rays[x].ray_correct_distance);
 			put_pixel(mlx, x, y, color);	
-            
 
         }
 		// Floor
         else
-            put_pixel(mlx, x, y, 0x8B4513);
+            put_pixel(mlx, x, y, mlx->map.floor_color);
 
 		y++;
     }
