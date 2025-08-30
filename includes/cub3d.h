@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 16:53:42 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/30 17:52:53 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# ifndef PI
-#  define PI 3.141592653589793238462
+# ifndef M_PI
+#  define M_PI 3.141592653589793238462
 # endif
 # define TILE_SIZE 32
 # define MAP_NUM_ROWS 16
 # define MAP_NUM_COLS 20
 # define WINDOW_WIDTH MAP_NUM_COLS *TILE_SIZE
 # define WINDOW_HEIGHT MAP_NUM_ROWS *TILE_SIZE
-# define FOV 60 * (PI / 180)
+# define FOV 60 * (M_PI / 180)
 # define NUM_RAYS WINDOW_WIDTH
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
@@ -34,14 +34,12 @@
 
 typedef struct s_player
 {
-	float		player_x;
-	float		player_y;
-	float		dir_x;
-	float		dir_y;
+	double		px;
+	double		py;
 	int			turn_dir;
 	int			walk_dir;
 	double		rotation_Angle;
-	int			move_speed;
+	double			move_speed;
 	int			rotation_speed;
 }				t_player;
 
@@ -78,41 +76,6 @@ typedef struct s_keys
 	int			key_escape;
 }				t_keys;
 
-typedef struct s_mlx_data
-{
-	void		*mlx_ptr;
-	void		*mlx_window;
-	void		*img;
-	char		*img_pixels;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	t_keys		keys;
-	t_texture	wall_texture;
-	t_player	player;
-	t_ray		rays[NUM_RAYS];
-}				t_mlx_data;
-
-// #-------------- raycasting prototypes --------------#
-void			init_player(t_mlx_data *mlx);
-int				ft_destroy_window(t_mlx_data *mlx);
-int				key_pressed(int keycode, t_mlx_data *mlx);
-int				key_released(int keycode, t_mlx_data *mlx);
-void			update_player_position(t_mlx_data *mlx);
-int				is_wall(float x, float y);
-void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
-void			draw_circle(t_mlx_data *mlx, int cx, int cy, int radius,
-					int color);
-void			draw_square(t_mlx_data *mlx, int x, int y, int color);
-void			draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1,
-					int color);
-void			draw_facing_line(t_mlx_data *mlx, double length, double color);
-void			render(t_mlx_data *mlx);
-int				update(t_mlx_data *mlx);
-void			cast_rays(t_mlx_data *mlx);
-int				load_wall_texture(t_mlx_data *mlx, char *path);
-
-// #--------------- Parsing map ----------------#
 typedef struct s_map
 {
 	int			_0;
@@ -140,12 +103,55 @@ typedef struct s_map
 	char		**map;
 	char		**copy_map;
 	int			rows;
+	int			cols;
 	int			floor_color;
 	int			ceiling_color;
-	int			px_player;
-	int			py_player;
+	double		px_player;
+	double		py_player;
 	char		player;
 }				t_map;
+
+
+typedef struct s_mlx_data
+{
+	void		*mlx_ptr;
+	void		*mlx_window;
+	void		*img;
+	char		*img_pixels;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	double		ray_angle;
+	t_keys		keys;
+	t_texture	textures[4];
+	t_texture	*wall_texture;
+	t_player	player;
+	t_ray		rays[NUM_RAYS];
+	t_map		map;
+}				t_mlx_data;
+
+// #-------------- raycasting prototypes --------------#
+void			init_player(t_mlx_data *mlx);
+int				ft_destroy_window(t_mlx_data *mlx);
+int				key_pressed(int keycode, t_mlx_data *mlx);
+int				key_released(int keycode, t_mlx_data *mlx);
+void			update_player_position(t_mlx_data *mlx);
+int				is_wall(t_mlx_data *mlx, double x, double y);
+void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
+void			draw_circle(t_mlx_data *mlx, int cx, int cy, int radius,
+					int color);
+void			draw_square(t_mlx_data *mlx, int x, int y, int color);
+void			draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1,
+					int color);
+void			draw_facing_line(t_mlx_data *mlx, double length, double color);
+void			render(t_mlx_data *mlx);
+int				update(t_mlx_data *mlx);
+void			cast_rays(t_mlx_data *mlx);
+int				load_all_textures(t_mlx_data *mlx);
+int				is_ray_facing_down(double ray_angle);
+int 			is_ray_facing_right(double ray_angle);
+
+// #--------------- Parsing map ----------------#
 
 bool			check_file_name(char *file_name);
 void			custom_error(char *msg);

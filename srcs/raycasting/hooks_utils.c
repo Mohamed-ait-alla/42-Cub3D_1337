@@ -3,39 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/20 16:25:10 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/29 18:03:05 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int is_wall(float x, float y) {
-	char	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-		{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '0', '0', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '1', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '1', '1', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '0', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-		{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-	};
-    if (x < 0 || y < 0 || x >= MAP_NUM_COLS * TILE_SIZE || y >= MAP_NUM_ROWS * TILE_SIZE)
-        return 1;
+int is_wall(t_mlx_data *mlx, double x, double y) {
+    if (x < 0 || y < 0 || x >= mlx->map.cols * TILE_SIZE || y >= mlx->map.rows * TILE_SIZE)
+	{
+        return 1;	
+	}
+	// if (!is_ray_facing_down(mlx->ray_angle)) // if ray is facing up get the y inside the cell.
+	// 	y--;		
+	// if (!is_ray_facing_right(mlx->ray_angle)) // if ray is facing left get the x inside the cell.
+	// 	x--;	
     int grid_x = x / TILE_SIZE;
     int grid_y = y / TILE_SIZE;
-    return map[grid_y][grid_x] == '1';
+    return mlx->map.map[grid_y][grid_x] == '1';
 }
 
 int	key_pressed(int keycode, t_mlx_data *mlx)
@@ -76,14 +64,26 @@ int	key_released(int keycode, t_mlx_data *mlx)
 	return (0);
 }
 
+int has_collision(t_mlx_data *mlx, float x, float y)
+{
+    float r = 0.5;
+
+    if (is_wall(mlx, x - r, y - r)) return 1;
+    if (is_wall(mlx, x + r, y - r)) return 1;
+    if (is_wall(mlx, x - r, y + r)) return 1;
+    if (is_wall(mlx, x + r, y + r)) return 1;
+    return 0;
+}
+
+
 void	update_player_position(t_mlx_data *mlx)
 {
 	float	next_x;
 	float	next_y;
 
-	next_x = mlx->player.player_x;
-	next_y = mlx->player.player_y;
-
+	next_x = mlx->player.px;
+	next_y = mlx->player.py;
+	
 	// handle escape: close the game
 	if (mlx->keys.key_escape)
 		ft_destroy_window(mlx);
@@ -116,10 +116,10 @@ void	update_player_position(t_mlx_data *mlx)
 	}
 
 	// check for wall collision
-	if (!is_wall(next_x, next_y))
+	if (!has_collision(mlx, next_x, next_y))
 	{
-		mlx->player.player_x = next_x;
-		mlx->player.player_y = next_y;
+		mlx->player.px = next_x;
+		mlx->player.py = next_y;
 	}
 	
 }
