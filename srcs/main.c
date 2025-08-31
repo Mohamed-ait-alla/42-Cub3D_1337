@@ -6,19 +6,11 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/30 09:44:55 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:07:33 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	ft_destroy_window(t_mlx_data *mlx)
-{
-	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_window);
-	mlx_destroy_display(mlx->mlx_ptr);
-	free(mlx->mlx_ptr);
-	exit (0);
-}
 
 int main(int ac, char **av)
 {
@@ -46,6 +38,6 @@ int main(int ac, char **av)
 	mlx_hook(mlx.mlx_window, 2, 1L << 0, key_pressed, &mlx);
 	mlx_hook(mlx.mlx_window, 3, 1L << 1, key_released, &mlx);
 	mlx_loop_hook(mlx.mlx_ptr, update, &mlx);
-	mlx_hook(mlx.mlx_window, 17, 0, ft_destroy_window, &mlx);
+	mlx_hook(mlx.mlx_window, 17, 0, ft_cleanup, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/28 16:56:33 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/31 11:10:01 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,8 @@ bool check_map(char *file, t_map *map)
 	}
 
 	// copy the map
-	map->copy_map = malloc(sizeof(char *) * (map->rows + 1));
-	map->map = malloc(sizeof(char *) * (map->rows + 1));
+	map->copy_map = ft_malloc(sizeof(char *) * (map->rows + 1), 1);
+	map->map = ft_malloc(sizeof(char *) * (map->rows + 1), 1);
 	if (!map->copy_map || !map->map)
 		return (false);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/29 18:03:05 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:07:24 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	update_player_position(t_mlx_data *mlx)
 	
 	// handle escape: close the game
 	if (mlx->keys.key_escape)
-		ft_destroy_window(mlx);
+		ft_cleanup(mlx);
 	// for moving the feild-of-view angle
 	if (mlx->keys.key_right)
 		mlx->player.rotation_Angle += 0.01;

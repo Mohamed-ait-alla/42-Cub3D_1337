@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/30 17:52:53 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:06:44 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_mlx_data
 }				t_mlx_data;
 
 // #-------------- raycasting prototypes --------------#
+int				ft_cleanup(t_mlx_data *mlx);
 void			init_player(t_mlx_data *mlx);
 int				ft_destroy_window(t_mlx_data *mlx);
 int				key_pressed(int keycode, t_mlx_data *mlx);
@@ -150,6 +151,7 @@ void			cast_rays(t_mlx_data *mlx);
 int				load_all_textures(t_mlx_data *mlx);
 int				is_ray_facing_down(double ray_angle);
 int 			is_ray_facing_right(double ray_angle);
+void			*ft_malloc(size_t size, int mode);
 
 // #--------------- Parsing map ----------------#
 

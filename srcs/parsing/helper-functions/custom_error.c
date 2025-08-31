@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 10:24:02 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/18 10:24:51 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/31 11:09:40 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	custom_error(char *msg)
 {
 	int	i;
 
+	ft_malloc(0, 0);
 	i = 0;
 	while (msg[i])
 	{

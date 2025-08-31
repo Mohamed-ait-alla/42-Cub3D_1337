@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/29 10:56:47 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:35:11 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	get_smallest_distance(t_mlx_data *mlx, int i,
 	else
 		vert_hit_distance = 2147483647;
 	// store values
-	if (horz_hit_distance <= vert_hit_distance)
+	if (horz_hit_distance < vert_hit_distance)
 	{
 		mlx->rays[i].wall_hit_x = horz_wall_hit_x;
 		mlx->rays[i].wall_hit_y = horz_wall_hit_y;

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:02:18 by mait-all          #+#    #+#             */
-/*   Updated: 2024/10/30 11:03:18 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:55:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 			i++;
 		while (s1[j - 1] && ft_strchr(set, s1[j - 1]) && j > i)
 			j--;
-		str = (char *)malloc((j - i + 1) * sizeof(char));
+		str = (char *)ft_malloc((j - i + 1) * sizeof(char), 1);
 		if (!str)
 			return (NULL);
 		ft_strlcpy(str, s1 + i, j - i + 1);

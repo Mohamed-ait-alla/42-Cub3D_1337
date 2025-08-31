@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 08:58:45 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/20 20:20:58 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 07:39:41 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
+void	*ft_malloc(size_t size, int mode);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
