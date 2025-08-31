@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 11:07:24 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:37:46 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,12 @@ void	update_player_position(t_mlx_data *mlx)
 
 	next_x = mlx->player.px;
 	next_y = mlx->player.py;
-	
-	// handle escape: close the game
 	if (mlx->keys.key_escape)
 		ft_cleanup(mlx);
-	// for moving the feild-of-view angle
 	if (mlx->keys.key_right)
 		mlx->player.rotation_Angle += 0.01;
 	if (mlx->keys.key_left)
 		mlx->player.rotation_Angle -= 0.01;
-		
-	// for moving the player: right, left, forward, backward
 	if (mlx->keys.key_w)
 	{
 		next_x += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
@@ -115,7 +110,6 @@ void	update_player_position(t_mlx_data *mlx)
 		next_y += cos(mlx->player.rotation_Angle) * mlx->player.move_speed;
 	}
 
-	// check for wall collision
 	if (!has_collision(mlx, next_x, next_y))
 	{
 		mlx->player.px = next_x;

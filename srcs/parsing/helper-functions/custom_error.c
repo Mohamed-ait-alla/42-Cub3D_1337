@@ -6,13 +6,13 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 10:24:02 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/31 11:09:40 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 12:00:52 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	custom_error(char *msg)
+int	custom_error(char *msg)
 {
 	int	i;
 
@@ -23,4 +23,5 @@ void	custom_error(char *msg)
 		write(2, &msg[i], 1);
 		i++;
 	}
+	return (1);
 }

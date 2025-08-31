@@ -6,6 +6,7 @@ SRCS = srcs/main.c \
 		srcs/raycasting/hooks_utils.c \
 		srcs/raycasting/raycasting.c \
 		srcs/raycasting/cleanup.c \
+		srcs/raycasting/launch.c \
 		\
 		\
 		\

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/30 15:08:08 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 12:04:32 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static double get_rotation_agnle(char p_char)
 	return (0);
 }
 
-void	init_player(t_mlx_data *mlx)
+void	init_player(t_mlx_data *mlx, t_map *map)
 {
+	mlx->map = *map;
 	mlx->player.px = mlx->map.px_player * TILE_SIZE;
 	mlx->player.py = mlx->map.py_player * TILE_SIZE;
 	mlx->player.rotation_Angle = get_rotation_agnle(mlx->map.player);

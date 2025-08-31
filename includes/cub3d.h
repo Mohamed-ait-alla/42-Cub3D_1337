@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 11:06:44 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 12:06:41 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ typedef struct s_mlx_data
 }				t_mlx_data;
 
 // #-------------- raycasting prototypes --------------#
+void 			launch(t_mlx_data *mlx);
 int				ft_cleanup(t_mlx_data *mlx);
-void			init_player(t_mlx_data *mlx);
-int				ft_destroy_window(t_mlx_data *mlx);
+void			init_player(t_mlx_data *mlx, t_map *map);
 int				key_pressed(int keycode, t_mlx_data *mlx);
 int				key_released(int keycode, t_mlx_data *mlx);
 void			update_player_position(t_mlx_data *mlx);
@@ -156,7 +156,7 @@ void			*ft_malloc(size_t size, int mode);
 // #--------------- Parsing map ----------------#
 
 bool			check_file_name(char *file_name);
-void			custom_error(char *msg);
+int				custom_error(char *msg);
 bool			check_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
