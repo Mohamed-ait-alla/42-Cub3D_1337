@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 12:04:32 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:53:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_right = 0;
 	mlx->keys.key_escape = 0;
 	mlx->map.cols = get_n_map_cols(mlx->map.map[0]);
+	mlx->window_width = mlx->map.cols * TILE_SIZE;
+	mlx->window_height = mlx->map.rows * TILE_SIZE;
+	mlx->nb_rays = mlx->window_width;
+	mlx->rays = ft_malloc(mlx->nb_rays * sizeof(t_ray), 1);
 }
 
 int	load_texture(t_mlx_data *mlx, char *path, int i)

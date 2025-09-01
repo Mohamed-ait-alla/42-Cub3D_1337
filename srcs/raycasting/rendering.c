@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 18:33:30 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:47:54 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void put_pixel(t_mlx_data *mlx, int x, int y, int color)
 {
-    if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+    if (x < 0 || x >= mlx->window_width || y < 0 || y >= mlx->window_height)
         return;
 
     int offset = (y * mlx->size_line) + (x * (mlx->bpp / 8));
@@ -88,7 +88,7 @@ void draw_textured_vertical_line(t_mlx_data *mlx, int wall_top,
 		texture_offset_x = (int)mlx->rays[x].wall_hit_y % TILE_SIZE;
 	else
 		texture_offset_x = (int)mlx->rays[x].wall_hit_x % TILE_SIZE;
-	while (y < WINDOW_HEIGHT)
+	while (y < mlx->window_height)
     {
 		// Ceiling
         if (y < wall_top)
@@ -127,15 +127,15 @@ void render_textured_walls(t_mlx_data *mlx)
     double projection_plane_distance;
 
     i = 0;
-    while (i < NUM_RAYS)
+    while (i < mlx->nb_rays)
     {
-        projection_plane_distance = (WINDOW_WIDTH / 2) / tan(FOV / 2);
+        projection_plane_distance = (mlx->window_width / 2) / tan(FOV / 2);
         wall_strip_height = (TILE_SIZE / mlx->rays[i].ray_correct_distance) * projection_plane_distance;
         
         // Use textured drawing instead of solid color
         draw_textured_vertical_line(mlx,
-                                   (WINDOW_HEIGHT / 2) - (wall_strip_height / 2), 
-                                   (WINDOW_HEIGHT / 2) + (wall_strip_height / 2), 
+                                   (mlx->window_height / 2) - (wall_strip_height / 2), 
+                                   (mlx->window_height / 2) + (wall_strip_height / 2), 
                                    i, wall_strip_height);
         i++;
     }
@@ -144,7 +144,7 @@ void render_textured_walls(t_mlx_data *mlx)
 int update(t_mlx_data *mlx)
 {
 	update_player_position(mlx);
-    mlx->img = mlx_new_image(mlx->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+    mlx->img = mlx_new_image(mlx->mlx_ptr, mlx->window_width, mlx->window_height);
     mlx->img_pixels = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
 	// render(mlx);
 	cast_rays(mlx);

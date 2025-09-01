@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 12:06:41 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:47:32 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 #  define M_PI 3.141592653589793238462
 # endif
 # define TILE_SIZE 32
-# define MAP_NUM_ROWS 16
-# define MAP_NUM_COLS 20
-# define WINDOW_WIDTH MAP_NUM_COLS *TILE_SIZE
-# define WINDOW_HEIGHT MAP_NUM_ROWS *TILE_SIZE
 # define FOV 60 * (M_PI / 180)
-# define NUM_RAYS WINDOW_WIDTH
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
 # include <X11/keysym.h>
@@ -122,11 +117,14 @@ typedef struct s_mlx_data
 	int			size_line;
 	int			endian;
 	double		ray_angle;
+	int			window_width;
+	int			window_height;
+	int			nb_rays;
 	t_keys		keys;
 	t_texture	textures[4];
 	t_texture	*wall_texture;
 	t_player	player;
-	t_ray		rays[NUM_RAYS];
+	t_ray		*rays;
 	t_map		map;
 }				t_mlx_data;
 

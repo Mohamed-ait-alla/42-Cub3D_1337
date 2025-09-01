@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 18:34:57 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:51:41 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	find_horizontal_intersection(t_mlx_data *mlx, double *horz_wall_hit_x, doubl
 	else if (is_ray_facing_right(ray_angle) && x_step < 0)
 		x_step *= -1;
 
-	while (x_intercept >= 0 && x_intercept <= WINDOW_WIDTH && y_intercept >= 0 && y_intercept <= WINDOW_HEIGHT)
+	while (x_intercept >= 0 && x_intercept <= mlx->window_width && y_intercept >= 0 && y_intercept <= mlx->window_height)
 	{
 		if (is_wall(mlx, x_intercept , y_intercept - (!is_ray_facing_down(ray_angle) ? 1 : 0)))
 		{
@@ -134,7 +134,7 @@ int	find_vertical_intersections(t_mlx_data *mlx, double *vert_wall_hit_x, double
 	else if (is_ray_facing_down(ray_angle) && y_step < 0)
 		y_step *= -1;
 	
-	while (x_intercept >= 0 && x_intercept <= WINDOW_WIDTH && y_intercept >= 0 && y_intercept <= WINDOW_HEIGHT)
+	while (x_intercept >= 0 && x_intercept <= mlx->window_width && y_intercept >= 0 && y_intercept <= mlx->window_height)
 	{
 		if (is_wall(mlx, x_intercept - (!is_ray_facing_right(ray_angle) ? 1 : 0), y_intercept))
 		{
@@ -175,12 +175,14 @@ void	cast(t_mlx_data *mlx, int i)
 void	cast_rays(t_mlx_data *mlx)
 {
 	int	i = 0;
+	double r_angle;
 
-	mlx->rays[0].ray_angle = mlx->player.rotation_Angle - (FOV / 2);
-	while (i < NUM_RAYS)
+	r_angle = mlx->player.rotation_Angle - (FOV / 2);
+	while (i < mlx->nb_rays)
 	{
+		mlx->rays[i].ray_angle = r_angle;
 		cast(mlx, i);
+		r_angle += (FOV / mlx->nb_rays);
 		i++;
-		mlx->rays[i].ray_angle = mlx->rays[i - 1].ray_angle + FOV / (NUM_RAYS);
 	}
 }
