@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/01 19:15:30 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:17:11 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ typedef struct s_mlx_data
 	int			window_width;
 	int			window_height;
 	int			nb_rays;
+	int			wall_top;
+	int			wall_bottom;
 	double		horz_wall_hit_x;
 	double		horz_wall_hit_y;
 	double		vert_wall_hit_x;
@@ -139,24 +141,23 @@ int				key_pressed(int keycode, t_mlx_data *mlx);
 int				key_released(int keycode, t_mlx_data *mlx);
 void			update_player_position(t_mlx_data *mlx);
 int				is_wall(t_mlx_data *mlx, double x, double y);
+int				has_collision(t_mlx_data *mlx, float x, float y);
 void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
-void			draw_circle(t_mlx_data *mlx, int cx, int cy, int radius,
-					int color);
-void			draw_square(t_mlx_data *mlx, int x, int y, int color);
-void			draw_line(t_mlx_data *mlx, int x0, int y0, int x1, int y1,
-					int color);
-void			draw_facing_line(t_mlx_data *mlx, double length, double color);
-void			render(t_mlx_data *mlx);
 int				update(t_mlx_data *mlx);
 void			cast_rays(t_mlx_data *mlx);
-int				load_all_textures(t_mlx_data *mlx);
 int				is_ray_facing_down(double ray_angle);
 int 			is_ray_facing_right(double ray_angle);
 void			*ft_malloc(size_t size, int mode);
-double	normalize_angle(double angle);
-double get_distance_between_points(double x0, double y0, double x1, double y1);
-double normalize_x_axis(double x, double ray_angle);
-double normalize_y_axis(double y, double ray_angle);
+double			normalize_angle(double angle);
+double			 get_distance_between_points(double x0, double y0,
+												double x1, double y1);
+double 			normalize_x_axis(double x, double ray_angle);
+double 			normalize_y_axis(double y, double ray_angle);
+void			set_rays_to_walls_distance(t_mlx_data *mlx, int i,
+								double horz_hit_distance,
+								double vert_hit_distance);
+int				get_texture_pixel(t_mlx_data *mlx, int x, int y);
+t_texture		*get_wall_texture(t_mlx_data *mlx, int x);
 
 // #--------------- Parsing map ----------------#
 

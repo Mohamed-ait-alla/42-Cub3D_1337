@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   normalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 10:33:49 by mait-all         ###   ########.fr       */
+/*   Created: 2025/09/02 10:44:16 by mait-all          #+#    #+#             */
+/*   Updated: 2025/09/02 10:46:52 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int ac, char **av)
+double	normalize_angle(double angle)
 {
-	t_mlx_data	mlx;
-	t_map		map;
+	angle = fmod(angle, (2 * M_PI));
+	if (angle < 0)
+		angle += (2 * M_PI);
+	return (angle);
+}
 
-	if (ac != 2 || !check_file_name(av[1]))
-		exit (custom_error("Error:\nNo such file or directory!\n"));
-	ft_bzero(&map, sizeof(t_map));
-	if (!check_map(av[1], &map))
-		exit (custom_error("Error:\nInvalid map!\n"));
-	ft_bzero(&mlx, sizeof(t_mlx_data));
-	init_player(&mlx, &map);
-	launch(&mlx);
-	return (0);
+double	normalize_x_axis(double x, double ray_angle)
+{
+	if (!is_ray_facing_right(ray_angle))
+		return (--x);
+	return (x);
+}
+
+double	normalize_y_axis(double y, double ray_angle)
+{
+	if (!is_ray_facing_down(ray_angle))
+		return (--y);
+	return (y);
 }

@@ -6,35 +6,14 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 10:18:48 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:42:53 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	set_rays_to_walls_distance(t_mlx_data *mlx, int i,
-								double horz_hit_distance,
-								double vert_hit_distance)
-{
-	if (horz_hit_distance < vert_hit_distance)
-	{
-		mlx->rays[i].wall_hit_x = mlx->horz_wall_hit_x;
-		mlx->rays[i].wall_hit_y = mlx->horz_wall_hit_y;
-		mlx->rays[i].ray_distored_distance = horz_hit_distance;
-		mlx->rays[i].was_hit_horz = 1;
-	}
-	else
-	{
-		mlx->rays[i].wall_hit_x = mlx->vert_wall_hit_x;
-		mlx->rays[i].wall_hit_y = mlx->vert_wall_hit_y;
-		mlx->rays[i].ray_distored_distance = vert_hit_distance;
-		mlx->rays[i].was_hit_vert = 1;
-	}
-	mlx->rays[i].ray_correct_distance = mlx->rays[i].ray_distored_distance *
-						cos(mlx->rays[i].ray_angle - mlx->player.rotation_Angle);
-}
-
-void	calculate_ray_intersection_steps(double *x_step, double *y_step, double ray_angle, char type)
+void	calculate_ray_intersection_steps(double *x_step, double *y_step,
+											double ray_angle, char type)
 {
 	if (type == 'h')
 	{
@@ -70,11 +49,13 @@ int	find_horizontal_intersection(t_mlx_data *mlx, double ray_angle)
 	y_intercept = floor(mlx->player.py / TILE_SIZE) * TILE_SIZE;
 	if (is_ray_facing_down(ray_angle))
 		y_intercept += TILE_SIZE;
-	x_intercept = mlx->player.px + (y_intercept - mlx->player.py) / tan(ray_angle);
+	x_intercept = mlx->player.px
+		+ (y_intercept - mlx->player.py) / tan(ray_angle);
 	calculate_ray_intersection_steps(&x_step, &y_step, ray_angle, 'h');
-	while (x_intercept >= 0 && x_intercept <= mlx->window_width && y_intercept >= 0 && y_intercept <= mlx->window_height)
+	while (x_intercept >= 0 && x_intercept <= mlx->window_width
+		&& y_intercept >= 0 && y_intercept <= mlx->window_height)
 	{
-		if (is_wall(mlx, x_intercept , normalize_y_axis(y_intercept, ray_angle)))
+		if (is_wall(mlx, x_intercept, normalize_y_axis(y_intercept, ray_angle)))
 		{
 			mlx->horz_wall_hit_x = x_intercept;
 			mlx->horz_wall_hit_y = y_intercept;
@@ -96,9 +77,11 @@ int	find_vertical_intersections(t_mlx_data *mlx, double ray_angle)
 	x_intercept = floor(mlx->player.px / TILE_SIZE) * TILE_SIZE;
 	if (is_ray_facing_right(ray_angle))
 		x_intercept += TILE_SIZE;
-	y_intercept = mlx->player.py + (x_intercept - mlx->player.px) * tan(ray_angle);
+	y_intercept = mlx->player.py
+		+ (x_intercept - mlx->player.px) * tan(ray_angle);
 	calculate_ray_intersection_steps(&x_step, &y_step, ray_angle, 'v');
-	while (x_intercept >= 0 && x_intercept <= mlx->window_width && y_intercept >= 0 && y_intercept <= mlx->window_height)
+	while (x_intercept >= 0 && x_intercept <= mlx->window_width
+		&& y_intercept >= 0 && y_intercept <= mlx->window_height)
 	{
 		if (is_wall(mlx, normalize_x_axis(x_intercept, ray_angle), y_intercept))
 		{
@@ -128,7 +111,8 @@ void	cast(t_mlx_data *mlx, int i)
 	found_vert_wall_hit = find_vertical_intersections(mlx, ray_angle);
 	if (found_horz_wall_hit)
 		horz_hit_distance = get_distance_between_points(mlx->player.px,
-						mlx->player.py, mlx->horz_wall_hit_x, mlx->horz_wall_hit_y);
+				mlx->player.py, mlx->horz_wall_hit_x,
+				mlx->horz_wall_hit_y);
 	else
 		horz_hit_distance = 2147483647;
 	if (found_vert_wall_hit)
@@ -141,10 +125,11 @@ void	cast(t_mlx_data *mlx, int i)
 
 void	cast_rays(t_mlx_data *mlx)
 {
-	int	i = 0;
-	double r_angle;
+	int		i;
+	double	r_angle;
 
 	r_angle = mlx->player.rotation_Angle - (FOV / 2);
+	i = 0;
 	while (i < mlx->nb_rays)
 	{
 		mlx->rays[i].ray_angle = r_angle;

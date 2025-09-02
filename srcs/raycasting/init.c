@@ -6,16 +6,16 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/01 17:53:37 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 15:52:54 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	get_n_map_cols(char *row)
+static int	get_col_num(char *row)
 {
 	int	count;
-	
+
 	if (!row)
 		return (0);
 	count = 0;
@@ -23,10 +23,28 @@ static int	get_n_map_cols(char *row)
 	{
 		count++;
 	}
-	return (count - 1);
+	return (count - 2);
 }
 
-static double get_rotation_agnle(char p_char)
+int	calculate_map_cols(char **map)
+{
+	int	len;
+	int	tmp;
+	int	i;
+
+	len = get_col_num(map[0]);
+	i = 1;
+	while (map[i])
+	{
+		tmp = get_col_num(map[i]);
+		if (tmp > len)
+			len = tmp;
+		i++;
+	}
+	return (len);
+}
+
+static double	get_rotation_agnle(char p_char)
 {
 	if (p_char == 'N')
 		return (3 * M_PI / 2);
@@ -54,40 +72,9 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_left = 0;
 	mlx->keys.key_right = 0;
 	mlx->keys.key_escape = 0;
-	mlx->map.cols = get_n_map_cols(mlx->map.map[0]);
+	mlx->map.cols = calculate_map_cols(mlx->map.map);
 	mlx->window_width = mlx->map.cols * TILE_SIZE;
 	mlx->window_height = mlx->map.rows * TILE_SIZE;
 	mlx->nb_rays = mlx->window_width;
 	mlx->rays = ft_malloc(mlx->nb_rays * sizeof(t_ray), 1);
-}
-
-int	load_texture(t_mlx_data *mlx, char *path, int i)
-{
-	mlx->textures[i].img = mlx_xpm_file_to_image (mlx->mlx_ptr, path, &mlx->textures[i].width, &mlx->textures[i].height);
-	if (!mlx->textures[i].img)
-	{
-		perror("failed to load a texture\n");
-		return (0);
-	}
-	mlx->textures[i].addr = mlx_get_data_addr(mlx->textures[i].img, &mlx->textures[i].bpp, &mlx->textures[i].line_length, &mlx->textures[i].endian);
-	if (!mlx->textures[i].addr)
-	{
-		perror("failed to get the addr of a texture\n");
-		return (0);
-	}
-	return (1);
-}
-
-int	load_all_textures(t_mlx_data *mlx)
-{
-	if (!load_texture(mlx, mlx->map.NO, 0))
-		return (0);
-	if (!load_texture(mlx, mlx->map.SO, 1))
-		return (0);
-	if (!load_texture(mlx, mlx->map.EA, 2))
-		return (0);
-	if (!load_texture(mlx, mlx->map.WE, 3))
-		return (0);
-	printf("textures loaded successfully!\n");
-	return (1);
 }

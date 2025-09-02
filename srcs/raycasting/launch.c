@@ -6,18 +6,52 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/01 15:40:38 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 15:53:24 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void launch(t_mlx_data *mlx)
+static int	load_texture(t_mlx_data *mlx, char *path, int i)
+{
+	mlx->textures[i].img = mlx_xpm_file_to_image (mlx->mlx_ptr, path,
+			&mlx->textures[i].width, &mlx->textures[i].height);
+	if (!mlx->textures[i].img)
+	{
+		perror("failed to load a texture\n");
+		return (0);
+	}
+	mlx->textures[i].addr = mlx_get_data_addr(mlx->textures[i].img,
+			&mlx->textures[i].bpp, &mlx->textures[i].line_length,
+			&mlx->textures[i].endian);
+	if (!mlx->textures[i].addr)
+	{
+		perror("failed to get the addr of a texture\n");
+		return (0);
+	}
+	return (1);
+}
+
+static int	load_all_textures(t_mlx_data *mlx)
+{
+	if (!load_texture(mlx, mlx->map.NO, 0))
+		return (0);
+	if (!load_texture(mlx, mlx->map.SO, 1))
+		return (0);
+	if (!load_texture(mlx, mlx->map.EA, 2))
+		return (0);
+	if (!load_texture(mlx, mlx->map.WE, 3))
+		return (0);
+	return (1);
+}
+
+void	launch(t_mlx_data *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
 	if (!mlx->mlx_ptr)
 		exit(custom_error("Error:\nFailed to init MLX!\n"));
-	mlx->mlx_window = mlx_new_window(mlx->mlx_ptr, mlx->window_width, mlx->window_height, "cub3d");
+	mlx->mlx_window = mlx_new_window(mlx->mlx_ptr,
+			mlx->window_width, mlx->window_height, "cub3d");
 	if (!mlx->mlx_window)
 		exit(custom_error("Error:\nFailed to create window!\n"));
 	if (!load_all_textures(mlx))

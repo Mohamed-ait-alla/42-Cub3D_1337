@@ -2,10 +2,13 @@ NAME = cub3d
 
 SRCS = srcs/main.c \
 		srcs/raycasting/init.c \
-		srcs/raycasting/rendering.c \
-		srcs/raycasting/hooks_utils.c \
+		srcs/raycasting/player_move.c \
 		srcs/raycasting/raycasting_utils.c \
 		srcs/raycasting/raycasting.c \
+		srcs/raycasting/rendering.c \
+		srcs/raycasting/rendering_utils.c \
+		srcs/raycasting/normalize.c \
+		srcs/raycasting/wall_collision.c \
 		srcs/raycasting/cleanup.c \
 		srcs/raycasting/launch.c \
 		\
