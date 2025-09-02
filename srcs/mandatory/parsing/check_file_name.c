@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normalize.c                                        :+:      :+:    :+:   */
+/*   check_file_name.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/02 10:44:16 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 10:46:52 by mait-all         ###   ########.fr       */
+/*   Created: 2025/08/18 10:01:26 by mdahani           #+#    #+#             */
+/*   Updated: 2025/09/02 18:33:47 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
-double	normalize_angle(double angle)
+bool	check_file_name(char *file_name)
 {
-	angle = fmod(angle, (2 * M_PI));
-	if (angle < 0)
-		angle += (2 * M_PI);
-	return (angle);
-}
+	size_t	len;
 
-double	normalize_x_axis(double x, double ray_angle)
-{
-	if (!is_ray_facing_right(ray_angle))
-		return (--x);
-	return (x);
-}
-
-double	normalize_y_axis(double y, double ray_angle)
-{
-	if (!is_ray_facing_down(ray_angle))
-		return (--y);
-	return (y);
+	len = ft_strlen(file_name);
+	if (len > 4 && file_name[len - 4] == '.' && file_name[len - 3] == 'c'
+		&& file_name[len - 2] == 'u' && file_name[len - 1] == 'b')
+		return (true);
+	return (false);
 }

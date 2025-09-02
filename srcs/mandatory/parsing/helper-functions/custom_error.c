@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_order_textures.c                             :+:      :+:    :+:   */
+/*   custom_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 16:49:06 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/28 16:53:20 by mdahani          ###   ########.fr       */
+/*   Created: 2025/08/18 10:24:02 by mdahani           #+#    #+#             */
+/*   Updated: 2025/09/02 18:33:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../../includes/cub3d.h"
 
-bool	check_order_textures(t_map *map)
+int	custom_error(char *msg)
 {
-	if (map->ORDER_NO && map->ORDER_SO && map->ORDER_WE && map->ORDER_EA)
-		return (true);
-	return (false);
+	int	i;
+
+	ft_malloc(0, 0);
+	i = 0;
+	while (msg[i])
+	{
+		write(2, &msg[i], 1);
+		i++;
+	}
+	return (1);
 }

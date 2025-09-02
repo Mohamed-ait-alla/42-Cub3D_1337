@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   custom_error.c                                     :+:      :+:    :+:   */
+/*   check_num_of_players.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 10:24:02 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/31 12:00:52 by mait-all         ###   ########.fr       */
+/*   Created: 2025/08/21 15:43:13 by mdahani           #+#    #+#             */
+/*   Updated: 2025/09/02 18:33:57 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-int	custom_error(char *msg)
+bool check_num_of_players(t_map *map)
 {
-	int	i;
-
-	ft_malloc(0, 0);
-	i = 0;
-	while (msg[i])
-	{
-		write(2, &msg[i], 1);
-		i++;
-	}
-	return (1);
+    if ((map->_N + map->_S +map->_E + map->_W) != 1)
+        return (false);
+    return (true);
 }

@@ -6,11 +6,11 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:39:11 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 10:49:18 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:32:31 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 void	*ft_malloc(size_t size, int mode)
 {

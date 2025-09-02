@@ -6,11 +6,11 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:48:52 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 10:46:15 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:33:01 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 void	set_rays_to_walls_distance(t_mlx_data *mlx, int i,
 								double horz_hit_distance,

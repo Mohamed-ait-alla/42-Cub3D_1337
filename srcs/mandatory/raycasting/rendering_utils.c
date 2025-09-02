@@ -6,11 +6,11 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:41:17 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 15:41:49 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:33:11 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 void	put_pixel(t_mlx_data *mlx, int x, int y, int color)
 {
