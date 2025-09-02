@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/31 18:37:46 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:46:48 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 
 int is_wall(t_mlx_data *mlx, double x, double y) {
     if (x < 0 || y < 0 || x >= mlx->map.cols * TILE_SIZE || y >= mlx->map.rows * TILE_SIZE)
-	{
-        return 1;	
-	}
-	// if (!is_ray_facing_down(mlx->ray_angle)) // if ray is facing up get the y inside the cell.
-	// 	y--;		
-	// if (!is_ray_facing_right(mlx->ray_angle)) // if ray is facing left get the x inside the cell.
-	// 	x--;	
+        return 1;
     int grid_x = x / TILE_SIZE;
     int grid_y = y / TILE_SIZE;
     return mlx->map.map[grid_y][grid_x] == '1';
