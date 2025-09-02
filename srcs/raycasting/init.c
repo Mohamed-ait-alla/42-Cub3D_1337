@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 15:52:54 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 18:24:59 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->player.px = mlx->map.px_player * TILE_SIZE;
 	mlx->player.py = mlx->map.py_player * TILE_SIZE;
 	mlx->player.rotation_Angle = get_rotation_agnle(mlx->map.player);
-	mlx->player.rotation_speed = 2 * (M_PI / 180);
-	mlx->player.move_speed = 0.8;
+	mlx->player.move_speed = 0.4;
 	mlx->keys.key_a = 0;
 	mlx->keys.key_d = 0;
 	mlx->keys.key_w = 0;

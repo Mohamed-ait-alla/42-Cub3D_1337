@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 15:23:40 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:27:26 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	update_player_position(t_mlx_data *mlx)
 	if (mlx->keys.key_escape)
 		ft_cleanup(mlx);
 	if (mlx->keys.key_right)
-		mlx->player.rotation_Angle += 0.01;
+		mlx->player.rotation_Angle += 0.005;
 	if (mlx->keys.key_left)
-		mlx->player.rotation_Angle -= 0.01;
+		mlx->player.rotation_Angle -= 0.005;
 	setup_player_position(mlx, &next_x, &next_y);
 	if (!has_collision(mlx, next_x, next_y))
 	{

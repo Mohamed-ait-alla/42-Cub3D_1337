@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:46:55 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 15:03:36 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:29:22 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	has_collision(t_mlx_data *mlx, float x, float y)
 {
 	float	r;
 
-	r = 0.5;
+	r = 0.1;
 	if (is_wall(mlx, x - r, y - r))
 		return (1);
 	if (is_wall(mlx, x + r, y - r))

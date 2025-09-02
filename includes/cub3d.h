@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 16:17:11 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:22:06 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ typedef struct s_player
 {
 	double		px;
 	double		py;
-	int			turn_dir;
-	int			walk_dir;
 	double		rotation_Angle;
 	double			move_speed;
-	int			rotation_speed;
 }				t_player;
 
 typedef struct s_ray
