@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:32:46 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 09:23:16 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ static int	load_all_textures(t_mlx_data *mlx)
 	return (1);
 }
 
+int	mouse_handle(int x, int y, t_mlx_data *mlx)
+{
+	int	win_middle;
+
+	win_middle = mlx->window_width / 2;
+	(void)y;
+
+	if (x > win_middle)
+	{
+		mlx->player.rotation_Angle += 0.03;
+	}
+	if (x < win_middle)
+	{
+		mlx->player.rotation_Angle -= 0.03;
+	}
+	normalize_angle(mlx->player.rotation_Angle);
+	mlx_mouse_move(mlx->mlx_ptr, mlx->mlx_window, mlx->window_width / 2, mlx->window_height / 2);
+	return (0);
+}
+
 void	launch(t_mlx_data *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
@@ -58,6 +78,7 @@ void	launch(t_mlx_data *mlx)
 		exit(custom_error("Error:\nFailed to load textures!\n"));
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, key_pressed, mlx);
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, key_released, mlx);
+	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_handle, mlx);
 	mlx_loop_hook(mlx->mlx_ptr, update, mlx);
 	mlx_hook(mlx->mlx_window, 17, 0, ft_cleanup, mlx);
 	mlx_loop(mlx->mlx_ptr);

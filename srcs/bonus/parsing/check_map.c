@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:54 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:53:04 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ static bool check_chars_of_map(char *line, t_map *map)
 	else if (!is_map(line))
 		return (true);
 	else if (line[i] == '1' || line[i] == '0' || line[i] == 'N' ||
-    		line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+    		line[i] == 'S' || line[i] == 'E' || line[i] == 'W' || line[i] == 'D')
 	{
 		int j = 0;
 		while (line[j])
 		{
 			if (line[j] == '1' || line[j] == '0' || line[j] == 'N' ||
     		line[j] == 'S' || line[j] == 'E' || line[j] == 'W' ||
-    		line[j] <= 32)
+    		line[j] == 'D' || line[j] <= 32)
 			{
 				if (line[j] == 'N')
 					map->_N++;
@@ -136,6 +136,8 @@ static bool check_chars_of_map(char *line, t_map *map)
 					map->_E++;
 				else if (line[j] == 'W')
 					map->_W++;
+				else if (line[j] == 'D')
+					map->_D++;
 				j++;
 			}
 			else

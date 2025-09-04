@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 16:22:06 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/03 21:11:05 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,18 @@
 # include <stdlib.h>
 # include <string.h>
 
+typedef struct s_door {
+	int	x;
+	int	y;
+	int	is_open;
+}	t_door;
+
 typedef struct s_player
 {
 	double		px;
 	double		py;
 	double		rotation_Angle;
-	double			move_speed;
+	double		move_speed;
 }				t_player;
 
 typedef struct s_ray
@@ -42,6 +48,7 @@ typedef struct s_ray
 	double		ray_correct_distance;
 	int			was_hit_horz;
 	int			was_hit_vert;
+	int			was_hit_door;
 	double		wall_hit_x;
 	double		wall_hit_y;
 }				t_ray;
@@ -76,6 +83,7 @@ typedef struct s_map
 	int			_S;
 	int			_E;
 	int			_W;
+	int			_D;
 	int			num_NO;
 	int			num_SO;
 	int			num_WE;
