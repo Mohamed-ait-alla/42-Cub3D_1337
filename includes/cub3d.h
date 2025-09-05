@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/04 18:19:14 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/05 09:10:24 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # ifndef M_PI
 #  define M_PI 3.141592653589793238462
 # endif
+# define MAX_DOORS 10
 # define TILE_SIZE 32
 # define FOV 60 * (M_PI / 180)
 # include "../libraries/libft/libft.h"
@@ -107,10 +108,11 @@ typedef struct s_map
 	int			cols;
 	int			floor_color;
 	int			ceiling_color;
+	int			doors_count;
 	double		px_player;
 	double		py_player;
 	char		player;
-	t_door		door;
+	t_door		doors[MAX_DOORS];
 }				t_map;
 
 

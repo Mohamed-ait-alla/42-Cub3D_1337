@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/04 18:14:04 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/05 09:17:54 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ static bool flood_fill(t_map *map, int x, int y, char player)
 bool map_is_valid(t_map *map)
 {
     int x, y;
+	int	i;
 
     // normalize the map
     normalize_the_map(map);
     x = 0;
+	i = 0;
     while (map->copy_map[x])
     {
         y = 0;
@@ -93,9 +95,11 @@ bool map_is_valid(t_map *map)
             }
 			if (map->copy_map[x][y] == 'D')
 			{
-				map->door.x = y;
-				map->door.y = x;
-				map->door.is_open = 0;
+				map->doors[i].is_open = 0;
+				map->doors[i].x = y;
+				map->doors[i].y = x;
+				i++;
+				map->doors_count ++;
 			}
             y++;
         }
