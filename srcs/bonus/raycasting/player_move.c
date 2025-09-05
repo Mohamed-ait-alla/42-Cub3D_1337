@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/05 09:33:50 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/05 18:55:19 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,27 @@ int	is_near(t_mlx_data *mlx)
 
 t_door	*find_closest_door(t_mlx_data *mlx)
 {
-	t_door	*closest_door;
-	double	min_distance;
+	t_door	*closest_door = NULL;
+	double	min_distance = 70;
 	double	distance;
 	double	door_world_x;
 	double	door_world_y;
+	double	dx, dy, door_angle, diff_angle;
 	int		i;
 
-	closest_door = NULL;
-	min_distance = 70;
 	i = 0;
 	while (i < mlx->map.doors_count)
 	{
 		door_world_x = mlx->map.doors[i].x * TILE_SIZE + (TILE_SIZE / 2);
 		door_world_y = mlx->map.doors[i].y * TILE_SIZE + (TILE_SIZE / 2);
-		
-		distance = sqrt(pow(mlx->player.px - door_world_x, 2) + pow(mlx->player.py - door_world_y, 2));
-		if (distance < min_distance)
+		dx = door_world_x - mlx->player.px;
+		dy = door_world_y - mlx->player.py;
+
+		distance = sqrt(dx * dx + dy * dy);
+		door_angle = atan2(dy, dx);
+		diff_angle = door_angle - mlx->player.rotation_Angle;
+		diff_angle = normalize_diff_door_player_angle(diff_angle);
+		if (fabs(diff_angle) <= (FOV / 2) && distance < min_distance)
 		{
 			min_distance = distance;
 			closest_door = &mlx->map.doors[i];
@@ -49,6 +53,7 @@ t_door	*find_closest_door(t_mlx_data *mlx)
 	}
 	return (closest_door);
 }
+
 
 int	key_pressed(int keycode, t_mlx_data *mlx)
 {

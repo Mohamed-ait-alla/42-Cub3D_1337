@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/05 09:10:24 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/05 18:55:08 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ double			 get_distance_between_points(double x0, double y0,
 												double x1, double y1);
 double 			normalize_x_axis(double x, double ray_angle);
 double 			normalize_y_axis(double y, double ray_angle);
+double 			normalize_diff_door_player_angle(double angle);
 void			set_rays_to_walls_distance(t_mlx_data *mlx, int i,
 								double horz_hit_distance,
 								double vert_hit_distance);

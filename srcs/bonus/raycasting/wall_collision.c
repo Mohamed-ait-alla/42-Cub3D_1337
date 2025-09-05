@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:46:55 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/04 16:17:03 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/05 10:14:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,15 @@ int	has_collision(t_mlx_data *mlx, float x, float y)
 // this is also my is_wall function:
 
 // int	is_wall(t_mlx_data *mlx, double x, double y) { 	int	grid_x; 	int	grid_y;  	if (x < 0 || y < 0 || x >= mlx->window_width || y >= mlx->window_height) 		return (1); 	grid_x = x / TILE_SIZE; 	grid_y = y / TILE_SIZE; 	mlx->tile = mlx->map.map[grid_y][grid_x]; 	return (mlx->map.map[grid_y][grid_x] == '1' || mlx->map.map[grid_y][grid_x] == 'D'); }
+
+
+
+
+// -----------------------
+// can you update this function that gets the closest door:
+// *// Find closest door within interaction range* t_door *find_closest_door(t_mlx_data *mlx) { double min_distance = INTERACTION_DISTANCE; t_door *closest_door = NULL; for (int i = 0; i < mlx->map.door_count; i++) { double door_world_x = mlx->map.doors[i].x * TILE_SIZE + TILE_SIZE / 2; double door_world_y = mlx->map.doors[i].y * TILE_SIZE + TILE_SIZE / 2; double distance = sqrt(pow(mlx->player.player_x - door_world_x, 2) + pow(mlx->player.player_y - door_world_y, 2)); if (distance < min_distance) { min_distance = distance; closest_door = &mlx->map.doors[i]; } } return closest_door; }
+// to make it more consist, because i have a case when i player is closed by doors for example:
+// 0D0
+// DND
+// 0D0
+// with that function only one door is opened because when we check we found the same distance and only one will open, but can make more consise by checking also the fov of the player, so when i get close to a door and the player fov is looking at that door then open it or close it
