@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/03 21:11:05 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:19:14 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef struct s_keys
 	int			key_a;
 	int			key_left;
 	int			key_right;
-	int			key_escape;
+	int			key_esc;
+	int			key_space;
 }				t_keys;
 
 typedef struct s_map
@@ -109,6 +110,7 @@ typedef struct s_map
 	double		px_player;
 	double		py_player;
 	char		player;
+	t_door		door;
 }				t_map;
 
 
@@ -118,6 +120,7 @@ typedef struct s_mlx_data
 	void		*mlx_window;
 	void		*img;
 	char		*img_pixels;
+	char		tile;
 	int			bpp;
 	int			size_line;
 	int			endian;
@@ -126,12 +129,14 @@ typedef struct s_mlx_data
 	int			nb_rays;
 	int			wall_top;
 	int			wall_bottom;
+	int			horz_hit_door;
+	int			vert_hit_door;
 	double		horz_wall_hit_x;
 	double		horz_wall_hit_y;
 	double		vert_wall_hit_x;
 	double		vert_wall_hit_y;
 	t_keys		keys;
-	t_texture	textures[4];
+	t_texture	textures[5];
 	t_texture	*wall_texture;
 	t_player	player;
 	t_ray		*rays;

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:41:17 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:11 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:07:14 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ int	get_texture_pixel(t_mlx_data *mlx, int x, int y)
 
 t_texture	*get_wall_texture(t_mlx_data *mlx, int x)
 {
-	if (mlx->rays[x].was_hit_vert)
+	if (mlx->rays[x].was_hit_door)
+		return (&mlx->textures[4]);
+	else if (mlx->rays[x].was_hit_vert)
 	{
 		if (is_ray_facing_right(mlx->rays[x].ray_angle))
 			return (&mlx->textures[3]);
 		else
 			return (&mlx->textures[2]);
 	}
-	if (mlx->rays[x].was_hit_horz)
+	else if (mlx->rays[x].was_hit_horz)
 	{
 		if (is_ray_facing_down(mlx->rays[x].ray_angle))
 			return (&mlx->textures[1]);

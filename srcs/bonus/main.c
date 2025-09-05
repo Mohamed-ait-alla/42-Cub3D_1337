@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 20:42:56 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:15:25 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 		exit (custom_error("Error:\nInvalid map!\n"));
 	ft_bzero(&mlx, sizeof(t_mlx_data));
 	init_player(&mlx, &map);
+	printf("x_door: %d, y_door: %d\n", mlx.map.door.x, mlx.map.door.y);
 	launch(&mlx);
 	return (0);
 }

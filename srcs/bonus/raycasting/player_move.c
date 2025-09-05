@@ -6,16 +6,42 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:32:56 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/05 08:19:16 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+int	is_near(t_mlx_data *mlx)
+{
+    double door_world_x = mlx->map.door.x * TILE_SIZE + TILE_SIZE / 2;
+    double door_world_y = mlx->map.door.y * TILE_SIZE + TILE_SIZE / 2;
+
+	double distance;
+	
+	distance = sqrt(pow(mlx->player.px - door_world_x, 2) + pow(mlx->player.py - door_world_y, 2));
+	return (distance <= 70);
+}
 
 int	key_pressed(int keycode, t_mlx_data *mlx)
 {
 	if (keycode == XK_Escape)
-		mlx->keys.key_escape = 1;
+		mlx->keys.key_esc = 1;
+	if (keycode == XK_space)
+	{
+		if (is_near(mlx))
+		{
+			if (mlx->map.door.is_open)
+			{
+				mlx->map.door.is_open = 0;
+				mlx->map.map[mlx->map.door.y][mlx->map.door.x] = 'D';
+			}
+			else if (!mlx->map.door.is_open)
+			{
+				mlx->map.door.is_open = 1;
+				mlx->map.map[mlx->map.door.y][mlx->map.door.x] = '0';
+			}
+		}
+	}
 	if (keycode == XK_Left)
 		mlx->keys.key_left = 1;
 	if (keycode == XK_Right)
@@ -34,7 +60,9 @@ int	key_pressed(int keycode, t_mlx_data *mlx)
 int	key_released(int keycode, t_mlx_data *mlx)
 {
 	if (keycode == XK_Escape)
-		mlx->keys.key_escape = 0;
+		mlx->keys.key_esc = 0;
+	if (keycode == XK_space)
+		mlx->keys.key_space = 0;
 	if (keycode == XK_Left)
 		mlx->keys.key_left = 0;
 	if (keycode == XK_Right)
@@ -81,7 +109,7 @@ void	update_player_position(t_mlx_data *mlx)
 
 	next_x = mlx->player.px;
 	next_y = mlx->player.py;
-	if (mlx->keys.key_escape)
+	if (mlx->keys.key_esc)
 		ft_cleanup(mlx);
 	if (mlx->keys.key_right)
 		mlx->player.rotation_Angle += 0.005;

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/02 18:34:05 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:14:04 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ bool map_is_valid(t_map *map)
                 if (!flood_fill(map, x, y, map->copy_map[x][y]))
                     return (false);                
             }
+			if (map->copy_map[x][y] == 'D')
+			{
+				map->door.x = y;
+				map->door.y = x;
+				map->door.is_open = 0;
+			}
             y++;
         }
         x++;

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 19:11:31 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:07:22 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	draw_walls(t_mlx_data *mlx, int x,
 		perror("Error: Failed to get the wall_texture!\n");
 		return ;
 	}
-	if (mlx->rays[x].was_hit_vert)
+	if (mlx->rays[x].was_hit_vert || mlx->rays[x].was_hit_door)
 		texture_offset_x = (int)mlx->rays[x].wall_hit_y % TILE_SIZE;
 	else
 		texture_offset_x = (int)mlx->rays[x].wall_hit_x % TILE_SIZE;

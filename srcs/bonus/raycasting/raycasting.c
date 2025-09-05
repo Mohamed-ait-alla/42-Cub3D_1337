@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:07 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:05:42 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,20 @@ int	find_horizontal_intersection(t_mlx_data *mlx, double ray_angle)
 	{
 		if (is_wall(mlx, x_intercept, normalize_y_axis(y_intercept, ray_angle)))
 		{
-			mlx->horz_wall_hit_x = x_intercept;
-			mlx->horz_wall_hit_y = y_intercept;
+			if (mlx->tile == '1')
+			{
+				mlx->horz_wall_hit_x = x_intercept;
+				mlx->horz_wall_hit_y = y_intercept;
+				mlx->horz_hit_door = 0;
+				return (1);
+			}
+			if (mlx->tile == 'D')
+			{
+				mlx->horz_wall_hit_x = x_intercept;
+				mlx->horz_wall_hit_y = y_intercept;
+				mlx->horz_hit_door = 1;
+				return (1);
+			}
 			return (1);
 		}
 		x_intercept += x_step;
@@ -85,9 +97,20 @@ int	find_vertical_intersections(t_mlx_data *mlx, double ray_angle)
 	{
 		if (is_wall(mlx, normalize_x_axis(x_intercept, ray_angle), y_intercept))
 		{
-			mlx->vert_wall_hit_x = x_intercept;
-			mlx->vert_wall_hit_y = y_intercept;
-			return (1);
+			if (mlx->tile == '1')
+			{
+				mlx->vert_wall_hit_x = x_intercept;
+				mlx->vert_wall_hit_y = y_intercept;
+				mlx->vert_hit_door = 0;
+				return (1);
+			}
+			if (mlx->tile == 'D')
+			{
+				mlx->vert_wall_hit_x = x_intercept;
+				mlx->vert_wall_hit_y = y_intercept;
+				mlx->vert_hit_door = 1;
+				return (1);
+			}
 		}
 		x_intercept += x_step;
 		y_intercept += y_step;
@@ -105,6 +128,9 @@ void	cast(t_mlx_data *mlx, int i)
 
 	mlx->rays[i].was_hit_horz = 0;
 	mlx->rays[i].was_hit_vert = 0;
+	mlx->rays[i].was_hit_door = 0;
+	mlx->vert_hit_door = 0;
+	mlx->horz_hit_door = 0;
 	ray_angle = normalize_angle(mlx->rays[i].ray_angle);
 	mlx->rays[i].ray_angle = ray_angle;
 	found_horz_wall_hit = find_horizontal_intersection(mlx, ray_angle);

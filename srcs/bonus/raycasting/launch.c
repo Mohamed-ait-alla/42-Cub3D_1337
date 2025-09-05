@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/04 09:23:16 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:14:38 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	load_all_textures(t_mlx_data *mlx)
 	if (!load_texture(mlx, mlx->map.EA, 2))
 		return (0);
 	if (!load_texture(mlx, mlx->map.WE, 3))
+		return (0);
+	if (!load_texture(mlx, "./textures/resized-eagle.xpm", 4))
 		return (0);
 	return (1);
 }
