@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file_name.c                                  :+:      :+:    :+:   */
+/*   check_file_name_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 10:01:26 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:47 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:17:40 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 bool	check_file_name(char *file_name)
 {

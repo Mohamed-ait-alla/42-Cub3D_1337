@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/04 18:19:22 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 12:03:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 static int	get_col_num(char *row)
 {
@@ -23,7 +23,7 @@ static int	get_col_num(char *row)
 	{
 		count++;
 	}
-	return (count - 2);
+	return (count - 1);
 }
 
 int	calculate_map_cols(char **map)
@@ -73,8 +73,5 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_esc = 0;
 	mlx->keys.key_space = 0;
 	mlx->map.cols = calculate_map_cols(mlx->map.map);
-	mlx->window_width = mlx->map.cols * TILE_SIZE;
-	mlx->window_height = mlx->map.rows * TILE_SIZE;
-	mlx->nb_rays = mlx->window_width;
-	mlx->rays = ft_malloc(mlx->nb_rays * sizeof(t_ray), 1);
+	printf("tttcols: %d,ttttt rows: %d\n", mlx->map.cols, mlx->map.rows);
 }

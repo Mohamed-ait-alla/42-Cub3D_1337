@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   launch.c                                           :+:      :+:    :+:   */
+/*   launch_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/04 18:14:38 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:16:47 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 static int	load_texture(t_mlx_data *mlx, char *path, int i)
 {
@@ -51,7 +51,7 @@ int	mouse_handle(int x, int y, t_mlx_data *mlx)
 {
 	int	win_middle;
 
-	win_middle = mlx->window_width / 2;
+	win_middle = WINDOW_WIDTH / 2;
 	(void)y;
 
 	if (x > win_middle)
@@ -63,7 +63,7 @@ int	mouse_handle(int x, int y, t_mlx_data *mlx)
 		mlx->player.rotation_Angle -= 0.03;
 	}
 	normalize_angle(mlx->player.rotation_Angle);
-	mlx_mouse_move(mlx->mlx_ptr, mlx->mlx_window, mlx->window_width / 2, mlx->window_height / 2);
+	mlx_mouse_move(mlx->mlx_ptr, mlx->mlx_window, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	return (0);
 }
 
@@ -73,7 +73,7 @@ void	launch(t_mlx_data *mlx)
 	if (!mlx->mlx_ptr)
 		exit(custom_error("Error:\nFailed to init MLX!\n"));
 	mlx->mlx_window = mlx_new_window(mlx->mlx_ptr,
-			mlx->window_width, mlx->window_height, "cub3d");
+			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	if (!mlx->mlx_window)
 		exit(custom_error("Error:\nFailed to create window!\n"));
 	if (!load_all_textures(mlx))

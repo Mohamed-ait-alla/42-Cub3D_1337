@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_num_of_players.c                             :+:      :+:    :+:   */
+/*   check_num_of_players_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:43:13 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:57 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:17:33 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 bool check_num_of_players(t_map *map)
 {

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 10:10:34 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 12:08:05 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # endif
 # define MAX_DOORS 10
 # define TILE_SIZE 32
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+# define NUM_RAYS WINDOW_WIDTH
 # define FOV 60 * (M_PI / 180)
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
@@ -126,9 +129,6 @@ typedef struct s_mlx_data
 	int			bpp;
 	int			size_line;
 	int			endian;
-	int			window_width;
-	int			window_height;
-	int			nb_rays;
 	int			wall_top;
 	int			wall_bottom;
 	int			horz_hit_door;
@@ -141,7 +141,7 @@ typedef struct s_mlx_data
 	t_texture	textures[5];
 	t_texture	*wall_texture;
 	t_player	player;
-	t_ray		*rays;
+	t_ray		rays[NUM_RAYS];
 	t_map		map;
 }				t_mlx_data;
 

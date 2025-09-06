@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.c                                        :+:      :+:    :+:   */
+/*   rendering_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/04 17:07:22 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:15:01 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 void	draw_wall(t_mlx_data *mlx,
 					int x, int texture_offset_x,
@@ -21,7 +21,7 @@ void	draw_wall(t_mlx_data *mlx,
 	int	color;
 
 	y = 0;
-	while (y < mlx->window_height)
+	while (y < WINDOW_HEIGHT)
 	{
 		if (y < mlx->wall_top)
 			put_pixel(mlx, x, y, mlx->map.ceiling_color);
@@ -67,13 +67,13 @@ void	render_textured_walls(t_mlx_data *mlx)
 	double	projection_plane_distance;
 
 	i = 0;
-	while (i < mlx->nb_rays)
+	while (i < NUM_RAYS)
 	{
-		projection_plane_distance = (mlx->window_width / 2) / tan(FOV / 2);
+		projection_plane_distance = (WINDOW_WIDTH / 2) / tan(FOV / 2);
 		wall_strip_height = (TILE_SIZE / mlx->rays[i].ray_correct_distance)
 			* projection_plane_distance;
-		mlx->wall_top = (mlx->window_height / 2) - (wall_strip_height / 2);
-		mlx->wall_bottom = (mlx->window_height / 2) + (wall_strip_height / 2);
+		mlx->wall_top = (WINDOW_HEIGHT / 2) - (wall_strip_height / 2);
+		mlx->wall_bottom = (WINDOW_HEIGHT / 2) + (wall_strip_height / 2);
 		draw_walls(mlx, i, wall_strip_height);
 		i++;
 	}
@@ -83,7 +83,7 @@ int	update(t_mlx_data *mlx)
 {
 	update_player_position(mlx);
 	mlx->img = mlx_new_image(mlx->mlx_ptr,
-			mlx->window_width, mlx->window_height);
+			WINDOW_WIDTH, WINDOW_HEIGHT);
 	mlx->img_pixels = mlx_get_data_addr(mlx->img,
 			&mlx->bpp, &mlx->size_line, &mlx->endian);
 	cast_rays(mlx);
