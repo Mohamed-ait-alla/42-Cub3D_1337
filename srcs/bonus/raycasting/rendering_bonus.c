@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 11:15:01 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 19:24:30 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ void	draw_walls(t_mlx_data *mlx, int x,
 		return ;
 	}
 	if (mlx->rays[x].was_hit_vert || mlx->rays[x].was_hit_door)
-		texture_offset_x = (int)mlx->rays[x].wall_hit_y % TILE_SIZE;
+		texture_offset_x = ((int)mlx->rays[x].wall_hit_y % TILE_SIZE)
+		* (mlx->wall_texture->height / TILE_SIZE);
 	else
-		texture_offset_x = (int)mlx->rays[x].wall_hit_x % TILE_SIZE;
+		texture_offset_x = ((int)mlx->rays[x].wall_hit_x % TILE_SIZE)
+		* (mlx->wall_texture->height / TILE_SIZE);
 	draw_wall(mlx, x, texture_offset_x, wall_strip_height);
 }
 
