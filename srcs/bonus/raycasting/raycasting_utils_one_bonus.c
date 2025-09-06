@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting_utils_bonus.c                           :+:      :+:    :+:   */
+/*   raycasting_utils_one_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:48:52 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 11:12:44 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:19:20 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,23 @@ void	set_rays_to_walls_distance(t_mlx_data *mlx, int i,
 {
 	if (horz_hit_distance < vert_hit_distance)
 	{
-			mlx->rays[i].wall_hit_x = mlx->horz_wall_hit_x;
-			mlx->rays[i].wall_hit_y = mlx->horz_wall_hit_y;
-			mlx->rays[i].ray_distored_distance = horz_hit_distance;
-			if (mlx->horz_hit_door)
-				mlx->rays[i].was_hit_door = 1;
-			else
-				mlx->rays[i].was_hit_horz = 1;
-
+		mlx->rays[i].wall_hit_x = mlx->horz_wall_hit_x;
+		mlx->rays[i].wall_hit_y = mlx->horz_wall_hit_y;
+		mlx->rays[i].ray_distored_distance = horz_hit_distance;
+		if (mlx->horz_hit_door)
+			mlx->rays[i].was_hit_door = 1;
+		else
+			mlx->rays[i].was_hit_horz = 1;
 	}
 	else
 	{
-			mlx->rays[i].wall_hit_x = mlx->vert_wall_hit_x;
-			mlx->rays[i].wall_hit_y = mlx->vert_wall_hit_y;
-			mlx->rays[i].ray_distored_distance = vert_hit_distance;
-			if (mlx->vert_hit_door)
-				mlx->rays[i].was_hit_door = 1;
-			else
-				mlx->rays[i].was_hit_vert = 1;
+		mlx->rays[i].wall_hit_x = mlx->vert_wall_hit_x;
+		mlx->rays[i].wall_hit_y = mlx->vert_wall_hit_y;
+		mlx->rays[i].ray_distored_distance = vert_hit_distance;
+		if (mlx->vert_hit_door)
+			mlx->rays[i].was_hit_door = 1;
+		else
+			mlx->rays[i].was_hit_vert = 1;
 	}
 	mlx->rays[i].ray_correct_distance = mlx->rays[i].ray_distored_distance
 		* cos(mlx->rays[i].ray_angle - mlx->player.rotation_Angle);

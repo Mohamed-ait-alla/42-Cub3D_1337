@@ -26,7 +26,8 @@ SRCS = srcs/mandatory/main.c \
 SRCSB = srcs/bonus/main_bonus.c \
 		srcs/bonus/raycasting/init_bonus.c \
 		srcs/bonus/raycasting/player_move_bonus.c \
-		srcs/bonus/raycasting/raycasting_utils_bonus.c \
+		srcs/bonus/raycasting/raycasting_utils_one_bonus.c \
+		srcs/bonus/raycasting/raycasting_utils_two_bonus.c \
 		srcs/bonus/raycasting/raycasting_bonus.c \
 		srcs/bonus/raycasting/rendering_bonus.c \
 		srcs/bonus/raycasting/rendering_utils_bonus.c \
@@ -34,6 +35,7 @@ SRCSB = srcs/bonus/main_bonus.c \
 		srcs/bonus/raycasting/wall_collision_bonus.c \
 		srcs/bonus/raycasting/cleanup_bonus.c \
 		srcs/bonus/raycasting/launch_bonus.c \
+		srcs/bonus/raycasting/handle_doors.c \
 		\
 		srcs/bonus/parsing/check_file_name_bonus.c \
 		srcs/bonus/parsing/helper-functions/custom_error_bonus.c \

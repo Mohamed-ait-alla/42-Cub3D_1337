@@ -6,80 +6,18 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 11:12:51 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 12:58:39 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d_bonus.h"
-int	is_near(t_mlx_data *mlx)
-{
-    double door_world_x = mlx->map.doors[0].x * TILE_SIZE + TILE_SIZE / 2;
-    double door_world_y = mlx->map.doors[0].y * TILE_SIZE + TILE_SIZE / 2;
-
-	double distance;
-	
-	distance = sqrt(pow(mlx->player.px - door_world_x, 2) + pow(mlx->player.py - door_world_y, 2));
-	return (distance <= 70);
-}
-
-t_door	*find_closest_door(t_mlx_data *mlx)
-{
-	t_door	*closest_door = NULL;
-	double	min_distance = 70;
-	double	distance;
-	double	door_world_x;
-	double	door_world_y;
-	double	dx, dy, door_angle, diff_angle;
-	int		i;
-
-	i = 0;
-	while (i < mlx->map.doors_count)
-	{
-		door_world_x = mlx->map.doors[i].x * TILE_SIZE + (TILE_SIZE / 2);
-		door_world_y = mlx->map.doors[i].y * TILE_SIZE + (TILE_SIZE / 2);
-		dx = door_world_x - mlx->player.px;
-		dy = door_world_y - mlx->player.py;
-
-		distance = sqrt(dx * dx + dy * dy);
-		door_angle = atan2(dy, dx);
-		diff_angle = door_angle - mlx->player.rotation_Angle;
-		diff_angle = normalize_diff_door_player_angle(diff_angle);
-		if (fabs(diff_angle) <= (FOV / 2) && distance < min_distance)
-		{
-			min_distance = distance;
-			closest_door = &mlx->map.doors[i];
-		}
-		i++;
-	}
-	return (closest_door);
-}
-
 
 int	key_pressed(int keycode, t_mlx_data *mlx)
 {
 	if (keycode == XK_Escape)
 		mlx->keys.key_esc = 1;
 	if (keycode == XK_space)
-	{
-		t_door	*door;
-
-		door = find_closest_door(mlx);
-		if (door)
-		{
-			if (door->is_open)
-			{
-				door->is_open = 0;
-				mlx->map.map[door->y][door->x] = 'D';
-			}
-			else if (!door->is_open)
-			{
-				door->is_open = 1;
-				mlx->map.map[door->y][door->x] = '0';
-			}
-		}
-		else
-			return (0);
-	}
+		toggle_door(mlx);
 	if (keycode == XK_Left)
 		mlx->keys.key_left = 1;
 	if (keycode == XK_Right)
