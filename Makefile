@@ -1,28 +1,28 @@
 NAME = cub3d
 
-SRCS = srcs/bonus/main.c \
-		srcs/bonus/raycasting/init.c \
-		srcs/bonus/raycasting/player_move.c \
-		srcs/bonus/raycasting/raycasting_utils.c \
-		srcs/bonus/raycasting/raycasting.c \
-		srcs/bonus/raycasting/rendering.c \
-		srcs/bonus/raycasting/rendering_utils.c \
-		srcs/bonus/raycasting/normalize.c \
-		srcs/bonus/raycasting/wall_collision.c \
-		srcs/bonus/raycasting/cleanup.c \
-		srcs/bonus/raycasting/launch.c \
+SRCS = srcs/mandatory/main.c \
+		srcs/mandatory/raycasting/init.c \
+		srcs/mandatory/raycasting/player_move.c \
+		srcs/mandatory/raycasting/raycasting_utils.c \
+		srcs/mandatory/raycasting/raycasting.c \
+		srcs/mandatory/raycasting/rendering.c \
+		srcs/mandatory/raycasting/rendering_utils.c \
+		srcs/mandatory/raycasting/normalize.c \
+		srcs/mandatory/raycasting/wall_collision.c \
+		srcs/mandatory/raycasting/cleanup.c \
+		srcs/mandatory/raycasting/launch.c \
 		\
 		\
 		\
-		srcs/bonus/parsing/check_file_name.c \
-		srcs/bonus/parsing/helper-functions/custom_error.c \
-		srcs/bonus/parsing/check_map.c \
+		srcs/mandatory/parsing/check_file_name.c \
+		srcs/mandatory/parsing/helper-functions/custom_error.c \
+		srcs/mandatory/parsing/check_map.c \
 		libraries/get_next_line/get_next_line.c \
-		srcs/bonus/parsing/check_color.c \
-		srcs/bonus/parsing/check_num_of_players.c \
-		srcs/bonus/parsing/map_is_valid.c \
-		srcs/bonus/parsing/get_color.c \
-		srcs/bonus/parsing/check_order_textures.c \
+		srcs/mandatory/parsing/check_color.c \
+		srcs/mandatory/parsing/check_num_of_players.c \
+		srcs/mandatory/parsing/map_is_valid.c \
+		srcs/mandatory/parsing/get_color.c \
+		srcs/mandatory/parsing/check_order_textures.c \
 
 LIBFT_DIR = ./libraries/libft
 LIBFT = $(LIBFT_DIR)/libft.a

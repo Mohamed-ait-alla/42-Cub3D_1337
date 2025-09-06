@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:32:42 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 10:26:50 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,4 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_right = 0;
 	mlx->keys.key_escape = 0;
 	mlx->map.cols = calculate_map_cols(mlx->map.map);
-	mlx->window_width = mlx->map.cols * TILE_SIZE;
-	mlx->window_height = mlx->map.rows * TILE_SIZE;
-	mlx->nb_rays = mlx->window_width;
-	mlx->rays = ft_malloc(mlx->nb_rays * sizeof(t_ray), 1);
 }

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:41:17 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:11 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:06:33 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_pixel(t_mlx_data *mlx, int x, int y, int color)
 {
 	int	offset;
 
-	if (x < 0 || x >= mlx->window_width || y < 0 || y >= mlx->window_height)
+	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return ;
 	offset = (y * mlx->size_line) + (x * (mlx->bpp / 8));
 	*(unsigned int *)(mlx->img_pixels + offset) = color;
