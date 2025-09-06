@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:39:11 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:32:31 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:47:55 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,13 @@ static void	ft_destroy_textures(t_mlx_data *mlx)
 int	ft_cleanup(t_mlx_data *mlx)
 {
 	ft_destroy_textures(mlx);
-	mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_window);
-	mlx_destroy_display(mlx->mlx_ptr);
-	free(mlx->mlx_ptr);
+	if (mlx->mlx_ptr && mlx->mlx_window)
+		mlx_destroy_window(mlx->mlx_ptr, mlx->mlx_window);
+	if (mlx->mlx_ptr)
+	{
+		mlx_destroy_display(mlx->mlx_ptr);
+		free(mlx->mlx_ptr);
+	}
 	ft_malloc(0, 0);
-	exit (0);
+	exit (EXIT_FAILURE);
 }

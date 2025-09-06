@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 11:06:57 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:48:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int				get_texture_pixel(t_mlx_data *mlx, int x, int y);
 // #--------------- Parsing map ----------------#
 
 bool			check_file_name(char *file_name);
-int			custom_error(char *msg);
+int				custom_error(t_mlx_data *mlx, char *msg);
 bool			check_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
