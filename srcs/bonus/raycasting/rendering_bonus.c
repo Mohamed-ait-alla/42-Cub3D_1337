@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 19:24:30 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 13:16:54 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,66 @@ void	draw_walls(t_mlx_data *mlx, int x,
 	draw_wall(mlx, x, texture_offset_x, wall_strip_height);
 }
 
+void	put_gun(t_mlx_data *mlx, int start_x, int start_y, int anim_index)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	y = 0;
+	mlx->wall_texture = &mlx->textures[anim_index];
+	while (y < mlx->textures[anim_index].height)
+	{
+		x = 0;
+		while (x < mlx->textures[anim_index].width)
+		{
+			color = get_texture_pixel(mlx, x, y);
+			if ((unsigned int)color != 0xFF000000)
+				put_pixel(mlx, start_x + x, start_y + y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	render_gun(t_mlx_data *mlx)
+{
+	int	x;
+	int	y;
+	
+	x = (WINDOW_WIDTH / 2) - (mlx->textures[mlx->player.anim_index].width / 2);
+	y = (WINDOW_HEIGHT)  - mlx->textures[mlx->player.anim_index].height;
+	put_gun(mlx, x, y, mlx->player.anim_index);
+}
+
+double	get_time()
+{
+	struct timeval tv;
+	
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec + tv.tv_usec / 1000000.0);
+}
+
+void	update_player_animation(t_mlx_data *mlx)
+{
+	static double	last_time = 0;
+	double	now = get_time();
+	
+	if (mlx->player.is_animating)
+	{
+		if (now - last_time > 0.05)
+		{
+			mlx->player.anim_index++;
+			if (mlx->player.anim_index > 9)
+			{
+				mlx->player.anim_index = 5;
+				mlx->player.is_animating = 0;
+			}
+			last_time = now;
+		}
+	}
+}
+
 void	render_textured_walls(t_mlx_data *mlx)
 {
 	int		i;
@@ -79,6 +139,7 @@ void	render_textured_walls(t_mlx_data *mlx)
 		draw_walls(mlx, i, wall_strip_height);
 		i++;
 	}
+	render_gun(mlx);
 }
 
 int	update(t_mlx_data *mlx)
@@ -90,6 +151,7 @@ int	update(t_mlx_data *mlx)
 			&mlx->bpp, &mlx->size_line, &mlx->endian);
 	cast_rays(mlx);
 	render_textured_walls(mlx);
+	update_player_animation(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img);
 	return (0);

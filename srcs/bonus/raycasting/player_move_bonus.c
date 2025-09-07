@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:06:57 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 12:58:39 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 10:31:19 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ int	key_pressed(int keycode, t_mlx_data *mlx)
 		mlx->keys.key_esc = 1;
 	if (keycode == XK_space)
 		toggle_door(mlx);
+	if (keycode == XK_e)
+	{
+		mlx->player.is_animating = 1;
+		mlx->player.anim_index = 5;
+	}
 	if (keycode == XK_Left)
 		mlx->keys.key_left = 1;
 	if (keycode == XK_Right)

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 14:32:06 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 10:17:09 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static double	get_rotation_agnle(char p_char)
 void	init_player(t_mlx_data *mlx, t_map *map)
 {
 	mlx->map = *map;
+	mlx->player.anim_index = 5;
 	mlx->player.px = (mlx->map.px_player * TILE_SIZE) + (TILE_SIZE / 2);
 	mlx->player.py = (mlx->map.py_player * TILE_SIZE) + (TILE_SIZE / 2);
 	mlx->player.rotation_Angle = get_rotation_agnle(mlx->map.player);
