@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 13:16:31 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 13:28:58 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	load_all_textures(t_mlx_data *mlx)
 	if (!load_texture(mlx, "./textures/anim_3.xpm", 8))
 		return (0);
 	if (!load_texture(mlx, "./textures/anim_4.xpm", 9))
-		return (0);	
+		return (0);
 	return (1);
 }
 

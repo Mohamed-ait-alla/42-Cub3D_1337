@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 13:15:32 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 14:28:32 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,10 @@ t_door			*find_closest_door(t_mlx_data *mlx);
 void			reset(t_mlx_data *mlx, int i);
 int				set_horz_wall_hit(t_mlx_data *mlx, double x_intercept, double y_intercept);
 int				set_vert_wall_hit(t_mlx_data *mlx, double x_intercept, double y_intercept);
-// void	player_animation(t_mlx_data *mlx);
+void			put_gun(t_mlx_data *mlx, int start_x, int start_y, int anim_index);
+void			render_gun(t_mlx_data *mlx);
+double			get_time();
+void			update_player_animation(t_mlx_data *mlx);
 
 // #--------------- Parsing map ----------------#
 

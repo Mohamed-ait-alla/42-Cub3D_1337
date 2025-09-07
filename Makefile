@@ -36,6 +36,7 @@ SRCSB = srcs/bonus/main_bonus.c \
 		srcs/bonus/raycasting/cleanup_bonus.c \
 		srcs/bonus/raycasting/launch_bonus.c \
 		srcs/bonus/raycasting/handle_doors.c \
+		srcs/bonus/raycasting/player_animation.c \
 		\
 		srcs/bonus/parsing/check_file_name_bonus.c \
 		srcs/bonus/parsing/helper-functions/custom_error_bonus.c \
