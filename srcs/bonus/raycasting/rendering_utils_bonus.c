@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:41:17 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 11:14:18 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:46:43 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,25 @@ t_texture	*get_wall_texture(t_mlx_data *mlx, int x)
 			return (&mlx->textures[0]);
 	}
 	return (NULL);
+}
+
+void	draw_sky(t_mlx_data *mlx)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	mlx->wall_texture = &mlx->textures[10];
+	y = 0;
+	while (y < WINDOW_HEIGHT)
+	{
+		x = 0;
+		while (x < WINDOW_WIDTH)
+		{
+			color = get_texture_pixel(mlx, x, y);
+			put_pixel(mlx, x, y, color);
+			x++;
+		}
+		y++;
+	}
 }

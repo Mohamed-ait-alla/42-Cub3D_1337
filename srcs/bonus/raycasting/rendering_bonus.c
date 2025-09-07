@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 14:28:11 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:46:05 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	draw_wall(t_mlx_data *mlx,
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{
-		if (y < mlx->wall_top)
-			put_pixel(mlx, x, y, mlx->map.ceiling_color);
-		else if (y >= mlx->wall_top && y <= mlx->wall_bottom)
+		if (y >= mlx->wall_top && y <= mlx->wall_bottom)
 		{
 			texture_offset_y = (y - mlx->wall_top)
 				* ((float)mlx->wall_texture->height / wall_strip_height);
@@ -36,8 +34,8 @@ void	draw_wall(t_mlx_data *mlx,
 			color = get_texture_pixel(mlx, texture_offset_x, texture_offset_y);
 			put_pixel(mlx, x, y, color);
 		}
-		else
-			put_pixel(mlx, x, y, mlx->map.floor_color);
+		else if (y > mlx->wall_bottom)
+			put_pixel(mlx, x, y, 0x000000);
 		y++;
 	}
 }
@@ -90,6 +88,7 @@ int	update(t_mlx_data *mlx)
 	mlx->img_pixels = mlx_get_data_addr(mlx->img,
 			&mlx->bpp, &mlx->size_line, &mlx->endian);
 	cast_rays(mlx);
+	draw_sky(mlx);
 	render_textured_walls(mlx);
 	update_player_animation(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
