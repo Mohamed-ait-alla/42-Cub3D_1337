@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 18:32:24 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:23:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_wall(t_mlx_data *mlx,
 			put_pixel(mlx, x, y, color);
 		}
 		else if (y > mlx->wall_bottom)
-			put_pixel(mlx, x, y, 0x000000);
+			put_pixel(mlx, x, y, mlx->map.floor_color);
 		y++;
 	}
 }
