@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 10:17:09 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:24:51 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_right = 0;
 	mlx->keys.key_esc = 0;
 	mlx->keys.key_space = 0;
-	mlx->map.cols = calculate_map_cols(mlx->map.map);
+	mlx->map.cols = calculate_map_cols(mlx->map.copy_map);
 	printf("px: %f, py: %f\n", mlx->player.px, mlx->player.py);
 	printf("tttcols: %d,ttttt rows: %d\n", mlx->map.cols, mlx->map.rows);
 }

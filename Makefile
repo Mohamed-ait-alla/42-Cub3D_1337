@@ -79,7 +79,7 @@ bonus: $(NAMEB)
 
 run: bonus
 	${RM} ${OBJSB}
-	./cub3d_bonus	./maps/map_1.cub
+	./cub3d_bonus	./maps/map_2.cub
 
 clean:
 	$(RM) $(OBJS) $(OBJSB)

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 16:49:07 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:59:54 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 	if (!check_map(av[1], &map))
 		exit (custom_error(&mlx, "Error:\nInvalid map!\n"));
 	init_player(&mlx, &map);
+	printf("rows are: %d | cols are: %d\n", mlx.map.rows, mlx.map.cols);
 	launch(&mlx);
 	return (0);
 }

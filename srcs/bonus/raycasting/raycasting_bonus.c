@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 13:15:29 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:26:55 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	find_horizontal_intersection(t_mlx_data *mlx, double ray_angle)
 	x_intercept = mlx->player.px
 		+ (y_intercept - mlx->player.py) / tan(ray_angle);
 	calculate_ray_intersection_steps(&x_step, &y_step, ray_angle, 'h');
-	while (x_intercept >= 0 && x_intercept <= WINDOW_WIDTH
-		&& y_intercept >= 0 && y_intercept <= WINDOW_HEIGHT)
+	while (x_intercept >= 0 && x_intercept <= mlx->map.cols * TILE_SIZE
+		&& y_intercept >= 0 && y_intercept <= mlx->map.rows * TILE_SIZE)
 	{
 		if (is_wall(mlx, x_intercept, normalize_y_axis(y_intercept, ray_angle)))
 			return (set_horz_wall_hit(mlx, x_intercept, y_intercept));
@@ -76,8 +76,8 @@ int	find_vertical_intersections(t_mlx_data *mlx, double ray_angle)
 	y_intercept = mlx->player.py
 		+ (x_intercept - mlx->player.px) * tan(ray_angle);
 	calculate_ray_intersection_steps(&x_step, &y_step, ray_angle, 'v');
-	while (x_intercept >= 0 && x_intercept <= WINDOW_WIDTH
-		&& y_intercept >= 0 && y_intercept <= WINDOW_HEIGHT)
+	while (x_intercept >= 0 && x_intercept <= mlx->map.cols * TILE_SIZE
+		&& y_intercept >= 0 && y_intercept <= mlx->map.rows * TILE_SIZE)
 	{
 		if (is_wall(mlx, normalize_x_axis(x_intercept, ray_angle), y_intercept))
 			return (set_vert_wall_hit(mlx, x_intercept, y_intercept));
