@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/08/23 10:39:40 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/28 16:56:33 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void parse_line(char *line, t_map *map)
 		while (line[i] && line[i] <= 32)
 			i++;
 		map->NO = ft_substr(line, i, (ft_strlen(line) - i) - 1);
+		if (!map->SO && !map->WE && !map->EA)
+			map->ORDER_NO = true;
 		map->num_NO++;
 	}
 	else if (ft_strncmp(&line[i], "SO", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
@@ -33,6 +35,8 @@ static void parse_line(char *line, t_map *map)
 		while (line[i] && line[i] <= 32)
 			i++;
 		map->SO = ft_substr(line, i, (ft_strlen(line) - i) - 1);
+		if (map->NO && !map->WE && !map->EA)
+			map->ORDER_SO = true;
 		map->num_SO++;
 	}
 	else if (ft_strncmp(&line[i], "WE", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
@@ -41,6 +45,8 @@ static void parse_line(char *line, t_map *map)
 		while (line[i] && line[i] <= 32)
 			i++;
 		map->WE = ft_substr(line, i, (ft_strlen(line) - i) - 1);
+		if (map->NO && map->SO && !map->EA)
+			map->ORDER_WE = true;
 		map->num_WE++;
 	}
 	else if (ft_strncmp(&line[i], "EA", 2) == 0 && line[i + 2] <= 32 && line[i + 2] && line[i + 2] != '\n')
@@ -49,6 +55,8 @@ static void parse_line(char *line, t_map *map)
 		while (line[i] && line[i] <= 32)
 			i++;
 		map->EA = ft_substr(line, i, (ft_strlen(line) - i) - 1);
+		if (map->NO && map->SO && map->WE)
+			map->ORDER_EA = true;
 		map->num_EA++;
 	}
 	else if (ft_strncmp(&line[i], "F", 1) == 0 && line[i + 1] <= 32 && line[i + 1] && line[i + 1] != '\n')
@@ -244,7 +252,7 @@ bool check_map(char *file, t_map *map)
 	printf("N_S: %d\n", map->_S);
 	printf("N_E: %d\n", map->_E);
 	printf("N_W: %d\n", map->_W);
-	return (map->NO && map->SO && map->WE && map->EA &&
+	return (map->NO && map->SO && map->WE && map->EA && check_order_textures(map) &&
 			map->f_color && map->c_color && map->rows &&
 			map->num_NO == 1 && map->num_SO == 1 &&
 			map->num_WE == 1 && map->num_EA == 1 &&

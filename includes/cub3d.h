@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/08/28 15:13:47 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/09 09:35:11 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ typedef struct s_map
 	char		*SO;
 	char		*WE;
 	char		*EA;
+	bool		ORDER_NO;
+	bool		ORDER_SO;
+	bool		ORDER_WE;
+	bool		ORDER_EA;
 	char		*f_color;
 	char		*c_color;
 	int			num_f_color;
@@ -156,5 +160,6 @@ bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);
 bool 			map_is_valid(t_map *map);
 void			get_color(t_map *map);
+bool			check_order_textures(t_map *map);
 
 #endif
