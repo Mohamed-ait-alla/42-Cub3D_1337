@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 09:34:59 by mdahani           #+#    #+#             */
-/*   Updated: 2024/11/24 12:31:49 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/08/31 11:10:15 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
-	buffer = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	buffer = (char *)ft_malloc(BUFFER_SIZE + 1 * sizeof(char), 1);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free(remainder);
-		free(buffer);
+		// free(remainder);
+		// free(buffer);
 		remainder = NULL;
 		buffer = NULL;
 		return (NULL);
@@ -34,7 +34,7 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	line = fill_line_buffer(fd, remainder, buffer);
-	free(buffer);
+	// free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
@@ -55,7 +55,7 @@ static char	*get_remainder(char *line)
 	remainder = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (remainder[0] == 0)
 	{
-		free(remainder);
+		// free(remainder);
 		remainder = NULL;
 	}
 	line[i + 1] = 0;
@@ -72,7 +72,7 @@ static char	*fill_line_buffer(int fd, char *remainder, char *buffer)
 		char_read = read(fd, buffer, BUFFER_SIZE);
 		if (char_read == -1)
 		{
-			free(remainder);
+			// free(remainder);
 			return (NULL);
 		}
 		else if (char_read == 0)
@@ -82,7 +82,7 @@ static char	*fill_line_buffer(int fd, char *remainder, char *buffer)
 			remainder = ft_strdup("");
 		tmp = remainder;
 		remainder = ft_strjoin(tmp, buffer);
-		free(tmp);
+		// free(tmp);
 		tmp = NULL;
 		if (ft_strchr(buffer, '\n'))
 			break ;

@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:54:45 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/20 20:22:48 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 10:23:52 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	size = ft_strlen(s1);
-	new = (char *)malloc(sizeof(char) * (size + 1));
+	new = (char *)ft_malloc(sizeof(char) * (size + 1), 1);
 	if (!new)
 		return (NULL);
 	while (i < size)

@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   launch.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
+/*   Updated: 2025/09/06 16:52:39 by mait-all         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../includes/cub3d.h"
+
+static int	load_texture(t_mlx_data *mlx, char *path, int i)
+{
+	mlx->textures[i].img = mlx_xpm_file_to_image (mlx->mlx_ptr, path,
+			&mlx->textures[i].width, &mlx->textures[i].height);
+	if (!mlx->textures[i].img)
+		return (0);
+	mlx->textures[i].addr = mlx_get_data_addr(mlx->textures[i].img,
+			&mlx->textures[i].bpp, &mlx->textures[i].line_length,
+			&mlx->textures[i].endian);
+	if (!mlx->textures[i].addr)
+		return (0);
+	return (1);
+}
+
+static int	load_all_textures(t_mlx_data *mlx)
+{
+	if (!load_texture(mlx, mlx->map.NO, 0))
+		return (0);
+	if (!load_texture(mlx, mlx->map.SO, 1))
+		return (0);
+	if (!load_texture(mlx, mlx->map.EA, 2))
+		return (0);
+	if (!load_texture(mlx, mlx->map.WE, 3))
+		return (0);
+	return (1);
+}
+
+void	launch(t_mlx_data *mlx)
+{
+	mlx->mlx_ptr = mlx_init();
+	if (!mlx->mlx_ptr)
+		exit(custom_error(mlx, "Error:\nFailed to init MLX!\n"));
+	if (!load_all_textures(mlx))
+		exit(custom_error(mlx, "Error:\nFailed to load textures!\n"));
+	mlx->mlx_window = mlx_new_window(mlx->mlx_ptr,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
+	if (!mlx->mlx_window)
+		exit(custom_error(mlx, "Error:\nFailed to create window!\n"));
+	mlx_hook(mlx->mlx_window, 2, 1L << 0, key_pressed, mlx);
+	mlx_hook(mlx->mlx_window, 3, 1L << 1, key_released, mlx);
+	mlx_loop_hook(mlx->mlx_ptr, update, mlx);
+	mlx_hook(mlx->mlx_window, 17, 0, ft_cleanup, mlx);
+	mlx_loop(mlx->mlx_ptr);
+}

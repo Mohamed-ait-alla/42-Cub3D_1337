@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:22:44 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/20 20:23:17 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:55:13 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	new = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	new = (char *)ft_malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char), 1);
 	if (!new)
 		return (NULL);
 	i = 0;

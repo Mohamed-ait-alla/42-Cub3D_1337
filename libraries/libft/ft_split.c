@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:22:51 by mait-all          #+#    #+#             */
-/*   Updated: 2025/07/20 20:23:12 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/08/31 07:40:14 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*ft_get_word(const char *str, char c)
 	int		len_word;
 
 	len_word = ft_get_len_word(str, c);
-	word = (char *)malloc((len_word + 1) * sizeof(char));
+	word = (char *)ft_malloc((len_word + 1) * sizeof(char), 1);
 	if (!word)
 	{
 		return (NULL);
@@ -80,7 +80,7 @@ char	**ft_split(char const *s, char c)
 	char	**strings;
 	int		i;
 
-	strings = (char **)malloc((ft_get_len(s, c) + 1) * sizeof(char *));
+	strings = (char **)ft_malloc((ft_get_len(s, c) + 1) * sizeof(char *), 1);
 	if (!strings)
 		return (NULL);
 	i = 0;
