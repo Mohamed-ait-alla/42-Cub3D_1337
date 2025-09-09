@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_is_valid_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/06 11:17:13 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:09:38 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool flood_fill(t_map *map, int x, int y, char player)
     char c = map->copy_map[x][y];
     if (c == 'O')
         return (false);
-    if (c != '0' && c != player)
+    if (c != '0' && c != 'D' && c != player)
         return (true);
     map->copy_map[x][y] = 'V';
     if (!flood_fill(map, x + 1, y, player)) 
@@ -93,7 +93,7 @@ bool map_is_valid(t_map *map)
                 if (!flood_fill(map, x, y, map->copy_map[x][y]))
                     return (false);                
             }
-			if (map->copy_map[x][y] == 'D')
+			else if (map->copy_map[x][y] == 'D')
 			{
 				map->doors[i].is_open = 0;
 				map->doors[i].x = y;
