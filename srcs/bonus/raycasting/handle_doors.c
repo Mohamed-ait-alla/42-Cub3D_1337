@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 12:56:16 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/08 16:30:44 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:55:45 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void	toggle_door(t_mlx_data *mlx)
 		if (door->is_open)
 		{
 			door->is_open = 0;
-			mlx->map.copy_map[door->y][door->x] = 'D';
+			mlx->map.map[door->y][door->x] = 'D';
 		}
 		else if (!door->is_open)
 		{
 			door->is_open = 1;
-			mlx->map.copy_map[door->y][door->x] = '0';
+			mlx->map.map[door->y][door->x] = '0';
 		}
 	}
 	else

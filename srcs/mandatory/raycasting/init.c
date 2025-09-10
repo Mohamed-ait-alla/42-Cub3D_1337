@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/08 14:49:57 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:59:22 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_left = 0;
 	mlx->keys.key_right = 0;
 	mlx->keys.key_escape = 0;
-	mlx->map.cols = calculate_map_cols(mlx->map.copy_map);
+	mlx->map.cols = calculate_map_cols(mlx->map.map);
 }

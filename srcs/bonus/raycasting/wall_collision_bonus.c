@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:46:55 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/08 17:05:48 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:55:20 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	is_wall(t_mlx_data *mlx, double x, double y)
 		return (1);
 	grid_x = x / TILE_SIZE;
 	grid_y = y / TILE_SIZE;
-	mlx->tile = mlx->map.copy_map[grid_y][grid_x];
-	return ((mlx->map.copy_map[grid_y][grid_x] == '1')
-		|| mlx->map.copy_map[grid_y][grid_x] == 'D');
+	mlx->tile = mlx->map.map[grid_y][grid_x];
+	return ((mlx->map.map[grid_y][grid_x] == '1')
+		|| mlx->map.map[grid_y][grid_x] == 'D');
 }
 
 int	has_collision(t_mlx_data *mlx, float x, float y)

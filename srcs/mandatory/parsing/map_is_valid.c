@@ -6,42 +6,42 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/02 18:34:05 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:58:39 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-static void normalize_the_map(t_map *map)
+static void normalize_the_map(char **map)
 {
     int x, y, big_line;
     
     // get the big line
     x = 0;
     big_line = 0;
-    while (map->copy_map[x])
+    while (map[x])
     {
-        if (big_line < (int) ft_strlen(map->copy_map[x]))
-            big_line = ft_strlen(map->copy_map[x]);
+        if (big_line < (int) ft_strlen(map[x]))
+            big_line = ft_strlen(map[x]);
         x++;
     }
     // fill the white spaces on O
     x = 0;
-    while (map->copy_map[x])
+    while (map[x])
     {
         y = 0;
-        while (map->copy_map[x][y])
+        while (map[x][y])
         {
-            if (map->copy_map[x][y] <= 32)
-                map->copy_map[x][y] = 'O';
+            if (map[x][y] <= 32)
+                map[x][y] = 'O';
             y++;
         }
-       if ((int) ft_strlen(map->copy_map[x]) < big_line)
+       if ((int) ft_strlen(map[x]) < big_line)
         {
-            int count_chars = big_line - (int) ft_strlen(map->copy_map[x]);
+            int count_chars = big_line - (int) ft_strlen(map[x]);
             while (count_chars > 0)
             {
-                map->copy_map[x] = ft_strjoin(map->copy_map[x], "O");
+                map[x] = ft_strjoin(map[x], "O");
                 count_chars--;
             }
         }
@@ -76,7 +76,8 @@ bool map_is_valid(t_map *map)
     int x, y;
 
     // normalize the map
-    normalize_the_map(map);
+    normalize_the_map(map->copy_map);
+    normalize_the_map(map->map);
     x = 0;
     while (map->copy_map[x])
     {
