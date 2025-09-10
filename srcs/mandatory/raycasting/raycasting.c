@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 10:54:38 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/08 14:06:49 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 09:26:56 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	cast_rays(t_mlx_data *mlx)
 	int		i;
 	double	r_angle;
 
-	r_angle = mlx->player.rotation_Angle - (FOV / 2);
+	r_angle = mlx->player.rotation_angle - (FOV / 2);
 	i = 0;
 	while (i < NUM_RAYS)
 	{

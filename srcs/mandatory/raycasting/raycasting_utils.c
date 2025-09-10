@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:48:52 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:01 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 09:26:45 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	set_rays_to_walls_distance(t_mlx_data *mlx, int i,
 		mlx->rays[i].was_hit_vert = 1;
 	}
 	mlx->rays[i].ray_correct_distance = mlx->rays[i].ray_distored_distance
-		* cos(mlx->rays[i].ray_angle - mlx->player.rotation_Angle);
+		* cos(mlx->rays[i].ray_angle - mlx->player.rotation_angle);
 }
 
 double	get_distance_between_points(double x0, double y0, double x1, double y1)

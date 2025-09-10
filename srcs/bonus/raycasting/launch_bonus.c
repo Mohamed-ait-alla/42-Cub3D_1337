@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:14:09 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 09:44:23 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int	mouse_handle(int x, int y, t_mlx_data *mlx)
 	win_middle = WINDOW_WIDTH / 2;
 	if (x > win_middle)
 	{
-		mlx->player.rotation_Angle += 0.03;
+		mlx->player.rotation_angle += 0.03;
 	}
 	if (x < win_middle)
 	{
-		mlx->player.rotation_Angle -= 0.03;
+		mlx->player.rotation_angle -= 0.03;
 	}
-	normalize_angle(mlx->player.rotation_Angle);
+	normalize_angle(mlx->player.rotation_angle);
 	mlx_mouse_move(mlx->mlx_ptr, mlx->mlx_window,
 		WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	return (0);

@@ -6,12 +6,12 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 16:50:58 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 09:43:15 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 # ifndef M_PI
 #  define M_PI 3.141592653589793238462
 # endif
@@ -20,7 +20,7 @@
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 # define NUM_RAYS WINDOW_WIDTH
-# define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
 # include <X11/keysym.h>
@@ -32,7 +32,8 @@
 # include <stdlib.h>
 # include <string.h>
 
-typedef struct s_door {
+typedef struct s_door
+{
 	int	x;
 	int	y;
 	int	is_open;
@@ -44,7 +45,7 @@ typedef struct s_player
 	int			is_animating;
 	double		px;
 	double		py;
-	double		rotation_Angle;
+	double		rotation_angle;
 	double		move_speed;
 }				t_player;
 
@@ -121,7 +122,6 @@ typedef struct s_map
 	t_door		doors[MAX_DOORS];
 }				t_map;
 
-
 typedef struct s_mlx_data
 {
 	void		*mlx_ptr;
@@ -152,8 +152,7 @@ typedef struct s_mlx_data
 	t_map		map;
 }				t_mlx_data;
 
-// #-------------- raycasting prototypes --------------#
-void 			launch(t_mlx_data *mlx);
+void			launch(t_mlx_data *mlx);
 int				ft_cleanup(t_mlx_data *mlx);
 void			init_player(t_mlx_data *mlx, t_map *map);
 int				key_pressed(int keycode, t_mlx_data *mlx);
@@ -165,31 +164,32 @@ void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
 int				update(t_mlx_data *mlx);
 void			cast_rays(t_mlx_data *mlx);
 int				is_ray_facing_down(double ray_angle);
-int 			is_ray_facing_right(double ray_angle);
+int				is_ray_facing_right(double ray_angle);
 void			*ft_malloc(size_t size, int mode);
 double			normalize_angle(double angle);
-double			 get_distance_between_points(double x0, double y0,
-												double x1, double y1);
-double 			normalize_x_axis(double x, double ray_angle);
-double 			normalize_y_axis(double y, double ray_angle);
-double 			normalize_diff_door_player_angle(double angle);
+double			get_distance_between_points(double x0, double y0,
+					double x1, double y1);
+double			normalize_x_axis(double x, double ray_angle);
+double			normalize_y_axis(double y, double ray_angle);
+double			normalize_diff_door_player_angle(double angle);
 void			set_rays_to_walls_distance(t_mlx_data *mlx, int i,
-								double horz_hit_distance,
-								double vert_hit_distance);
+					double horz_hit_distance,
+					double vert_hit_distance);
 int				get_texture_pixel(t_mlx_data *mlx, int x, int y);
 t_texture		*get_wall_texture(t_mlx_data *mlx, int x);
 void			toggle_door(t_mlx_data *mlx);
 t_door			*find_closest_door(t_mlx_data *mlx);
 void			reset(t_mlx_data *mlx, int i);
-int				set_horz_wall_hit(t_mlx_data *mlx, double x_intercept, double y_intercept);
-int				set_vert_wall_hit(t_mlx_data *mlx, double x_intercept, double y_intercept);
-void			put_gun(t_mlx_data *mlx, int start_x, int start_y, int anim_index);
+int				set_horz_wall_hit(t_mlx_data *mlx,
+					double x_intercept, double y_intercept);
+int				set_vert_wall_hit(t_mlx_data *mlx,
+					double x_intercept, double y_intercept);
+void			put_gun(t_mlx_data *mlx, int start_x, int start_y,
+					int anim_index);
 void			render_gun(t_mlx_data *mlx);
 void			draw_sky(t_mlx_data *mlx);
-double			get_time();
+double			get_time(void);
 void			update_player_animation(t_mlx_data *mlx);
-
-// #--------------- Parsing map ----------------#
 
 bool			check_file_name(char *file_name);
 int				custom_error(t_mlx_data *mlx, char *msg);
@@ -197,7 +197,7 @@ bool			check_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);
-bool 			map_is_valid(t_map *map);
+bool			map_is_valid(t_map *map);
 void			get_color(t_map *map);
 bool			check_order_textures(t_map *map);
 

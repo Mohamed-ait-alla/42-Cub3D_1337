@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/09 09:42:30 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/10 09:35:32 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define TILE_SIZE 32
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
-# define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512
 # define NUM_RAYS WINDOW_WIDTH
 # include "../libraries/libft/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
@@ -34,7 +34,7 @@ typedef struct s_player
 {
 	double		px;
 	double		py;
-	double		rotation_Angle;
+	double		rotation_angle;
 	double		move_speed;
 	int			rotation_speed;
 }				t_player;
@@ -107,7 +107,6 @@ typedef struct s_map
 	char		player;
 }				t_map;
 
-
 typedef struct s_mlx_data
 {
 	void		*mlx_ptr;
@@ -132,8 +131,7 @@ typedef struct s_mlx_data
 	t_map		map;
 }				t_mlx_data;
 
-// #-------------- raycasting prototypes --------------#
-void 			launch(t_mlx_data *mlx);
+void			launch(t_mlx_data *mlx);
 int				ft_cleanup(t_mlx_data *mlx);
 void			init_player(t_mlx_data *mlx, t_map *map);
 int				ft_cleanup(t_mlx_data *mlx);
@@ -146,20 +144,18 @@ void			put_pixel(t_mlx_data *mlx, int x, int y, int color);
 int				update(t_mlx_data *mlx);
 void			cast_rays(t_mlx_data *mlx);
 int				is_ray_facing_down(double ray_angle);
-int 			is_ray_facing_right(double ray_angle);
+int				is_ray_facing_right(double ray_angle);
 void			*ft_malloc(size_t size, int mode);
-double 			normalize_x_axis(double x, double ray_angle);
-double 			normalize_y_axis(double y, double ray_angle);
+double			normalize_x_axis(double x, double ray_angle);
+double			normalize_y_axis(double y, double ray_angle);
 double			normalize_angle(double angle);
-double			 get_distance_between_points(double x0, double y0,
-												double x1, double y1);
+double			get_distance_between_points(double x0, double y0,
+					double x1, double y1);
 void			set_rays_to_walls_distance(t_mlx_data *mlx, int i,
-								double horz_hit_distance,
-								double vert_hit_distance);
+					double horz_hit_distance,
+					double vert_hit_distance);
 t_texture		*get_wall_texture(t_mlx_data *mlx, int x);
 int				get_texture_pixel(t_mlx_data *mlx, int x, int y);
-
-// #--------------- Parsing map ----------------#
 
 bool			check_file_name(char *file_name);
 int				custom_error(t_mlx_data *mlx, char *msg);
@@ -167,7 +163,7 @@ bool			check_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);
-bool 			map_is_valid(t_map *map);
+bool			map_is_valid(t_map *map);
 void			get_color(t_map *map);
 bool			check_order_textures(t_map *map);
 

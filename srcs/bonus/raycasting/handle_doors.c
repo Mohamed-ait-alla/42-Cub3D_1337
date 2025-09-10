@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 12:56:16 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/09 18:55:45 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 09:44:38 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ double	get_door_player_angle(t_mlx_data *mlx, int i)
 	mlx->dx = mlx->door_world_x - mlx->player.px;
 	mlx->dy = mlx->door_world_y - mlx->player.py;
 	door_angle = atan2(mlx->dy, mlx->dx);
-	diff_angle = door_angle - mlx->player.rotation_Angle;
+	diff_angle = door_angle - mlx->player.rotation_angle;
 	diff_angle = normalize_diff_door_player_angle(diff_angle);
 	return (diff_angle);
 }
