@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:43:15 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 11:09:21 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ typedef struct s_mlx_data
 	double		vert_wall_hit_x;
 	double		vert_wall_hit_y;
 	t_keys		keys;
-	t_texture	textures[11];
+	t_texture	textures[12];
 	t_texture	*wall_texture;
 	t_player	player;
 	t_ray		rays[NUM_RAYS];

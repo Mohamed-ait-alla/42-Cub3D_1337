@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:44:23 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 11:54:40 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	load_all_textures(t_mlx_data *mlx)
 		return (0);
 	if (!load_texture(mlx, "./textures/sky.xpm", 10))
 		return (0);
+	if (!load_texture(mlx, "./textures/start.xpm", 11))
+		return (0);
 	return (1);
 }
 
@@ -73,6 +75,23 @@ int	mouse_handle(int x, int y, t_mlx_data *mlx)
 	return (0);
 }
 
+int	start_timer(t_mlx_data *mlx)
+{
+	static double	start = 0;
+	double			now;
+
+	if (start == 0)
+		start = get_time();
+	now = get_time();
+	if (now - start >= 1)
+	{
+		mlx_clear_window(mlx->mlx_ptr, mlx->mlx_window);
+		mlx_loop_hook(mlx->mlx_ptr, update, mlx);
+		return (0);
+	}
+	return (1);
+}
+
 void	launch(t_mlx_data *mlx)
 {
 	mlx->mlx_ptr = mlx_init();
@@ -84,10 +103,13 @@ void	launch(t_mlx_data *mlx)
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3d");
 	if (!mlx->mlx_window)
 		exit(custom_error(mlx, "Error:\nFailed to create window!\n"));
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window,
+		mlx->textures[11].img, 0, 0);
 	mlx_hook(mlx->mlx_window, 2, 1L << 0, key_pressed, mlx);
 	mlx_hook(mlx->mlx_window, 3, 1L << 1, key_released, mlx);
 	mlx_hook(mlx->mlx_window, 6, 1L << 6, mouse_handle, mlx);
 	mlx_loop_hook(mlx->mlx_ptr, update, mlx);
+	mlx_loop_hook(mlx->mlx_ptr, start_timer, mlx);
 	mlx_hook(mlx->mlx_window, 17, 0, ft_cleanup, mlx);
 	mlx_loop(mlx->mlx_ptr);
 }

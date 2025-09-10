@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:39:11 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/07 16:49:21 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 11:53:08 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_destroy_textures(t_mlx_data *mlx)
 	int	i;
 
 	i = 0;
-	while (i < 11)
+	while (i < 12)
 	{
 		if (mlx->textures[i].addr)
 			mlx_destroy_image(mlx->mlx_ptr, mlx->textures[i].img);
