@@ -16,6 +16,10 @@ SRCS = srcs/mandatory/main.c \
 		srcs/mandatory/parsing/check_file_name.c \
 		srcs/mandatory/parsing/helper-functions/custom_error.c \
 		srcs/mandatory/parsing/check_map.c \
+		srcs/mandatory/parsing/parse_line_utils.c \
+		srcs/mandatory/parsing/parse_line_utils_plus.c \
+		srcs/mandatory/parsing/get_map.c \
+		srcs/mandatory/parsing/check_map_utils.c \
 		libraries/get_next_line/get_next_line.c \
 		srcs/mandatory/parsing/check_color.c \
 		srcs/mandatory/parsing/check_num_of_players.c \

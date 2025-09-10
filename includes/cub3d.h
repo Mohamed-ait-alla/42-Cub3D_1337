@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:35:32 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 22:10:32 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,18 @@ int				get_texture_pixel(t_mlx_data *mlx, int x, int y);
 bool			check_file_name(char *file_name);
 int				custom_error(t_mlx_data *mlx, char *msg);
 bool			check_map(char *file, t_map *map);
+void			parse_line_of_no(int *i, char *line, t_map *map);
+void			parse_line_of_so(int *i, char *line, t_map *map);
+void			parse_line_of_we(int *i, char *line, t_map *map);
+void			parse_line_of_ea(int *i, char *line, t_map *map);
+void			parse_line_of_f_color(int *i, char *line, t_map *map);
+void			parse_line_of_c_color(int *i, char *line, t_map *map);
+bool 			check_chars_map_and_count_player(char *line, t_map *map);
+bool			get_map(t_map *map, char *file);
+bool 			is_empty_line(char *line);
+bool 			is_map(char *line);
+bool 			this_line_is_map(char *line);
+int 			check_order_of_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);
