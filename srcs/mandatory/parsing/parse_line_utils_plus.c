@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 18:43:00 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/10 20:35:23 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/10 22:53:11 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ bool	check_chars_map_and_count_player(char *line, t_map *map)
 			|| line[i] == 'E' || line[i] == 'W' || line[i] <= 32)
 		{
 			if (line[i] == 'N')
-				map->_N++;
+				map->player_n++;
 			else if (line[i] == 'S')
-				map->_S++;
+				map->player_s++;
 			else if (line[i] == 'E')
-				map->_E++;
+				map->player_e++;
 			else if (line[i] == 'W')
-				map->_W++;
+				map->player_w++;
 			i++;
 		}
 		else

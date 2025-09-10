@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/10 22:37:10 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/10 22:50:39 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ bool	check_map(char *file, t_map *map)
 		return (false);
 	if (!get_map(map, file))
 		return (false);
-	return (map->NO && map->SO && map->WE && map->EA
+	return (map->no && map->so && map->we && map->ea
 		&& check_order_textures(map) && map->f_color && map->c_color
-		&& map->rows && map->num_NO == 1 && map->num_SO == 1 && map->num_WE == 1
-		&& map->num_EA == 1 && map->num_f_color == 1 && map->num_c_color == 1
+		&& map->rows && map->num_no == 1 && map->num_so == 1 && map->num_we == 1
+		&& map->num_ea == 1 && map->num_f_color == 1 && map->num_c_color == 1
 		&& check_order_of_map(file, map) == 6 && check_num_of_players(map)
 		&& check_color(map) && map_is_valid(map));
 }

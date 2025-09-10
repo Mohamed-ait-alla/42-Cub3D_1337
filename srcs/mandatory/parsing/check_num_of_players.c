@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_num_of_players.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 15:43:13 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/02 18:33:57 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 22:53:31 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	check_num_of_players(t_map *map)
 {
-	if ((map->_N + map->_S + map->_E + map->_W) != 1)
+	if ((map->player_n + map->player_s + map->player_e + map->player_w) != 1)
 		return (false);
 	return (true);
 }
