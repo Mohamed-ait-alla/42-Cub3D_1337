@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_order_textures_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 16:49:06 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/06 11:17:23 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/11 11:52:33 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	check_order_textures(t_map *map)
 {
-	if (map->ORDER_NO && map->ORDER_SO && map->ORDER_WE && map->ORDER_EA)
+	if (map->order_no && map->order_so && map->order_we && map->order_ea)
 		return (true);
 	return (false);
 }

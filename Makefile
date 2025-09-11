@@ -45,6 +45,10 @@ SRCSB = srcs/bonus/main_bonus.c \
 		srcs/bonus/parsing/check_file_name_bonus.c \
 		srcs/bonus/parsing/helper-functions/custom_error_bonus.c \
 		srcs/bonus/parsing/check_map_bonus.c \
+		srcs/bonus/parsing/parse_line_utils_bonus.c \
+		srcs/bonus/parsing/parse_line_utils_plus_bonus.c \
+		srcs/bonus/parsing/get_map_bonus.c \
+		srcs/bonus/parsing/check_map_utils_bonus.c \
 		libraries/get_next_line/get_next_line.c \
 		srcs/bonus/parsing/check_color_bonus.c \
 		srcs/bonus/parsing/check_num_of_players_bonus.c \
