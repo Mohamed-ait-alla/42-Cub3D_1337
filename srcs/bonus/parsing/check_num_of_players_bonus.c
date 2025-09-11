@@ -12,9 +12,9 @@
 
 #include "../../../includes/cub3d_bonus.h"
 
-bool check_num_of_players(t_map *map)
+bool	check_num_of_players(t_map *map)
 {
-    if ((map->_N + map->_S +map->_E + map->_W) != 1)
-        return (false);
-    return (true);
+	if ((map->_N + map->_S + map->_E + map->_W) != 1)
+		return (false);
+	return (true);
 }
