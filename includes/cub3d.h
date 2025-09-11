@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:35:32 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 22:49:12 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,22 @@ typedef struct s_keys
 
 typedef struct s_map
 {
-	int			_0;
-	int			_1;
-	int			_N;
-	int			_S;
-	int			_E;
-	int			_W;
-	int			num_NO;
-	int			num_SO;
-	int			num_WE;
-	int			num_EA;
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
-	bool		ORDER_NO;
-	bool		ORDER_SO;
-	bool		ORDER_WE;
-	bool		ORDER_EA;
+	int			player_n;
+	int			player_s;
+	int			player_e;
+	int			player_w;
+	int			num_no;
+	int			num_so;
+	int			num_we;
+	int			num_ea;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	bool		order_no;
+	bool		order_so;
+	bool		order_we;
+	bool		order_ea;
 	char		*f_color;
 	char		*c_color;
 	int			num_f_color;
@@ -149,17 +147,28 @@ void			*ft_malloc(size_t size, int mode);
 double			normalize_x_axis(double x, double ray_angle);
 double			normalize_y_axis(double y, double ray_angle);
 double			normalize_angle(double angle);
-double			get_distance_between_points(double x0, double y0,
-					double x1, double y1);
+double			get_distance_between_points(double x0, double y0, double x1,
+					double y1);
 void			set_rays_to_walls_distance(t_mlx_data *mlx, int i,
-					double horz_hit_distance,
-					double vert_hit_distance);
+					double horz_hit_distance, double vert_hit_distance);
 t_texture		*get_wall_texture(t_mlx_data *mlx, int x);
 int				get_texture_pixel(t_mlx_data *mlx, int x, int y);
 
 bool			check_file_name(char *file_name);
 int				custom_error(t_mlx_data *mlx, char *msg);
 bool			check_map(char *file, t_map *map);
+void			parse_line_of_no(int *i, char *line, t_map *map);
+void			parse_line_of_so(int *i, char *line, t_map *map);
+void			parse_line_of_we(int *i, char *line, t_map *map);
+void			parse_line_of_ea(int *i, char *line, t_map *map);
+void			parse_line_of_f_color(int *i, char *line, t_map *map);
+void			parse_line_of_c_color(int *i, char *line, t_map *map);
+bool			check_chars_map_and_count_player(char *line, t_map *map);
+bool			get_map(t_map *map, char *file);
+bool			is_empty_line(char *line);
+bool			is_map(char *line);
+bool			this_line_is_map(char *line);
+int				check_order_of_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 16:52:39 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/10 22:49:56 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static int	load_texture(t_mlx_data *mlx, char *path, int i)
 
 static int	load_all_textures(t_mlx_data *mlx)
 {
-	if (!load_texture(mlx, mlx->map.NO, 0))
+	if (!load_texture(mlx, mlx->map.no, 0))
 		return (0);
-	if (!load_texture(mlx, mlx->map.SO, 1))
+	if (!load_texture(mlx, mlx->map.so, 1))
 		return (0);
-	if (!load_texture(mlx, mlx->map.EA, 2))
+	if (!load_texture(mlx, mlx->map.ea, 2))
 		return (0);
-	if (!load_texture(mlx, mlx->map.WE, 3))
+	if (!load_texture(mlx, mlx->map.we, 3))
 		return (0);
 	return (1);
 }
