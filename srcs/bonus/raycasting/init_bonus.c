@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:02:39 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:44:30 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:05:16 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,4 @@ void	init_player(t_mlx_data *mlx, t_map *map)
 	mlx->keys.key_esc = 0;
 	mlx->keys.key_space = 0;
 	mlx->map.cols = calculate_map_cols(mlx->map.map);
-	printf("px: %f, py: %f\n", mlx->player.px, mlx->player.py);
-	printf("tttcols: %d,ttttt rows: %d\n", mlx->map.cols, mlx->map.rows);
 }
