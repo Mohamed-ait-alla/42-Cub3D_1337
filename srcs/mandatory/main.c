@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:07:56 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/08 14:59:54 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:03:23 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 	if (!check_map(av[1], &map))
 		exit (custom_error(&mlx, "Error:\nInvalid map!\n"));
 	init_player(&mlx, &map);
-	printf("rows are: %d | cols are: %d\n", mlx.map.rows, mlx.map.cols);
 	launch(&mlx);
 	return (0);
 }
