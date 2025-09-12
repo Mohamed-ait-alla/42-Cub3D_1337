@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 12:56:16 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 09:44:38 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/12 10:32:30 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,21 @@ t_door	*find_closest_door(t_mlx_data *mlx)
 void	toggle_door(t_mlx_data *mlx)
 {
 	t_door	*door;
+	int		p_tile_x;
+	int		p_tile_y;
 
+	p_tile_x = (int)(mlx->player.px / TILE_SIZE);
+	p_tile_y = (int)(mlx->player.py / TILE_SIZE);
 	door = find_closest_door(mlx);
 	if (door)
 	{
 		if (door->is_open)
 		{
-			door->is_open = 0;
-			mlx->map.map[door->y][door->x] = 'D';
+			if (p_tile_x != door->x || p_tile_y != door->y)
+			{
+				door->is_open = 0;
+				mlx->map.map[door->y][door->x] = 'D';
+			}
 		}
 		else if (!door->is_open)
 		{
