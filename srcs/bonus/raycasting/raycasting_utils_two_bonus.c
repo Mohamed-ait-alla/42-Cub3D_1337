@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 13:14:06 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/06 13:16:21 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:17:44 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	reset(t_mlx_data *mlx, int i)
 	mlx->rays[i].was_hit_horz = 0;
 	mlx->rays[i].was_hit_vert = 0;
 	mlx->rays[i].was_hit_door = 0;
+	mlx->rays[i].door_hit_direction = 0;
 	mlx->vert_hit_door = 0;
 	mlx->horz_hit_door = 0;
 }

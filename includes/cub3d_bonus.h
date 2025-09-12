@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/12 11:56:54 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/12 14:44:23 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_ray
 	int			was_hit_horz;
 	int			was_hit_vert;
 	int			was_hit_door;
+	int			door_hit_direction;
 	double		wall_hit_x;
 	double		wall_hit_y;
 }				t_ray;
