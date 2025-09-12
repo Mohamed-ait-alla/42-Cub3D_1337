@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 18:43:00 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/11 11:46:04 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/12 12:17:20 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,32 @@ bool	check_chars_map_and_count_player(char *line, t_map *map)
 		}
 		else
 			return (false);
+	}
+	return (true);
+}
+
+bool	check_doors(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'D')
+			{
+				if (map->map[i][j - 1] != '1' || map->map[i][j + 1] != '1')
+				{
+					if (map->map[i - 1][j] != '1' || map->map[i + 1][j] != '1')
+						return (false);
+				}
+			}
+			j++;
+		}
+		i++;
 	}
 	return (true);
 }

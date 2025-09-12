@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/11 21:06:03 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:56:54 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void			parse_line_of_ea(int *i, char *line, t_map *map);
 void			parse_line_of_f_color(int *i, char *line, t_map *map);
 void			parse_line_of_c_color(int *i, char *line, t_map *map);
 bool			check_chars_map_and_count_player(char *line, t_map *map);
+bool			check_doors(t_map *map);
 bool			get_map(t_map *map, char *file);
 bool			is_empty_line(char *line);
 bool			is_map(char *line);

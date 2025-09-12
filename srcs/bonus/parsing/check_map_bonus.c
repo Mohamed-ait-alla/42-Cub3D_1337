@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/12 11:06:18 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/12 11:57:56 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ bool	check_map(char *file, t_map *map)
 	if (!check_characters_of_map(file, map))
 		return (false);
 	if (!get_map(map, file))
+		return (false);
+	if (!check_doors(map))
 		return (false);
 	return (map->no && map->so && map->we && map->ea
 		&& map->f_color && map->c_color
