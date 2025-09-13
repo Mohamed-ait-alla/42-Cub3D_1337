@@ -23,7 +23,8 @@ SRCS = srcs/mandatory/main.c \
 		libraries/get_next_line/get_next_line.c \
 		srcs/mandatory/parsing/check_color.c \
 		srcs/mandatory/parsing/check_num_of_players.c \
-		srcs/mandatory/parsing/map_is_valid.c \
+		srcs/mandatory/parsing/get_px_py_and_normalize_map.c \
+		srcs/mandatory/parsing/is_map_closed.c \
 		srcs/mandatory/parsing/get_color.c \
 		srcs/mandatory/parsing/check_order_textures.c \
 
@@ -52,7 +53,8 @@ SRCSB = srcs/bonus/main_bonus.c \
 		libraries/get_next_line/get_next_line.c \
 		srcs/bonus/parsing/check_color_bonus.c \
 		srcs/bonus/parsing/check_num_of_players_bonus.c \
-		srcs/bonus/parsing/map_is_valid_bonus.c \
+		srcs/bonus/parsing/get_px_py_and_normalize_map_bonus.c \
+		srcs/bonus/parsing/is_map_closed_bonus.c \
 		srcs/bonus/parsing/get_color_bonus.c \
 		srcs/bonus/parsing/check_order_textures_bonus.c \
 

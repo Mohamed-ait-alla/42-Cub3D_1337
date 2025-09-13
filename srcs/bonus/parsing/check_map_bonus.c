@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 11:09:12 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/12 11:57:56 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/13 15:25:06 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ bool	check_map(char *file, t_map *map)
 		return (false);
 	if (!get_map(map, file))
 		return (false);
+	get_px_py_and_normalize_map(map);
+	if (!is_map_closed(map))
+		return (false);
 	if (!check_doors(map))
 		return (false);
 	return (map->no && map->so && map->we && map->ea
@@ -120,5 +123,5 @@ bool	check_map(char *file, t_map *map)
 		&& map->rows && map->num_no == 1 && map->num_so == 1 && map->num_we == 1
 		&& map->num_ea == 1 && map->num_f_color == 1 && map->num_c_color == 1
 		&& check_order_of_map(file, map) == 6 && check_num_of_players(map)
-		&& check_color(map) && map_is_valid(map));
+		&& check_color(map));
 }

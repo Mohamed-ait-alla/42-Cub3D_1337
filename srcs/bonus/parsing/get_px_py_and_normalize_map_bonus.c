@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_is_valid.c                                     :+:      :+:    :+:   */
+/*   get_px_py_and_normalize_map_bonus.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:27:49 by mdahani           #+#    #+#             */
-/*   Updated: 2025/09/10 13:44:43 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/13 15:18:35 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/cub3d_bonus.h"
 
 static int	get_big_line(char **map)
 {
@@ -53,35 +53,24 @@ static void	normalize_the_map(char **map)
 	}
 }
 
-static bool	flood_fill(t_map *map, int x, int y, char player)
+static void	get_position_of_doors(t_map *map, int x, int y, int *i)
 {
-	char	c;
-
-	if (x < 0 || x >= map->rows || y < 0
-		|| y >= (int)ft_strlen(map->copy_map[x]))
-		return (false);
-	c = map->copy_map[x][y];
-	if (c == 'O')
-		return (false);
-	if (c != '0' && c != player)
-		return (true);
-	map->copy_map[x][y] = 'V';
-	if (!flood_fill(map, x + 1, y, player))
-		return (false);
-	if (!flood_fill(map, x - 1, y, player))
-		return (false);
-	if (!flood_fill(map, x, y + 1, player))
-		return (false);
-	if (!flood_fill(map, x, y - 1, player))
-		return (false);
-	return (true);
+	if (map->map[x][y] == 'D')
+	{
+		map->doors[(*i)].is_open = 0;
+		map->doors[(*i)].x = y;
+		map->doors[(*i)].y = x;
+		(*i)++;
+		map->doors_count++;
+	}
 }
 
-bool	map_is_valid(t_map *map)
+void	get_px_py_and_normalize_map(t_map *map)
 {
-	int (x), (y);
+	int (x), (y), (i);
 	normalize_the_map(map->copy_map);
 	normalize_the_map(map->map);
+	i = 0;
 	x = 0;
 	while (map->copy_map[x])
 	{
@@ -94,12 +83,10 @@ bool	map_is_valid(t_map *map)
 				map->px_player = y;
 				map->py_player = x;
 				map->player = map->copy_map[x][y];
-				if (!flood_fill(map, x, y, map->copy_map[x][y]))
-					return (false);
 			}
+			get_position_of_doors(map, x, y, &i);
 			y++;
 		}
 		x++;
 	}
-	return (true);
 }

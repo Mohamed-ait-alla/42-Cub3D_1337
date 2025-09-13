@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 20:09:20 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/10 22:49:12 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/13 15:23:47 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,8 @@ int				check_order_of_map(char *file, t_map *map);
 char			*get_next_line(int fd);
 bool			check_color(t_map *map);
 bool			check_num_of_players(t_map *map);
-bool			map_is_valid(t_map *map);
+bool			is_map_closed(t_map *map);
+void			get_px_py_and_normalize_map(t_map *map);
 void			get_color(t_map *map);
 bool			check_order_textures(t_map *map);
 
