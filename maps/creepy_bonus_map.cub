@@ -1,7 +1,4 @@
-NO ./textures/N.xpm
-SO ./textures/S.xpm
-WE ./textures/W.xpm
-EA ./textures/E.xpm
+
 
 C 35,19,73
 F 15,6,40
