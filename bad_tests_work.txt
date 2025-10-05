@@ -1,4 +1,0 @@
-forbidden.cub
-map_missing.cub (sig) :(
-textures_dir.cub
-textures_forbidden.cub
