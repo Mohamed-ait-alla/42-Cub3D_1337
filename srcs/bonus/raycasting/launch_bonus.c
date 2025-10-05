@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 11:40:59 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/11 14:24:46 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/09/15 17:31:46 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	mouse_handle(int x, int y, t_mlx_data *mlx)
 		mlx->player.rotation_angle -= 0.03;
 	}
 	normalize_angle(mlx->player.rotation_angle);
-	mlx_mouse_move(mlx->mlx_ptr, mlx->mlx_window,
-		WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	return (0);
 }
 

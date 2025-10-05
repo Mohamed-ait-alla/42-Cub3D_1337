@@ -6,7 +6,7 @@
 /*   By: mait-all <mait-all@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:04:48 by mait-all          #+#    #+#             */
-/*   Updated: 2025/09/12 11:49:12 by mait-all         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:31:37 by mait-all         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,7 @@ int	update(t_mlx_data *mlx)
 	update_player_animation(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->mlx_window, mlx->img, 0, 0);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->img);
+	mlx_mouse_move(mlx->mlx_ptr, mlx->mlx_window,
+		WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	return (0);
 }
